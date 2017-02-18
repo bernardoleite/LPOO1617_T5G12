@@ -6,6 +6,11 @@ import java.util.Vector;
 
 public class jogo {
 	
+	public static void clearScreen() {  
+	    System.out.print("\033[H\033[2J");  
+	    System.out.flush();  
+	   }  
+	
 	public static class Matrix1 {
 		
 		char vec[][];
@@ -260,7 +265,10 @@ public static class Matrix2 {
 		char vec[][];
 		int linha = 8, coluna = 1;
 		int linhaOg = 1, colunaOg = 4;
-		int alcancaS = 0;
+		int alcancaS = 0; //Se estiver a 1 significa que alcançou o S
+		int trancar = 0; //Se estiver a 1 significa que o Ogre está por cima da Key
+		int mudarcarater = 0; //Se estiver a 1 significa que o Hero está com a Key
+		int porta = 0;		// Se estiver a 1 significa que I Hero apanhou a Key (vai ser possivel passar na porta)
 		
 		public Matrix2(char vetor[][]) {
 		      vec = vetor;
@@ -281,68 +289,77 @@ public static class Matrix2 {
 
 		   }
 		   
-		   void MoverEmNivel2(String letra, int x, int y){
+		   void MoverEmNivel2(String letra, int x, int y, char carater){
+			   
 			  
 			   if ( letra.equals("W") || letra.equals("w") )
 			   {
-				   if (vec[x-1][y] == 'X' || vec[x-1][y] == 'I')  ;
+				   if (vec[x-1][y] == 'X' )  ;
 				   
-				   else if (vec[x-1][y] == 'S') {vec[x][y] = ' '; vec[x-1][y] = 'H'; alcancaS =1; }
+				   else if (vec[x-1][y] == 'S') {vec[x][y] = ' '; vec[x-1][y] = carater; alcancaS =1; }
 				   
-				   else if (vec[x-1][y] == ' ') {vec[x][y] = ' '; vec[x-1][y] = 'H'; linha--;}
+				   else if (vec[x-1][y] == ' ') {vec[x][y] = ' '; vec[x-1][y] = carater; linha--;}
 				   
-				   else if (vec[x-1][y] == 'K') {vec[x][y] = ' '; vec[x-1][y] = 'H'; linha--;}
+				   else if (vec[x-1][y] == 'K') {vec[x][y] = ' '; porta = 1; vec[x-1][y] = 'K'; mudarcarater++; linha--;}
+				   
+				   else  if (vec[x-1][y] == 'I' && porta == 1) { vec[x-1][y] = 'S'; }
 			   }
 			   
 			   else  if ( letra.equals("A") || letra.equals("a") )
+				   
 			   {
-				   if (vec[x][y-1] == 'X' || vec[x][y-1] == 'I')  ;
+				   if (vec[x][y-1] == 'X' )  ;
 				   
-				   else  if (vec[x][y-1] == 'K') {vec[x][y] = ' '; vec[x][y-1] = 'H'; coluna--;}
+				   else  if (vec[x][y-1] == 'S' ) {vec[x][y] = ' '; vec[x][y-1] = carater; alcancaS =1; }
 				   
-				   else  if (vec[x][y-1] == 'S') {vec[x][y] = ' '; vec[x][y-1] = 'H'; alcancaS =1; }
+				   else  if (vec[x][y-1] == 'K') {vec[x][y] = ' '; porta = 1; vec[x][y-1] = 'K'; mudarcarater++; coluna--;}
 				   
-				   else if (vec[x][y-1] == ' ') {vec[x][y] = ' '; vec[x][y-1] = 'H'; coluna--;}
+				   else  if (vec[x][y-1] == 'I') {vec[x][y-1] = 'S'; }					   	
+				   
+				   else if (vec[x][y-1] == ' ') {vec[x][y] = ' '; vec[x][y-1] = carater; coluna--;}
 			   }
 			   
 			   else if ( letra.equals("S") || letra.equals("s") )
 			   {
-				   System.out.println("entrou ");
 				   
-				   if (vec[x+1][y] == 'X' || vec[x+1][y] == 'I')  ;
+				   if (vec[x+1][y] == 'X')  ;
 				   
-				   else if (vec[x+1][y] == ' ') {vec[x][y] = ' '; vec[x+1][y] = 'H'; linha++;}
+				   else if (vec[x+1][y] == ' ') {vec[x][y] = ' '; vec[x+1][y] = carater; linha++;}
 				   
-				   else if (vec[x+1][y] == 'K') {vec[x][y] = ' '; vec[x+1][y] = 'H'; linha++;}
+				   else if (vec[x+1][y] == 'K') {vec[x][y] = ' '; porta = 1; vec[x+1][y] = 'K'; mudarcarater++; linha++;}
 				   
-				   else if (vec[x+1][y] == 'S') {vec[x][y] = ' '; vec[x+1][y] = 'H'; alcancaS =1; }
+				   else if (vec[x+1][y] == 'I' && porta == 1) { vec[x+1][y] = 'S';  }
+				   
+				   else if (vec[x+1][y] == 'S' ) { vec[x+1][y] = carater; alcancaS =1; }
 			   }
 			
 			   else  if ( letra.equals("D") || letra.equals("d") )
 			   {
-				   if (vec[x][y+1] == 'X' || vec[x][y+1] == 'I')  ;
+				   if (vec[x][y+1] == 'X')  ;
 				  
 				   
 				   else if (vec[x][y+1] == ' ')  
 				   
 				   {
 					   
-					   vec[x][y] = ' '; vec[x][y+1] = 'H'; coluna++;
+					   vec[x][y] = ' '; vec[x][y+1] = carater; coluna++;
 				   }
 				   
 				   else if (vec[x][y+1] == 'K')  
 					   
 				   {
 					   
-					   vec[x][y] = ' '; vec[x][y+1] = 'H'; coluna++;
+					   vec[x][y] = ' '; porta = 1; vec[x][y+1] = 'K'; mudarcarater++; coluna++;
 				   }
 				   
 				   else if (vec[x][y+1] == 'S')  
 					   
 				   {
 					   
-					   vec[x][y] = ' '; vec[x][y+1] = 'H'; alcancaS =1; 
+					   vec[x][y] = ' '; vec[x][y+1] = carater; alcancaS =1; 
 				   }
+				   
+				   else if (vec[x][y+1] == 'I' && porta == 1) { vec[x][+1] = 'S';  }
 				   
 				 
 			   }
@@ -372,13 +389,9 @@ public static class Matrix2 {
 		   int VerificaK()
 		   {
 
-			if (vec[1][8] == 'H') 
+			if (linha == 1 && coluna == 8) 
 			{
-		    	for(int i = 0; i < 10; i++){
-		    		for (int j = 0 ; j < 10; j++){
-		    			if (vec[i][j] == 'I') vec[i][j] = 'S';				
-		    		}
-		    	}
+		    	porta = 1;
 			}
 			return 1;
 		   }
@@ -390,6 +403,12 @@ public static class Matrix2 {
 			   else return 0;
 		   }
 		   
+		   char VerificaCarater()
+		   {
+			   if (mudarcarater == 1) return 'K';
+			   
+			   else return 'H';
+		   }
 
 		
 		   void MoveOgre(int posisaox, int posicaoy) //Aqui geram-se numeros aleatorios sendo que W,A,S,D sao respetivamente 1,2,3,4
@@ -400,9 +419,12 @@ public static class Matrix2 {
 
 		       number = num.nextInt(4)+1;
 		       
+		       if(trancar == 1) {vec[1][8] = 'K'; trancar = 0;} //Quando o Ogre trancou a chave com o $
+		       
+		       
 		       if (number == 1) //W
 		    	{
-		    	    if (vec[linhaOg-1][colunaOg] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg-1][colunaOg] = '$';  linhaOg--;}
+		    	    if (vec[linhaOg-1][colunaOg] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg-1][colunaOg] = '$'; trancar = 1; linhaOg--;}
 		    	    
 		    	    else if (vec[linhaOg-1][colunaOg] == ' ') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg-1][colunaOg] = 'O';  linhaOg--;}
 	    
@@ -410,21 +432,22 @@ public static class Matrix2 {
 		       
 		       else if (number == 2) //A
 		       {
-		    	  if (vec[linhaOg][colunaOg-1] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg-1] = '$'; colunaOg--;}
+		    	  if (vec[linhaOg][colunaOg-1] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg-1] = '$'; trancar =1; colunaOg--;}
 		    	  
 		    	  else if (vec[linhaOg][colunaOg-1] == ' ') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg-1] = 'O'; colunaOg--;}
 		       }
 		       
 		       else if (number == 3) //S
 		       {
-		    	  if (vec[linhaOg+1][colunaOg] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg+1][colunaOg] = '$'; linhaOg++;}
+		    	  if (vec[linhaOg+1][colunaOg] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg+1][colunaOg] = '$'; trancar =1; linhaOg++;}
 		    	  
 		    	  else if (vec[linhaOg+1][colunaOg] == ' ') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg+1][colunaOg] = 'O'; linhaOg++;}
 		       }
 		       
 		       else if (number == 4) //D
 		       {
-		    	  if (vec[linhaOg][colunaOg+1] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg+1] = '$'; colunaOg++;}
+		    	   
+		    	  if (vec[linhaOg][colunaOg+1] == 'K') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg+1] = '$'; trancar =1; colunaOg++;}
 		    	  
 		    	  else if (vec[linhaOg][colunaOg+1] == ' ') {vec[linhaOg][colunaOg] = ' '; vec[linhaOg][colunaOg+1] = 'O'; colunaOg++;}
 		       }
@@ -450,13 +473,13 @@ public static class Matrix2 {
     		};
 		
 		char aux2[][] = {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, /*Tabuleiro do 2º nível*/
-    			{'I', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'K', 'X'},
+    			{'X', ' ', ' ', ' ', 'O', ' ', ' ', ' ', 'K', 'X'},
     			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
     			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
     			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
     			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
     			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-    			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+    			{'X', ' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', 'X'},
     			{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
     			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
     			
@@ -508,13 +531,14 @@ public static class Matrix2 {
 
 
 		
-   	Matrix2 obj2 = new Matrix2 (aux2);
-   	obj2.PrintMatrix2();
+	   	Matrix2 obj2 = new Matrix2 (aux2);
+	   	obj2.PrintMatrix2();
+	   	char carater = 'H'; //O carater vai mudar para K quando o Hero apanhar a chave
     	
     
     	while (flag2 == 0)
     	{
-    		
+
     		
         	System.out.printf("Movimento? (W,A,S,D) ");
         	
@@ -523,23 +547,26 @@ public static class Matrix2 {
             String mov = leitura.next();
 
             
-            obj2.MoverEmNivel2(mov, pos[0], pos[1]);
+            obj2.MoverEmNivel2(mov, pos[0], pos[1], carater);
             
+           // obj2.VerificaK() ;
+           
             obj2.MoveOgre(posOg[0], posOg[1]);
             
-            pos = obj2.AtualizarCoord();
+            carater = obj2.VerificaCarater();
             
+            pos = obj2.AtualizarCoord();
+                     
             posOg = obj2.AtualizarCoordOgre();
             
             if (obj2.VerificaOgre() == 1) {obj2.PrintMatrix2(); System.out.println("!!!!GAME OVER!!!!"); flag2 = 1;}
             
             obj2.VerificaOgre() ;
             
-            obj2.VerificaK() ;
-            
             if ( obj2.VerificaSeGanhou() == 1) {obj2.PrintMatrix2();  System.out.println("!!!!YOU WIN THE GAME!!!!"); flag2 = 1;}
             
             obj2.PrintMatrix2();
+            
     		
     	}
     	
