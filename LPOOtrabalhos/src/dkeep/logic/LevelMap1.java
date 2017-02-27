@@ -1,5 +1,7 @@
 package dkeep.logic;
 
+import java.util.Random;
+
 public class LevelMap1 {
 	
 	public int Klever = 0;
@@ -69,6 +71,129 @@ public class LevelMap1 {
 	
 	
 	 public int GuardMovement(Hero hero, Lever lever, Guard guard)
+	 {
+		 
+	if (guard.typeguard.equals("Rookie"))
+		
+	{
+		 guard.steps++;
+		 
+		  if (guard.steps > 24) guard.steps = 1;
+	    	
+    	  else if (guard.steps <= 0) guard.steps = 24;
+		 
+		 Movement(hero, lever, guard);
+		 
+	}
+	
+	else if (guard.typeguard.equals("Drunken"))	
+	{
+			int number = 1, number2 = 1 ;
+		   
+		   Random num = new Random();
+
+	       number = num.nextInt(2)+1;
+	       
+	       if (number == 1) //Acordado
+	    	   {
+	    	   guard.dress = "G";
+	    	   
+			   Random num2 = new Random();
+
+		       number2 = num2.nextInt(2)+1;
+		       
+	    	    if(number2 == 1) //Segue em frente
+	    	    {
+	    			guard.steps++;
+	    			 
+		    	    if (guard.steps > 24) guard.steps = 1;
+		    	    	
+		    	    else if (guard.steps <= 0) guard.steps = 24;
+		    	    	
+	    			Movement(hero, lever, guard);
+	    			 
+	    			 
+	    	    }
+	    	    
+	    	    else if(number2 == 2) //Anda para trás
+	    	    {
+	    	    	guard.steps--; //analisar caso negativo
+	    	    	
+	    	    	if (guard.steps > 24) guard.steps = 1;
+	    	    	
+	    	    	else if (guard.steps <= 0) guard.steps = 24;
+	    			 
+	    			 Movement(hero, lever, guard); 
+	    			 
+	    	    }
+	    	    
+	    	   
+	    	   }
+	       
+	       else if (number == 2) //Adormecido
+	    	   {
+	    	   guard.dress = "g";
+	    	   }
+		 
+	 }
+	
+	else if (guard.typeguard.equals("Suspicious"))
+	{
+			int number3 = 1;
+		
+		   Random num3 = new Random();
+
+	       number3 = num3.nextInt(2)+1;
+	       
+    	    if(number3 == 1) //Segue em frente
+    	    {
+    			 guard.steps++;
+    			 
+    			 if (guard.steps > 24) guard.steps = 1;
+    			 
+    			 else if (guard.steps <= 0) guard.steps = 24;
+
+    			 Movement(hero, lever, guard);
+    			 
+    	    }
+    	    
+    	    else if(number3 == 2) //Anda para trás
+    	    {
+    	    	guard.steps--; //analisar caso negativo
+    	    	
+    	    	if (guard.steps > 24) guard.steps = 1;
+    	    	
+    	    	else if (guard.steps <= 0) guard.steps = 24;
+    			 
+    			 Movement(hero, lever, guard);
+    			 
+    			 
+    	    }
+		 
+	 }
+	
+	return 1;
+	 }
+	 public int Crossing(Hero hero, Lever lever, Guard guard)
+	 {
+		 
+		 if (hero.x == guard.x && hero.y == guard.y) return 1;
+		 
+		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress.equals("g")) return 0;
+		 
+		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress.equals("g")) return 0;
+		 
+		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1) return 1;
+		 
+		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y) return 1;
+		 
+		 else return 0;
+ 
+	 }
+	 
+	 
+	 
+	 public int Movement(Hero hero, Lever lever, Guard guard)
 	 {
 		 if (guard.steps == 1) {
 			   guard.x = 1;
@@ -190,24 +315,7 @@ public class LevelMap1 {
 			   guard.y = 8;
 		   }
 		 
-		 guard.steps++;
-		 
-		 if (guard.steps >= 24) guard.steps = 0;
-		 
 		 return 1;
-	 }
-	 
-	 public int Crossing(Hero hero, Lever lever, Guard guard)
-	 {
-		 
-		 if (hero.x == guard.x && hero.y == guard.y) return 1;
-		 
-		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1) return 1;
-		 
-		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y) return 1;
-		 
-		 else return 0;
- 
 	 }
 	 
 

@@ -23,7 +23,7 @@ public class StateOfGame {
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 			
 		};
@@ -34,6 +34,9 @@ public class StateOfGame {
 	public Lever lever;
 	public Key key;
 	public Ork ork;
+	public Ork ork2;
+	public Ork ork3;
+	public Ork ork4;
 	public Guard guard;
 	public int MyLevel;
 	public int status = 0;
@@ -58,7 +61,13 @@ public class StateOfGame {
 		
 		else if (Level == 2)
 		{
-			
+			hero = new Hero (8,1);
+			ork =  new  Ork(2,7);
+			ork2 = new Ork(3,5);
+			ork3 = new Ork(5,6);
+			ork4 = new Ork(6,8);
+			key = new Key(1,8);
+			level2 = new LevelMap2();
 		}
 		
 		return 1;
@@ -91,7 +100,19 @@ public class StateOfGame {
 			
 			}
 		
-		else if (MyLevel == 2){ }
+		else if (MyLevel == 2){
+			
+			current = level2.HeroMoves(Map2 ,input ,hero ,key ,ork, ork2, ork3, ork4 );
+			
+			if(current == 1) 	//Se receber 1 Guarda e Ork cruzaram-se
+				status = 1;
+				
+			else if(current == 2) //Se receber 2 Vitória
+				status = 2;
+			
+			else if(current == 3) // Necessario Mudar Mapa
+				MapChange();
+		}
 		
 		
 		return 1;
@@ -124,7 +145,14 @@ public class StateOfGame {
 		
 		else if (MyLevel == 2)
 		{
-			return 1;
+		 	for(int i = 0; i < 10; i++){
+	    		for (int j = 0 ; j < 10; j++){
+	    			if (Map2[i][j] == 'I') Map2[i][j] = 'S';
+	    			//else if (Map1[i][j] == 'K') Map1[i][j] = ' ';
+	    		}
+
+	    	}
+
 		}
 		
 		return 1;
@@ -132,32 +160,122 @@ public class StateOfGame {
 	
 	public void getMap() //Precisa de mudança aquando acrescento de nivel
 	{
-		int next = 1;
+		int next = 1; //Variaveis para nao desconfigurar impressao
+		int ver = 0; //Variaveis para nao desconfigurar impressao
+		int cont = 0;
 		
-	  	for(int i = 0;  i < 10; i++){
-	  		
-    		for (int j = 0 ; j < 10; j++){
-    			
-    			if (hero.x == i && hero.y == j)
-    			{
-    			System.out.print ('H'); next = 0;
-    			}
-    			
-    			if (guard.x == i && guard.y == j)
-    			{
-    			System.out.print ('G'); next = 0;
-    			}	
-    			
-    			if(next == 1){
-    			System.out.print (Map1[i][j]);
-    			}
-    			
-    			next = 1;
-    			System.out.print(" ");		
-    			
-    		}
-    		System.out.print("\n");
-    	}
+	if (MyLevel == 1)
+	{	  	for(int i = 0;  i < 10; i++){
+  		
+		for (int j = 0 ; j < 10; j++){
+			
+			if ( (hero.x == i && hero.y == j) && (guard.x == i && guard.y == j) )
+			{
+				System.out.print (hero.dress); 
+				System.out.print (guard.dress);
+				next = 0;
+				ver = 1;
+			}
+			
+			else if (hero.x == i && hero.y == j)
+			{
+			System.out.print (hero.dress); next = 0;
+			}
+			
+			else if (guard.x == i && guard.y == j)
+			{
+			System.out.print (guard.dress); next = 0;
+			}	
+			
+			if(next == 1){
+			System.out.print (Map1[i][j]);
+			}
+			
+			next = 1;
+			if (ver == 0) System.out.print(" ");		
+			ver = 0;
+			
+		}
+		System.out.print("\n");
+	}}
+	
+	
+	else if (MyLevel == 2)
+		
+	{	  	
+		
+	for(int i = 0;  i < 10; i++){
+  		
+		for (int j = 0 ; j < 10; j++){
+			
+			if (hero.x == i && hero.y == j)
+			{
+				System.out.print(hero.dress); 
+			}
+			
+			else if (i == 8 && j == 2 && hero.armed == 0)
+			{
+				System.out.print('A');
+			}
+			
+			else if (ork.x == i && ork.y == j)
+			{
+				System.out.print(ork.dress);
+			}
+				
+			else if (ork.clubx == i && ork.y == j)
+			{
+				System.out.print(ork.dressclub);
+			}
+			
+			else if (ork2.x == i && ork2.y == j)
+			{
+				System.out.print(ork2.dress);
+			}
+			
+			else if (ork2.clubx == i && ork2.cluby == j)
+			{
+				System.out.print(ork2.dressclub);
+			}
+		/*	
+			if (ork3.x == i && ork3.y == j)
+			{
+				System.out.print(ork3.dress);
+			}
+			
+			if (ork3.clubx == i && ork3.cluby == j)
+			{
+				System.out.print(ork3.dressclub);
+			}
+			
+			if (ork4.x == i && ork4.y == j)
+			{
+				System.out.print(ork4.dress);
+			}
+			
+			if (ork4.clubx == i && ork4.cluby == j)
+			{
+				System.out.print(ork4.dressclub); 
+			}*/
+			
+			else if (key.x == i && key.y == j && key.locked == 0)
+			{
+				System.out.print(key.dress);
+			}
+			
+			
+			else System.out.print(Map2[i][j]);
+			
+			
+
+
+			System.out.print(" ");		
+			
+		}
+		System.out.print("\n");
+	}
+	}
+
 	}
 	
 	

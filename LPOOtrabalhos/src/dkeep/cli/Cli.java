@@ -15,7 +15,7 @@ public class Cli {
 	
     public static void main(String[] args) {
     	
-    	StateOfGame novojogo = new StateOfGame(1); //Novo Jogo
+    	StateOfGame novojogo = new StateOfGame(2); //Novo Jogo
     	int flag1 = 1;
     	
     	
@@ -38,8 +38,6 @@ public class Cli {
 		if ( novojogo.GameState() == 2 ) {System.out.printf("!!!You Win!!!\n"); flag1 = 0;}
 		
 		}
-    
-    
-    
+ 
 }
 }

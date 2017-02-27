@@ -3,8 +3,11 @@ public class Ork extends Enemy {
 	
 	public int x;
 	public int y;
-	char club = '*';
-	char dress = 'O';
+	public int clubx;
+	public int cluby;
+	public char dressclub = '*';
+	public char dress = 'O';
+	public int freeze = 0;
 	
 	public Ork(int CoordenadaX, int CoordenadaY)
 	{
