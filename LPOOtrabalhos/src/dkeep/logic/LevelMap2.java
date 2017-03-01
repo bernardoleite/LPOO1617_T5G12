@@ -16,7 +16,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x-1][hero.y] == 'X' )  ;
 			   
-			   else if (hero.x-1 == 8 && hero.y == 2) {hero.armed = 1; hero.dress = 'A'; hero.x--;}
+			   else if (hero.x-1 == 8 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x--;}
 			   
 			   else if (map[hero.x-1][hero.y] == 'S') {reachS = 1; hero.x--;}
 			   
@@ -33,7 +33,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x][hero.y-1] == 'X' )  ;
 			   
-			   else  if (hero.x == 8 && hero.y-1 == 2) {hero.armed = 1; hero.dress = 'A'; hero.y--;}
+			   else  if (hero.x == 8 && hero.y-1 == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.y--;}
 			   
 			   else  if (map[hero.x][hero.y-1] == 'S' ) {reachS = 1; hero.y--;}
 			   
@@ -50,7 +50,7 @@ public class LevelMap2 {
 			   
 			   if (map[hero.x+1][hero.y] == 'X')  ;
 			   
-			   else if (hero.x+1 == 8 && hero.y == 2) {hero.armed = 1; hero.dress = 'A'; hero.x++;}
+			   else if (hero.x+1 == 8 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x++;}
 			   
 			   else if (map[hero.x+1][hero.y] == 'S' ) {reachS = 1; hero.x++;}
 			   
@@ -65,7 +65,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x][hero.y+1] == 'X')  ;
 			   
-			   else if (hero.x == 8 && hero.y+1 == 2)  {hero.armed = 1; hero.dress = 'A'; hero.y++;}
+			   else if (hero.x == 8 && hero.y+1 == 2 && hero.armed == 0)  {hero.armed = 1; hero.dress = 'A'; hero.y++;}
 			  
 			   else if (map[hero.x][hero.y+1] == 'S')  {reachS = 1; hero.y++;}
 			   
@@ -141,7 +141,7 @@ public class LevelMap2 {
 	    	{
 	    	   	if (map[ork.x-1][ork.y] == 'X');
 	    	   
-	    	   	else if (ork.x-1 == key.x && ork.y == key.y && ork.freeze == 0 ) { ork.dress = '$'; ork.x--;}
+	    	   	else if (ork.x-1 == key.x && ork.y == key.y && ork.freeze == 0 && key.catched == 0 ) { ork.dress = '$'; ork.x--;}
 	    	    
 	    	   // else if (ork.x-1 == hero.x && ork.y == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.x--; }
 	    	    
@@ -153,7 +153,7 @@ public class LevelMap2 {
 	       {
 	        if (map[ork.x][ork.y-1] == 'X');
 	        
-	        else if (ork.x == key.x && ork.y-1 == key.y && ork.freeze == 0 ) {ork.dress = '$';  ork.y--;}
+	        else if (ork.x == key.x && ork.y-1 == key.y && ork.freeze == 0 && key.catched == 0 ) {ork.dress = '$';  ork.y--;}
 	    	  
 	    	 // else if (ork.x == hero.x && ork.y-1 == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.y--; }
 	    	  
@@ -165,7 +165,7 @@ public class LevelMap2 {
 	    	   
 	    	   if (map[ork.x+1][ork.y] == 'X');
 	    	   
-	    	   else if (ork.x+1 == key.x && ork.y == key.y && ork.freeze == 0 ) {ork.dress = '$'; ork.x++;}
+	    	   else if (ork.x+1 == key.x && ork.y == key.y && ork.freeze == 0 && key.catched == 0 ) {ork.dress = '$'; ork.x++;}
 	    	  
 	    	 // else if (ork.x+1 == hero.x && ork.y == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.x++; }
 	    	  
@@ -176,7 +176,7 @@ public class LevelMap2 {
 	       {
 	        	if (map[ork.x][ork.y+1] == 'X');
 
-	        	else if (ork.x == key.x && ork.y+1 == key.y && ork.freeze == 0 ) {ork.dress = '$'; ork.y++;}
+	        	else if (ork.x == key.x && ork.y+1 == key.y && ork.freeze == 0  && key.catched == 0) {ork.dress = '$'; ork.y++;}
 	    	  
 	    	  //else if (ork.x == hero.x && ork.y+1 == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.y++; }
 	    	  
