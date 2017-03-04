@@ -188,31 +188,36 @@ public class LevelMap2 {
 	       if (aleaClub == 1) 
 	       {
 	    	  if (map[ork.x-1][ork.y] == 'X');
+	    	  
+	    	  if (ork.x-1 == key.x && ork.y == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }
 	    	   
 	    	  else if (map[ork.x-1][ork.y] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }   
 	    	   
-	    	  else if (ork.x-1 == key.x && ork.y == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }
+	    	  
 	       }
 	       
 	       else if (aleaClub == 2) 
 	       {
 	    	   	if (map[ork.x][ork.y-1] == 'X');
+	    	   	if (ork.x == key.x && ork.y-1 == key.y ) {System.out.print("hellooooooo");ork.dressclub = '$'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; } 
 	    	   	else if (map[ork.x][ork.y-1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; }
-		    	else if (ork.x == key.x && ork.y-1 == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; }  
+		    	 
 		   }
 	       
 	       else if (aleaClub == 3) 
 	       {
 	    	   if (map[ork.x+1][ork.y] == 'X');
+	    	   if (ork.x+1 == key.x && ork.y == key.y ) {System.out.print("hellooooooo");ork.dressclub = '$'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }  
 	    	   else if (map[ork.x+1][ork.y] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }   
-	    	   else if (ork.x+1 == key.x && ork.y == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }    
+	    	     
 		      }
 	       
 	       else if (aleaClub == 4) 
 	       {
 	    	   if (map[ork.x][ork.y+1] == 'X');
+	    	   if (ork.x == key.x && ork.y+1 == key.y ) { System.out.print("hellooooooo"); ork.dressclub = '$'; ork.clubx = ork.x; ork.cluby = ork.y + 1; }  
 	    	   else if (map[ork.x][ork.y+1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x; ork.cluby = ork.y + 1; } 
-	    	   else  if (ork.x == key.x && ork.y+1 == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x; ork.cluby = ork.y + 1; }  	  
+	    	   	  
 		   }
 	   }
 	   

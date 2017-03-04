@@ -15,13 +15,15 @@ public class Cli {
 	
     public static void main(String[] args) {
     	
-    	StateOfGame novojogo = new StateOfGame(2); //Novo Jogo
+    	StateOfGame novojogo = new StateOfGame(1); //Novo Jogo
     	int flag1 = 1;
     	
     	
     	while (flag1 == 1)
     		
 		{
+    		
+    	novojogo.getMap();	//Mapa Resultante da Jogada	
 		
 		System.out.printf("Movimento? (W,A,S,D) ");
 		

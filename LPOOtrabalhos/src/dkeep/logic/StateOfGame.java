@@ -41,6 +41,49 @@ public class StateOfGame {
 	public int MyLevel;
 	public int status = 0;
 	
+	public LevelMap1 GetLevelMap1()
+	{
+		return level1;
+	}
+	
+	public LevelMap2 GetLevelMap2()
+	{
+		return level2;
+	}
+	
+	public Hero GetHero()
+	{
+		return hero;
+	}
+	
+	public Lever GetLever()
+	{
+		return lever;
+	}
+	
+	public Key GetKey()
+	{
+		return key;
+	}
+	
+	public Ork GetOrk(int orkNumber)
+	{
+		if (orkNumber == 1) return ork;
+		else if (orkNumber == 2) return ork2;
+		else if (orkNumber == 3) return ork3;
+		else return ork4;
+	}
+	
+	public Guard GetGuard()
+	{
+		return guard;
+	}
+	
+	public int GetMyLevel()
+	{
+		return MyLevel;
+	}
+	
 	
 	public StateOfGame(int Level)	//Precisa de mudança aquando acrescento de nivel
 	{
@@ -75,18 +118,19 @@ public class StateOfGame {
 	
 	public int Input (String input)	
 	{
-		HeroMovement(input);
+		if (MyLevel == 1 )HeroMovement(input, Map1);
+		else if (MyLevel == 2 )HeroMovement(input, Map2);
 
 		return 1;
 	}
 	
-	public int HeroMovement(String input)	//Precisa de mudança aquando acrescento de nivel
+	public int HeroMovement(String input, char map[][])	//Precisa de mudança aquando acrescento de nivel
 	{
 		int current;
 		
-		if (MyLevel == 1) { 
+		if (MyLevel == 1 ) { 
 			
-			current = level1.HeroMoves(Map1 ,input ,hero ,lever ,guard );
+			current = level1.HeroMoves(map ,input ,hero ,lever ,guard );
 			
 			if(current == 1) 	//Se receber 1 Guarda e Hero cruzaram-se
 				status = 1;
@@ -95,14 +139,16 @@ public class StateOfGame {
 				status = 2;
 			
 			else if(current == 3) // Necessario Mudar Mapa
-				MapChange();
-			
+			{
+				status = 3;
+				MapChange(map);
+			}
 			
 			}
 		
 		else if (MyLevel == 2){
 			
-			current = level2.HeroMoves(Map2 ,input ,hero ,key ,ork, ork2, ork3, ork4 );
+			current = level2.HeroMoves(map ,input ,hero ,key ,ork, ork2, ork3, ork4 );
 			
 			if(current == 1) 	//Se receber 1 Guarda e Ork cruzaram-se
 				status = 1;
@@ -111,7 +157,10 @@ public class StateOfGame {
 				status = 2;
 			
 			else if(current == 3) // Necessario Mudar Mapa
-				MapChange();
+				{
+				status = 3;
+				MapChange(map);
+				}
 		}
 		
 		
@@ -124,18 +173,20 @@ public class StateOfGame {
 		
 		else if (status == 2) return 2;
 		
+		else if (status == 3) return 3;
+		
 		else return 0;
 		
 	}
 	
-	public int MapChange()
+	public int MapChange(char map[][])
 	{
 		if(MyLevel == 1)
 		{
 		 	for(int i = 0; i < 10; i++){
 	    		for (int j = 0 ; j < 10; j++){
-	    			if (Map1[i][j] == 'I') Map1[i][j] = 'S';
-	    			else if (Map1[i][j] == 'K') Map1[i][j] = ' ';
+	    			if (map[i][j] == 'I') map[i][j] = 'S';
+	    			else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
 
 	    	}
@@ -147,8 +198,8 @@ public class StateOfGame {
 		{
 		 	for(int i = 0; i < 10; i++){
 	    		for (int j = 0 ; j < 10; j++){
-	    			if (Map2[i][j] == 'I') Map2[i][j] = 'S';
-	    			//else if (Map1[i][j] == 'K') Map1[i][j] = ' ';
+	    			if (map[i][j] == 'I') map[i][j] = 'S';
+	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
 
 	    	}

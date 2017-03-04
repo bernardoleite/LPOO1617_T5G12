@@ -57,6 +57,8 @@ public class LevelMap1 {
 			   
 		   }
 		 
+		if (Crossing(hero, lever, guard) == 1) return 1;	//import
+		 
 		GuardMovement(hero,lever,guard);
 		
 		if (Crossing(hero, lever, guard) == 1) return 1;		

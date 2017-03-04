@@ -40,9 +40,22 @@ public class Guard extends Enemy {
 	       {
 	    	   typeguard = "Suspicious";
 	       }
-	       
-	       
 
+	}
+	
+	public int[] getGuardPos()
+	{
+		int vec[] = {this.x,this.y};
+		
+		return vec;
+	}
+	
+	
+	public void setGuardPositions(int CordX, int CordY)
+	{
+		this.x = CordX;
+		this.y = CordY;
+			
 	}
 
 }
