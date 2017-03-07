@@ -1,6 +1,7 @@
 package dkeep.logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class StateOfGame {
@@ -37,10 +38,6 @@ public class StateOfGame {
 	public Hero hero;
 	public Lever lever;
 	public Key key;
-	public Ork ork;
-	public Ork ork2;
-	public Ork ork3;
-	public Ork ork4;
 	public ArrayList<Ork> orks; //novo
 	public Guard guard;
 	public int MyLevel;
@@ -71,12 +68,9 @@ public class StateOfGame {
 		return key;
 	}
 	
-	public Ork GetOrk(int orkNumber)
+	public ArrayList<Ork> GetOrk()
 	{
-		if (orkNumber == 1) return ork;
-		else if (orkNumber == 2) return ork2;
-		else if (orkNumber == 3) return ork3;
-		else return ork4;
+		return orks;
 	}
 	
 	public Guard GetGuard()
@@ -118,10 +112,6 @@ public class StateOfGame {
 		else if (Level == 2)
 		{
 			hero = new Hero (8,1);
-			ork =  new  Ork(2,7);
-			ork2 = new Ork(3,5);
-			ork3 = new Ork(5,6);
-			ork4 = new Ork(6,8);
 			key = new Key(1,8);
 			level2 = new LevelMap2();
 			
@@ -130,12 +120,9 @@ public class StateOfGame {
 			 num = NumOrks.nextInt(3)+1;
 			 orks = new ArrayList<Ork> ();
 			 
-			 for (int i = 0; i < orks.size(); i++)
-			 {
-				 Ork ork = new Ork();
-				 
-				 orks.add(ork);
-				 
+		 for (int i = 0; i < num; i++)
+			 { 		 
+				 orks.add(new Ork());
 			 }
 			//New
 			 
@@ -176,7 +163,7 @@ public class StateOfGame {
 		
 		else if (MyLevel == 2){
 			
-			current = level2.HeroMoves(map ,input ,hero ,key ,ork, ork2, ork3, ork4 );
+			current = level2.HeroMoves(map ,input ,hero ,key , orks );
 			
 			if(current == 1) 	//Se receber 1 Guarda e Ork cruzaram-se
 				status = 1;
@@ -237,14 +224,22 @@ public class StateOfGame {
 		return 1;
 	}
 	
-	public void getMap() //Precisa de mudança aquando acrescento de nivel
+	public char[][] getMap() //Precisa de mudança aquando acrescento de nivel
 	{
 		int next = 1; //Variaveis para nao desconfigurar impressao
 		int ver = 0; //Variaveis para nao desconfigurar impressao
 		int cont = 0;
+		char clonemap[][] = Map2; //
+	/*	
+		for (int i = 0; i < 10; i++)
+		{
+		clonemap = Arrays.copyOf(Map2[i], Map2[i].length) ;
+		}*/
 		
 	if (MyLevel == 1)
-	{	  	for(int i = 0;  i < 10; i++){
+	{	  
+		
+		for(int i = 0;  i < 10; i++){
   		
 		for (int j = 0 ; j < 10; j++){
 			
@@ -281,85 +276,54 @@ public class StateOfGame {
 			
 		}
 		System.out.print("\n");
-	}}
+	}
+		return clonemap;
+		}
 	
 	
 	else if (MyLevel == 2) //change orks prints
 		
-	{	  	
+	{
+
 		
 	for(int i = 0;  i < 10; i++){
   		
 		for (int j = 0 ; j < 10; j++){
 			
+			for (int k = 0; k < orks.size(); k++)
+			{
+				if (orks.get(k).x == i && orks.get(k).y == j ) clonemap[i][j] = orks.get(k).dress;
+			}
+			
+			for (int m = 0; m < orks.size(); m++)
+			{
+				if (orks.get(m).clubx == i && orks.get(m).cluby == j ) clonemap[i][j] = orks.get(m).dressclub;;
+			}
+		
+			
 			if (hero.x == i && hero.y == j)
 			{
-				System.out.print(hero.dress); 
+				clonemap[i][j] = hero.dress;
 			}
 			
 			else if (i == 8 && j == 2 && hero.armed == 0)
 			{
-				System.out.print('A');
+				clonemap[i][j] = 'A';
 			}
 			
-			else if (ork.x == i && ork.y == j)
-			{
-				System.out.print(ork.dress);
-			}
-				
-			else if (ork.clubx == i && ork.y == j)
-			{
-				System.out.print(ork.dressclub);
-			}
-			
-			else if (ork2.x == i && ork2.y == j)
-			{
-				System.out.print(ork2.dress);
-			}
-			
-			else if (ork2.clubx == i && ork2.cluby == j)
-			{
-				System.out.print(ork2.dressclub);
-			}
-		/*	
-			if (ork3.x == i && ork3.y == j)
-			{
-				System.out.print(ork3.dress);
-			}
-			
-			if (ork3.clubx == i && ork3.cluby == j)
-			{
-				System.out.print(ork3.dressclub);
-			}
-			
-			if (ork4.x == i && ork4.y == j)
-			{
-				System.out.print(ork4.dress);
-			}
-			
-			if (ork4.clubx == i && ork4.cluby == j)
-			{
-				System.out.print(ork4.dressclub); 
-			}*/
 			
 			else if (key.x == i && key.y == j && key.locked == 0)
 			{
-				System.out.print(key.dress);
+				clonemap[i][j] = key.dress;
 			}
 			
-			
-			else System.out.print(Map2[i][j]);
-			
-			
-
-
-			System.out.print(" ");		
-			
 		}
-		System.out.print("\n");
+		
 	}
+	
+	return clonemap;
 	}
-
+	return clonemap;
 	}
 	
 	

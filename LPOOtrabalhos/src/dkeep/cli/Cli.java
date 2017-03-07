@@ -1,4 +1,5 @@
 package dkeep.cli;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -15,15 +16,16 @@ public class Cli {
 	
     public static void main(String[] args) {
     	
-    	StateOfGame novojogo = new StateOfGame(1); //Novo Jogo
+    	StateOfGame novojogo = new StateOfGame(2); //Novo Jogo
     	int flag1 = 1;
+    	char map[][];
     	
     	
     	while (flag1 == 1)
     		
 		{
     		
-    	novojogo.getMap();	//Mapa Resultante da Jogada	
+    	//novojogo.getMap();	//Mapa Resultante da Jogada	
 		
 		System.out.printf("Movimento? (W,A,S,D) ");
 		
@@ -33,7 +35,18 @@ public class Cli {
 		
 		novojogo.Input(movement); //Ler Teclado
 		
-		novojogo.getMap();	//Mapa Resultante da Jogada
+		map = novojogo.getMap() ;
+		
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10 ; j++)
+			{
+				System.out.print(map[i][j]);
+				System.out.printf(" ");
+			}
+			
+			System.out.printf("\n");
+		}
 		
 		if ( novojogo.GameState() == 1 ) {System.out.printf("!!!Game Over!!!\n"); flag1 = 0;}
 		

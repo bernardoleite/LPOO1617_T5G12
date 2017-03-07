@@ -1,5 +1,6 @@
 package dkeep.logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class LevelMap2 {
@@ -9,7 +10,7 @@ public class LevelMap2 {
 	public int needchange = 0;
 	public int reachS = 0;
 	
-	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key ,Ork ork, Ork ork2, Ork ork3, Ork ork4){ //CHANGE ORKS
+	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS
 		   
 			  
 		   if ( input.equals("W") || input.equals("w") )
@@ -79,30 +80,13 @@ public class LevelMap2 {
 		   
 		   
 		     
-			OrksMovement(map, hero ,key ,ork, ork2, ork3, ork4); //OrksMovement(map, hero, key, orks);
+			OrksMovement(map, hero ,key , orks); //OrksMovement(map, hero, key, orks);
 			
-			/*
 			 for (int i = 0 ; i < orks.size(); i++)
 			 {
-			 //if (Crossing(map, hero, key, orks.get(i) == 1) return 1;
+			 if (Crossing(map, hero, key, orks.get(i) ) == 1) return 1;
 			 }
-			 
-			 */
-			
-			if (Crossing(map, hero, key, ork) == 1) return 1;	// if (Crossing(map, hero, key, orks) == 1) return 1;
-			
-			
-			
-			
-			if (Crossing(map, hero, key, ork2) == 1) return 1;	 //delete
-			
-			//if (Crossing(map, hero, key, ork3) == 1) return 1; //delete
-			
-			//if (Crossing(map, hero, key, ork4) == 1) return 1;	//delete
-			
-			
-			
-			
+
 			if (reachS == 1) return 2;
 			
 			if (needchange == 1) { needchange = 0; return 3;}
@@ -114,29 +98,22 @@ public class LevelMap2 {
 	   }
 	   
 	   
-	   public void OrksMovement(char[][] map, Hero hero ,Key key ,Ork ork, Ork ork2, Ork ork3, Ork ork4) //CHANGE ORKS
+	   public void OrksMovement(char[][] map, Hero hero ,Key key ,ArrayList<Ork> orks) //CHANGE ORKS
 	   {
 		   
-		   int aleaMov1 = 1, aleaMov2 = 1, aleaMov3 = 1, aleaMov4 = 1; //change
-		   int aleaClub1 = 1, aleaClub2 = 1, aleaClub3 = 1, aleaClub4 = 1; //change
-		   
-		   
-		   /*
+		   int aleaMov1 = 1;
+		   int aleaClub1 = 1;
+
 		   for (int i = 0 ; i < orks.size(); i++)
 		   {
-		   
-		   Random mov = new Random();
-		   Random club = new Random();
-		   aleaMov1 = mov.nextInt(4)+1;
-		   aleaClub1 = club.nextInt(4)+1;	
-		   
-		   EffectiveMovement(map, hero ,key , orks.get(i) , aleaMov1, aleaClub1);
+			   Random mov = new Random();
+			   Random club = new Random();
+			   aleaMov1 = mov.nextInt(4)+1;
+			   aleaClub1 = club.nextInt(4)+1;	
+			   EffectiveMovement(map, hero ,key , orks.get(i) , aleaMov1, aleaClub1);
 		   }
 		   
-		   
-		   */
-
-		   
+		/*  
 		   Random mov = new Random();
 		   Random mov2 = new Random();
 		   Random mov3 = new Random();
@@ -149,18 +126,18 @@ public class LevelMap2 {
 
 	       aleaMov1 = mov.nextInt(4)+1;
 	       aleaMov2 = mov2.nextInt(4)+1;
-	      // aleaMov3 = mov3.nextInt(4)+1;
-	      // aleaMov4 = mov4.nextInt(4)+1;
+	       aleaMov3 = mov3.nextInt(4)+1;
+	       aleaMov4 = mov4.nextInt(4)+1;
 	       
 	       aleaClub1 = club.nextInt(4)+1;	  
 	       aleaClub2 = club2.nextInt(4)+1;
-	       //aleaClub3 = club3.nextInt(4)+1;
-	      // aleaClub4 = club4.nextInt(4)+1;
+	       aleaClub3 = club3.nextInt(4)+1;
+	      aleaClub4 = club4.nextInt(4)+1;
 	           
 	       EffectiveMovement(map, hero ,key ,ork, aleaMov1, aleaClub1);
 	       EffectiveMovement(map, hero ,key ,ork2, aleaMov2, aleaClub2);
-	       //EffectiveMovement(map, hero ,key ,ork3, aleaMov3, aleaClub3);
-	       //EffectiveMovement(map, hero ,key ,ork4, aleaMov4, aleaClub4);
+	       EffectiveMovement(map, hero ,key ,ork3, aleaMov3, aleaClub3);
+	       EffectiveMovement(map, hero ,key ,ork4, aleaMov4, aleaClub4);*/
 		   
 	   }
 	   
