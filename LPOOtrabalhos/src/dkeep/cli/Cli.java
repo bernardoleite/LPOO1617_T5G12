@@ -18,8 +18,6 @@ public class Cli {
     	
     	StateOfGame novojogo = new StateOfGame(2); //Novo Jogo
     	int flag1 = 1;
-    	char map[][];
-    	
     	
     	while (flag1 == 1)
     		
@@ -34,14 +32,13 @@ public class Cli {
 		String movement = reader.next(); 
 		
 		novojogo.Input(movement); //Ler Teclado
-		
-		map = novojogo.getMap() ;
+	
 		
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10 ; j++)
 			{
-				System.out.print(map[i][j]);
+				System.out.print(novojogo.getMap()[i][j]);
 				System.out.printf(" ");
 			}
 			

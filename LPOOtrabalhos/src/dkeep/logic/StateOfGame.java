@@ -229,19 +229,20 @@ public class StateOfGame {
 		int next = 1; //Variaveis para nao desconfigurar impressao
 		int ver = 0; //Variaveis para nao desconfigurar impressao
 		int cont = 0;
-		char clonemap[][] = Map2; //
-	/*	
-		for (int i = 0; i < 10; i++)
-		{
-		clonemap = Arrays.copyOf(Map2[i], Map2[i].length) ;
-		}*/
+		char  clonemap[][] = new char[10][10];
+		
+		for (int c = 0; c < 10; c++ ){
+			for (int v = 0; v < 10; v++){
+				clonemap[c][v] = Map2[c][v];
+			}
+		}
 		
 	if (MyLevel == 1)
 	{	  
 		
 		for(int i = 0;  i < 10; i++){
   		
-		for (int j = 0 ; j < 10; j++){
+			for (int j = 0 ; j < 10; j++){
 			
 			if ( (hero.x == i && hero.y == j) && (guard.x == i && guard.y == j) )
 			{
@@ -290,6 +291,21 @@ public class StateOfGame {
   		
 		for (int j = 0 ; j < 10; j++){
 			
+			if (key.x == i && key.y == j && key.locked == 0)
+			{
+				clonemap[i][j] = key.dress;
+			}
+			
+			if (hero.x == i && hero.y == j)
+			{
+				clonemap[i][j] = hero.dress;
+			}
+			
+			if (i == 8 && j == 2 && hero.armed == 0)
+			{
+				clonemap[i][j] = 'A';
+			}
+			
 			for (int k = 0; k < orks.size(); k++)
 			{
 				if (orks.get(k).x == i && orks.get(k).y == j ) clonemap[i][j] = orks.get(k).dress;
@@ -301,21 +317,6 @@ public class StateOfGame {
 			}
 		
 			
-			if (hero.x == i && hero.y == j)
-			{
-				clonemap[i][j] = hero.dress;
-			}
-			
-			else if (i == 8 && j == 2 && hero.armed == 0)
-			{
-				clonemap[i][j] = 'A';
-			}
-			
-			
-			else if (key.x == i && key.y == j && key.locked == 0)
-			{
-				clonemap[i][j] = key.dress;
-			}
 			
 		}
 		
