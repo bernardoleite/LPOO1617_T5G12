@@ -6,9 +6,10 @@ public class Lever {
 	public int y;
 	public int catched = 0;
 	
-	public Lever()
+	public Lever(int CordX, int CordY)
 	{
-		
+		this.x = CordX;
+		this.y = CordY;
 	}
 	
 	public int GetCatched(){

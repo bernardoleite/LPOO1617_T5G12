@@ -15,7 +15,7 @@ public class LevelMap1 {
 			   
 			   else if (map[hero.x-1][hero.y] == 'S') {reachS =1; hero.x--;}
 			   
-			   else if (map[hero.x-1][hero.y] == 'K') {Klever = 1;  hero.x--;}
+			   else if (hero.x-1 == lever.x && hero.y == lever.y) {Klever = 1;  hero.x--;}
 			   
 			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;}
 		   }
@@ -26,7 +26,7 @@ public class LevelMap1 {
 			   
 			   else  if (map[hero.x][hero.y-1] == 'S') {reachS =1; hero.y--;}
 			   
-			   else  if (map[hero.x][hero.y-1] == 'K') {Klever = 1; hero.y--;}
+			   else  if (hero.x == lever.x && hero.y-1 == lever.y) {Klever = 1; hero.y--;}
 			   
 			   else if (map[hero.x][hero.y-1] == ' ') {hero.y--;}
 		   }
@@ -38,7 +38,7 @@ public class LevelMap1 {
 			   
 			   else if (map[hero.x+1][hero.y] == 'S') {reachS =1; hero.x++;}
 			   
-			   else if (map[hero.x+1][hero.y] == 'K') {Klever = 1; hero.x++;}
+			   else if (hero.x+1 == lever.x && hero.y == lever.y) {Klever = 1; hero.x++;}
 			   
 			   else if (map[hero.x+1][hero.y] == ' ') {hero.x++;}
 			   
@@ -51,7 +51,7 @@ public class LevelMap1 {
 			   
 			   else if (map[hero.x][hero.y+1] == 'S')  {reachS =1; hero.y++;}
 			   
-			   else if (map[hero.x][hero.y+1] == 'K')  {Klever = 1; hero.y++;}
+			   else if (hero.x == lever.x && hero.y+1 == lever.y)  {Klever = 1; hero.y++;}
 			  		  
 			   else if (map[hero.x][hero.y+1] == ' ')  {hero.y++;}
 			   

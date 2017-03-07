@@ -15,6 +15,9 @@ public class Ork extends Enemy {
 		this.y = CoordenadaY;
 	}
 	
+	public Ork()
+	{}
 	
+	//create new function to crate random positions when ork borns
 	
 }

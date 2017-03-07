@@ -1,4 +1,8 @@
 package dkeep.logic;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 public class StateOfGame {
 	
 
@@ -10,7 +14,7 @@ public class StateOfGame {
 			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', 'K', ' ', 'X'},
+			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
 			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 			
 		};
@@ -37,6 +41,7 @@ public class StateOfGame {
 	public Ork ork2;
 	public Ork ork3;
 	public Ork ork4;
+	public ArrayList<Ork> orks; //novo
 	public Guard guard;
 	public int MyLevel;
 	public int status = 0;
@@ -84,6 +89,11 @@ public class StateOfGame {
 		return MyLevel;
 	}
 	
+	public ArrayList<Ork> getOrks()
+	{
+		return this.orks;
+	}
+	
 	
 	public StateOfGame(int Level)	//Precisa de mudança aquando acrescento de nivel
 	{
@@ -95,10 +105,13 @@ public class StateOfGame {
 	
 	public int NewGame(int Level) //Precisa de mudança aquando acrescento de nivel
 	{
+		int num = 0;
+		
 		if (Level == 1)
 		{
 			hero = new Hero (1,1);
 			guard = new Guard (1,8);
+			lever = new Lever (8,7);
 			level1 = new LevelMap1();
 		}
 		
@@ -111,6 +124,21 @@ public class StateOfGame {
 			ork4 = new Ork(6,8);
 			key = new Key(1,8);
 			level2 = new LevelMap2();
+			
+			//New
+			 Random NumOrks = new Random();
+			 num = NumOrks.nextInt(3)+1;
+			 orks = new ArrayList<Ork> ();
+			 
+			 for (int i = 0; i < orks.size(); i++)
+			 {
+				 Ork ork = new Ork();
+				 
+				 orks.add(ork);
+				 
+			 }
+			//New
+			 
 		}
 		
 		return 1;
@@ -183,10 +211,10 @@ public class StateOfGame {
 	{
 		if(MyLevel == 1)
 		{
-		 	for(int i = 0; i < 10; i++){
-	    		for (int j = 0 ; j < 10; j++){
+		 	for(int i = 0; i < map.length; i++){
+	    		for (int j = 0 ; j < map.length; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
-	    			else if (map[i][j] == 'K') map[i][j] = ' ';
+	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
 
 	    	}
@@ -194,7 +222,7 @@ public class StateOfGame {
 			 return 1;
 		}
 		
-		else if (MyLevel == 2)
+		 if (MyLevel == 2)
 		{
 		 	for(int i = 0; i < 10; i++){
 	    		for (int j = 0 ; j < 10; j++){
@@ -236,6 +264,11 @@ public class StateOfGame {
 			else if (guard.x == i && guard.y == j)
 			{
 			System.out.print (guard.dress); next = 0;
+			}
+			
+			else if (lever.x == i && lever.y == j)
+			{
+			System.out.print ('K'); next = 0;
 			}	
 			
 			if(next == 1){
@@ -251,7 +284,7 @@ public class StateOfGame {
 	}}
 	
 	
-	else if (MyLevel == 2)
+	else if (MyLevel == 2) //change orks prints
 		
 	{	  	
 		
