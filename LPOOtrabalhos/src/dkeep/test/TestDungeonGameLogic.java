@@ -33,8 +33,7 @@ public class TestDungeonGameLogic {
 		novo.NewGame(1);
 		assertEquals (vet[0], novo.hero.getHeroPos()[0]);
 		assertEquals (vet[1], novo.hero.getHeroPos()[1]);
-		novo.HeroMovement("s", map);
-	 //hero moves down (free cell, should go and update position)
+		novo.HeroMovement("s", map); //hero moves down (free cell, should go and update position)
 		assertEquals(vet2[0], novo.hero.getHeroPos()[0]);
 		assertEquals(vet2[1], novo.hero.getHeroPos()[1]);
 		
@@ -49,24 +48,21 @@ public class TestDungeonGameLogic {
 		novo.NewGame(1);
 		assertEquals (vet[0], novo.hero.getHeroPos()[0]);
 		assertEquals (vet[1], novo.hero.getHeroPos()[1]);
-		novo.HeroMovement("a", map);
-		//hero moves left (there is a wall, must not update position)
+		novo.HeroMovement("a", map); //hero moves left (there is a wall, must not update position)
 		assertEquals(vet2[0], novo.hero.getHeroPos()[0]);
 		assertEquals(vet2[1], novo.hero.getHeroPos()[1]);
 		
 	}
 	
-	
 	@Test
 	public void testHeroIsCapturedByGuard() {
 		
 		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
 		novo.GetGuard().setGuardPositions(1, 3);
+		novo.GetGuard().StopMovement();
 		assertEquals (0, novo.GameState());
-		novo.HeroMovement("d", map);
+		novo.HeroMovement("d", map); //move next to the guard
 		assertEquals(1, novo.GameState());
-		
 	}
 	
 	@Test
@@ -74,7 +70,6 @@ public class TestDungeonGameLogic {
 		
 		int current ;
 		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
 		novo.HeroMovement("s", map);
 		assertEquals (0, novo.GameState()); 
 		novo.HeroMovement("a", map);

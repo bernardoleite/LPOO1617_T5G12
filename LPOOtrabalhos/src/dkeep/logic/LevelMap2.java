@@ -10,6 +10,7 @@ public class LevelMap2 {
 	public int needchange = 0;
 	public int reachS = 0;
 	
+	
 	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS
 		   
 			  
@@ -92,9 +93,7 @@ public class LevelMap2 {
 			if (needchange == 1) { needchange = 0; return 3;}
 
 			return 0;
-			
-			
-		   
+
 	   }
 	   
 	   
@@ -147,6 +146,8 @@ public class LevelMap2 {
 		     
 	       if (aleaMov == 1) //W
 	    	{
+	    	   	ork.setOgreMovement('W');
+	    	   	
 	    	   	if (map[ork.x-1][ork.y] == 'X');
 	    	   
 	    	   	else if (ork.x-1 == key.x && ork.y == key.y && ork.freeze == 0 && key.catched == 0 ) { ork.dress = '$'; ork.x--;}
@@ -159,6 +160,8 @@ public class LevelMap2 {
 	       
 	        if (aleaMov == 2) //A
 	       {
+	        ork.setOgreMovement('A');
+	        	
 	        if (map[ork.x][ork.y-1] == 'X');
 	        
 	        else if (ork.x == key.x && ork.y-1 == key.y && ork.freeze == 0 && key.catched == 0 ) {ork.dress = '$';  ork.y--;}
@@ -170,6 +173,7 @@ public class LevelMap2 {
 	       
 	       else if (aleaMov == 3) //S
 	       {
+	    	   ork.setOgreMovement('S');
 	    	   
 	    	   if (map[ork.x+1][ork.y] == 'X');
 	    	   
@@ -182,6 +186,8 @@ public class LevelMap2 {
 	       
 	        else if (aleaMov == 4) //D
 	       {
+	        	ork.setOgreMovement('D');
+	        	
 	        	if (map[ork.x][ork.y+1] == 'X');
 
 	        	else if (ork.x == key.x && ork.y+1 == key.y && ork.freeze == 0  && key.catched == 0) {ork.dress = '$'; ork.y++;}
@@ -192,9 +198,11 @@ public class LevelMap2 {
 	       }
 	       
 	       //Club
-   
+   if (ork.freezeclub == 0){
 	       if (aleaClub == 1) 
 	       {
+	    	  ork.setClubMovement('A');
+	    	   
 	    	  if (map[ork.x-1][ork.y] == 'X');
 	    	  
 	    	  if (ork.x-1 == key.x && ork.y == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }
@@ -206,6 +214,7 @@ public class LevelMap2 {
 	       
 	       else if (aleaClub == 2) 
 	       {
+	    	   	ork.setClubMovement('A');
 	    	   	if (map[ork.x][ork.y-1] == 'X');
 	    	   	if (ork.x == key.x && ork.y-1 == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; } 
 	    	   	else if (map[ork.x][ork.y-1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; }
@@ -214,6 +223,7 @@ public class LevelMap2 {
 	       
 	       else if (aleaClub == 3) 
 	       {
+	    	   ork.setClubMovement('S');
 	    	   if (map[ork.x+1][ork.y] == 'X');
 	    	   if (ork.x+1 == key.x && ork.y == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }  
 	    	   else if (map[ork.x+1][ork.y] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }   
@@ -222,11 +232,12 @@ public class LevelMap2 {
 	       
 	       else if (aleaClub == 4) 
 	       {
+	    	   ork.setClubMovement('D');
 	    	   if (map[ork.x][ork.y+1] == 'X');
 	    	   if (ork.x == key.x && ork.y+1 == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x; ork.cluby = ork.y + 1; }  
 	    	   else if (map[ork.x][ork.y+1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x; ork.cluby = ork.y + 1; } 
 	    	   	  
-		   }
+		   }}
 	   }
 	   
 	   public int Crossing (char[][] map, Hero hero ,Key key ,Ork ork)
@@ -235,7 +246,7 @@ public class LevelMap2 {
 		   
 		   if (hero.x == key.x && hero.y == key.y && key.locked  == 0) {keycatched = 1; key.catched =1 ; key.dress = ' '; hero.dress = 'K';}
 
-		   if (ork.freeze > 0) ork.freeze--;
+		   if (ork.freeze > 0 && ork.permanent == 0) ork.freeze--;
 	/*	   	   
 		   if (ork.x == key.x && ork.y == key.y || ork.clubx == key.x && ork.cluby == key.y  )
 		   {
@@ -245,7 +256,7 @@ public class LevelMap2 {
 		   else key.locked = 0;
 		   
 		   	if (hero.x == ork.x && hero.y == ork.y) return 1;	   
-		   	if (hero.x == ork.clubx && hero.y == ork.cluby) return 1;
+		   	if (hero.x == ork.clubx && hero.y == ork.cluby && ork.freezeclub == 0) return 1;
 			 
 			 else if (hero.x == ork.x && Math.abs(hero.y - ork.y) == 1 && hero.armed == 0 ) return 1; //Crossing Hero and an Ork
 			 
@@ -257,9 +268,9 @@ public class LevelMap2 {
 			 else if (Math.abs(hero.x - ork.x) == 1 && hero.y == ork.y && hero.armed == 1) {ork.dress = '8';  ork.freeze = 2;  return 0;} //Crossing Hero and an Ork's Club with armer
 		   
 		   
-			 else if (Math.abs(hero.x - ork.clubx) == 1 && hero.y == ork.cluby ) return 1; //Crossing Hero and an Ork's Club
+			 else if (Math.abs(hero.x - ork.clubx) == 1 && hero.y == ork.cluby  && ork.freezeclub == 0) return 1; //Crossing Hero and an Ork's Club
 		   
-			 else if (hero.x == ork.clubx  && Math.abs(hero.y - ork.cluby) == 1 ) return 1; //Crossing Hero and an Ork's Club
+			 else if (hero.x == ork.clubx  && Math.abs(hero.y - ork.cluby) == 1  && ork.freezeclub == 0) return 1; //Crossing Hero and an Ork's Club
 		   
 			 return 0;
 		   

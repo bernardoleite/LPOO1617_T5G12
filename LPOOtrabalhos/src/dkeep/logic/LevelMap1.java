@@ -59,7 +59,7 @@ public class LevelMap1 {
 		 
 		if (Crossing(hero, lever, guard) == 1) return 1;	//import
 		 
-		GuardMovement(hero,lever,guard);
+		if (guard.getMovement() == 0) GuardMovement(hero,lever,guard);
 		
 		if (Crossing(hero, lever, guard) == 1) return 1;		
 		
@@ -98,7 +98,7 @@ public class LevelMap1 {
 	       
 	       if (number == 1) //Acordado
 	    	   {
-	    	   guard.dress = "G";
+	    	   guard.dress = 'G';
 	    	   
 			   Random num2 = new Random();
 
@@ -134,7 +134,7 @@ public class LevelMap1 {
 	       
 	       else if (number == 2) //Adormecido
 	    	   {
-	    	   guard.dress = "g";
+	    	   guard.dress = 'g';
 	    	   }
 		 
 	 }
@@ -181,9 +181,9 @@ public class LevelMap1 {
 		 
 		 if (hero.x == guard.x && hero.y == guard.y) return 1;
 		 
-		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress.equals("g")) return 0;
+		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress == 'G') return 0;
 		 
-		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress.equals("g")) return 0;
+		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress == 'G') return 0;
 		 
 		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1) return 1;
 		 

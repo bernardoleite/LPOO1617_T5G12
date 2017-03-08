@@ -27,4 +27,9 @@ public class Hero {
 			
 	}
 	
+	public char getHeroDress()
+	{
+		return this.dress;
+	}
+	
 }

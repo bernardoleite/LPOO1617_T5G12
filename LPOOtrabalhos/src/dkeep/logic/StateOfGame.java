@@ -111,20 +111,23 @@ public class StateOfGame {
 		
 		else if (Level == 2)
 		{
+			Random NumOrks = new Random();
+			num = NumOrks.nextInt(3)+1;
+			 
 			hero = new Hero (8,1);
 			key = new Key(1,8);
 			level2 = new LevelMap2();
 			
-			//New
-			 Random NumOrks = new Random();
-			 num = NumOrks.nextInt(3)+1;
-			 orks = new ArrayList<Ork> ();
+			 this.orks = new ArrayList<Ork> ();
 			 
+			 this.orks.add(new Ork());
+			 
+			/* 
 		 for (int i = 0; i < num; i++)
 			 { 		 
 				 orks.add(new Ork());
-			 }
-			//New
+			 }*/
+			
 			 
 		}
 		
@@ -138,6 +141,15 @@ public class StateOfGame {
 
 		return 1;
 	}
+	
+	public void StopOrksMovement()
+	{
+		for (int i = 0; i < orks.size(); i++)
+		{
+			orks.get(i).StopMovement();
+		}
+	}
+	
 	
 	public int HeroMovement(String input, char map[][])	//Precisa de mudança aquando acrescento de nivel
 	{
@@ -211,8 +223,8 @@ public class StateOfGame {
 		
 		 if (MyLevel == 2)
 		{
-		 	for(int i = 0; i < 10; i++){
-	    		for (int j = 0 ; j < 10; j++){
+		 	for(int i = 0; i < map.length; i++){
+	    		for (int j = 0 ; j < map.length; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
 	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
@@ -231,14 +243,15 @@ public class StateOfGame {
 		int cont = 0;
 		char  clonemap[][] = new char[10][10];
 		
-		for (int c = 0; c < 10; c++ ){
-			for (int v = 0; v < 10; v++){
-				clonemap[c][v] = Map2[c][v];
-			}
-		}
 		
 	if (MyLevel == 1)
 	{	  
+		
+		for (int c = 0; c < 10; c++ ){
+			for (int v = 0; v < 10; v++){
+				clonemap[c][v] = Map1[c][v];
+			}
+		}
 		
 		for(int i = 0;  i < 10; i++){
   		
@@ -246,37 +259,32 @@ public class StateOfGame {
 			
 			if ( (hero.x == i && hero.y == j) && (guard.x == i && guard.y == j) )
 			{
-				System.out.print (hero.dress); 
-				System.out.print (guard.dress);
-				next = 0;
-				ver = 1;
+				clonemap[i][j] = guard.dress;
+
 			}
 			
 			else if (hero.x == i && hero.y == j)
 			{
-			System.out.print (hero.dress); next = 0;
+				clonemap[i][j] = hero.dress; next = 0;
 			}
 			
 			else if (guard.x == i && guard.y == j)
 			{
-			System.out.print (guard.dress); next = 0;
+				clonemap[i][j] = guard.dress; next = 0;
 			}
 			
 			else if (lever.x == i && lever.y == j)
 			{
-			System.out.print ('K'); next = 0;
+				clonemap[i][j] = 'K'; next = 0;
 			}	
 			
-			if(next == 1){
-			System.out.print (Map1[i][j]);
+			else{
+				clonemap[i][j] = Map1[i][j];
 			}
 			
-			next = 1;
-			if (ver == 0) System.out.print(" ");		
-			ver = 0;
 			
 		}
-		System.out.print("\n");
+
 	}
 		return clonemap;
 		}
@@ -285,6 +293,11 @@ public class StateOfGame {
 	else if (MyLevel == 2) //change orks prints
 		
 	{
+		for (int c = 0; c < 10; c++ ){
+			for (int v = 0; v < 10; v++){
+				clonemap[c][v] = Map2[c][v];
+			}
+		}
 
 		
 	for(int i = 0;  i < 10; i++){

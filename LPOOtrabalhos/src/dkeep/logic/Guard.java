@@ -7,8 +7,10 @@ public class Guard extends Enemy {
 	public int x, y;
 	public int steps = 0;
 	public String typeguard = " ";
-	public String dress = "G";
+	public char dress = 'G';
 	public int timestopped = 0;
+	
+	private int freeze = 0;
 	
 	public Guard(int Cordx, int Cordy)
 	{
@@ -56,6 +58,16 @@ public class Guard extends Enemy {
 		this.x = CordX;
 		this.y = CordY;
 			
+	}
+	
+	public void StopMovement()
+	{
+		this.freeze = 1;
+	}
+	
+	public int getMovement()
+	{
+		return this.freeze;
 	}
 
 }

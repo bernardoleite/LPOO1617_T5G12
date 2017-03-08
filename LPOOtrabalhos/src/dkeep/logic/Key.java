@@ -12,5 +12,11 @@ public class Key {
 		x  = CoordenadaX;
 		y = CoordenadaY;
 	}
+	
+	public void setKeypos(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
 
 }
