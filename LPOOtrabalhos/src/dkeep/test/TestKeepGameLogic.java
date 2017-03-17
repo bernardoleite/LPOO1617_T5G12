@@ -35,7 +35,7 @@ public class TestKeepGameLogic {
 		int vet[] = {1,1};
 		int vet2[] = {1,3};
 		
-		StateOfGame novo = new StateOfGame(2);
+		StateOfGame novo = new StateOfGame(2,0,1);
 		
 		for (int i = 0; i < novo.getOrks().size(); i++){
 			novo.getOrks().get(i).setOrkPositicions(1, 3);}
@@ -64,7 +64,7 @@ public class TestKeepGameLogic {
 		
 		
 
-		StateOfGame novo = new StateOfGame(2);
+		StateOfGame novo = new StateOfGame(2,0,1);
 
 		for (int i = 0; i < novo.getOrks().size(); i++){
 			novo.getOrks().get(i).setOrkPositicions(1, 3);}
@@ -87,7 +87,7 @@ public class TestKeepGameLogic {
 	@Test
 	public void HeroFailstoExit() {
 		
-		StateOfGame novo = new StateOfGame(2);
+		StateOfGame novo = new StateOfGame(2,0,1);
 
 		for (int i = 0; i < novo.getOrks().size(); i++){
 			novo.getOrks().get(i).setOrkPositicions(1, 3);}
@@ -112,7 +112,7 @@ public class TestKeepGameLogic {
 		int vet[] = {3,1};
 
 		
-		StateOfGame novo = new StateOfGame(2);
+		StateOfGame novo = new StateOfGame(2,0,1);
 		
 		
 		for (int i = 0; i < novo.getOrks().size(); i++){
@@ -145,7 +145,7 @@ public class TestKeepGameLogic {
 		int vet[] = {3,1};
 
 		
-		StateOfGame novo = new StateOfGame(2);
+		StateOfGame novo = new StateOfGame(2,0,1);
 
 		
 		novo.getMap();

@@ -89,15 +89,15 @@ public class StateOfGame {
 	}
 	
 	
-	public StateOfGame(int Level)	//Precisa de mudança aquando acrescento de nivel
+	public StateOfGame(int Level, int GuardPersonality, int numberOrks)	//Precisa de mudança aquando acrescento de nivel
 	{
 		this.MyLevel = Level;
-		if (Level == 1) NewGame(1);
-		if (Level == 2) NewGame(2);
+		if (Level == 1) NewGame(1,GuardPersonality, numberOrks);
+		if (Level == 2) NewGame(2, GuardPersonality, numberOrks);
 		
 	}
 	
-	public int NewGame(int Level) //Precisa de mudança aquando acrescento de nivel
+	public int NewGame(int Level, int GuardPersonality, int numberOrks) //Precisa de mudança aquando acrescento de nivel
 	{
 		int num = 0;
 		
@@ -105,6 +105,10 @@ public class StateOfGame {
 		{
 			hero = new Hero (1,1);
 			guard = new Guard (1,8);
+			
+			if (GuardPersonality == 0) guard.ChooseGuardRandom();
+			else guard.setGuardPersonality(GuardPersonality);
+			
 			lever = new Lever (8,7);
 			level1 = new LevelMap1();
 		}
@@ -119,14 +123,13 @@ public class StateOfGame {
 			level2 = new LevelMap2();
 			
 			 this.orks = new ArrayList<Ork> ();
+		
 			 
-			 this.orks.add(new Ork());
-			 
-			/* 
-		 for (int i = 0; i < num; i++)
+			
+		 for (int i = 0; i < numberOrks; i++)
 			 { 		 
 				 orks.add(new Ork());
-			 }*/
+			 }
 			
 			 
 		}
@@ -203,6 +206,12 @@ public class StateOfGame {
 		else if (status == 3) return 3;
 		
 		else return 0;
+		
+	}
+	
+	public void NothingHappens()
+	{
+		level2.setImortality();
 		
 	}
 	

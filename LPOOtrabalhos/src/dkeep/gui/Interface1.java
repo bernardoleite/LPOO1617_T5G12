@@ -102,19 +102,13 @@ public class Interface1 {
 				String texto = numogres.getText();
 				ogres = Integer.parseInt(texto);
 				int tipoguarda = comboBox.getSelectedIndex();
-				if (tipoguarda == 0){
-	
-				}
-				if (tipoguarda == 1){
-					
-				}
-				
-				
-				//Aqui começa a impressao inicial do primeiro nível.
+
+								
+				//Aqui comeï¿½a a impressao inicial do primeiro nï¿½vel.
 				String aux;
 				String fim;
 				fim = "";
-				novojogo = new StateOfGame(1);
+				novojogo = new StateOfGame(1, tipoguarda, 2);
 				
 				for (int i = 0; i < 10; i++)
 				{

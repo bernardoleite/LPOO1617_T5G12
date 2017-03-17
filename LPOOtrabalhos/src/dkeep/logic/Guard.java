@@ -17,10 +17,10 @@ public class Guard extends Enemy {
 		
 		this.x = Cordx;
 		this.y = Cordy;
-		ChooseGuard();
+
 	}
 	
-	public void ChooseGuard()
+	public void ChooseGuardRandom()
 	{
 		   int number = 1 ;
 		   
@@ -57,6 +57,14 @@ public class Guard extends Enemy {
 	{
 		this.x = CordX;
 		this.y = CordY;
+			
+	}
+	
+	public void setGuardPersonality(int GuardPersonality)
+	{
+		if (GuardPersonality == 1) this.typeguard = "Rookie";
+		else if (GuardPersonality == 2) this.typeguard = "Drunken";
+		else if (GuardPersonality == 3) this.typeguard = "Suspicious";
 			
 	}
 	

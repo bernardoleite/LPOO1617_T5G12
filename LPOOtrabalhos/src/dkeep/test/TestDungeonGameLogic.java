@@ -29,8 +29,8 @@ public class TestDungeonGameLogic {
 		
 		int vet[] = {1,1};
 		int vet2[] = {2,1};
-		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
+
 		assertEquals (vet[0], novo.hero.getHeroPos()[0]);
 		assertEquals (vet[1], novo.hero.getHeroPos()[1]);
 		novo.HeroMovement("s", map); //hero moves down (free cell, should go and update position)
@@ -44,8 +44,8 @@ public class TestDungeonGameLogic {
 		
 		int vet[] = {1,1};
 		int vet2[] = {1,1};
-		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
+
 		assertEquals (vet[0], novo.hero.getHeroPos()[0]);
 		assertEquals (vet[1], novo.hero.getHeroPos()[1]);
 		novo.HeroMovement("a", map); //hero moves left (there is a wall, must not update position)
@@ -57,7 +57,7 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testHeroIsCapturedByGuard() {
 		
-		StateOfGame novo = new StateOfGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
 		novo.GetGuard().setGuardPositions(1, 3);
 		novo.GetGuard().StopMovement();
 		assertEquals (0, novo.GameState());
@@ -69,7 +69,7 @@ public class TestDungeonGameLogic {
 	public void testHeroFailsToLeave() {
 		
 		int current ;
-		StateOfGame novo = new StateOfGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
 		novo.HeroMovement("s", map);
 		assertEquals (0, novo.GameState()); 
 		novo.HeroMovement("a", map);
@@ -79,8 +79,7 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testDoorsOpenWhenLeverIsReached() {
 		
-		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
 		novo.GetLever().SetLeverPos(3, 1);
 		novo.HeroMovement("s", map);
 		novo.HeroMovement("s", map);
@@ -91,8 +90,7 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testProgresstoKeep() {
 		
-		StateOfGame novo = new StateOfGame(1);
-		novo.NewGame(1);
+		StateOfGame novo = new StateOfGame(1, 0, 2);
 		novo.GetLever().SetLeverPos(3, 1);
 		novo.HeroMovement("s", map);
 		novo.HeroMovement("s", map);

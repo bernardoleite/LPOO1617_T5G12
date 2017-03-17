@@ -9,6 +9,7 @@ public class LevelMap2 {
 	public int keycatched = 0;
 	public int needchange = 0;
 	public int reachS = 0;
+	private int imortality = 0;
 	
 	
 	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS
@@ -201,7 +202,7 @@ public class LevelMap2 {
    if (ork.freezeclub == 0){
 	       if (aleaClub == 1) 
 	       {
-	    	  ork.setClubMovement('A');
+	    	  ork.setClubMovement('W');
 	    	   
 	    	  if (map[ork.x-1][ork.y] == 'X');
 	    	  
@@ -240,6 +241,10 @@ public class LevelMap2 {
 		   }}
 	   }
 	   
+		 public void setImortality(){
+			 this.imortality = 1;
+		 }
+	   
 	   public int Crossing (char[][] map, Hero hero ,Key key ,Ork ork)
 	   
 	   {
@@ -255,12 +260,12 @@ public class LevelMap2 {
 		   
 		   else key.locked = 0;
 		   
-		   	if (hero.x == ork.x && hero.y == ork.y) return 1;	   
-		   	if (hero.x == ork.clubx && hero.y == ork.cluby && ork.freezeclub == 0) return 1;
+		   	if (hero.x == ork.x && hero.y == ork.y && this.imortality == 0) return 1;	   
+		   	if (hero.x == ork.clubx && hero.y == ork.cluby && ork.freezeclub == 0 && this.imortality == 0) return 1;
 			 
-			 else if (hero.x == ork.x && Math.abs(hero.y - ork.y) == 1 && hero.armed == 0 ) return 1; //Crossing Hero and an Ork
+			 else if (hero.x == ork.x && Math.abs(hero.y - ork.y) == 1 && hero.armed == 0 && this.imortality == 0 ) return 1; //Crossing Hero and an Ork
 			 
-			 else if (Math.abs(hero.x - ork.x) == 1 && hero.y == ork.y && hero.armed == 0) return 1; //Crossing Hero and an Ork's Club
+			 else if (Math.abs(hero.x - ork.x) == 1 && hero.y == ork.y && hero.armed == 0 && this.imortality == 0) return 1; //Crossing Hero and an Ork's Club
 		   
 		   
 			 else if (hero.x == ork.x && Math.abs(hero.y - ork.y) == 1 && hero.armed == 1 ) {ork.dress = '8';  ork.freeze = 2; return 0;} //Crossing Hero and an Ork with armer
@@ -268,9 +273,9 @@ public class LevelMap2 {
 			 else if (Math.abs(hero.x - ork.x) == 1 && hero.y == ork.y && hero.armed == 1) {ork.dress = '8';  ork.freeze = 2;  return 0;} //Crossing Hero and an Ork's Club with armer
 		   
 		   
-			 else if (Math.abs(hero.x - ork.clubx) == 1 && hero.y == ork.cluby  && ork.freezeclub == 0) return 1; //Crossing Hero and an Ork's Club
+			 else if (Math.abs(hero.x - ork.clubx) == 1 && hero.y == ork.cluby  && ork.freezeclub == 0 && this.imortality == 0) return 1; //Crossing Hero and an Ork's Club
 		   
-			 else if (hero.x == ork.clubx  && Math.abs(hero.y - ork.cluby) == 1  && ork.freezeclub == 0) return 1; //Crossing Hero and an Ork's Club
+			 else if (hero.x == ork.clubx  && Math.abs(hero.y - ork.cluby) == 1  && ork.freezeclub == 0 && this.imortality == 0) return 1; //Crossing Hero and an Ork's Club
 		   
 			 return 0;
 		   

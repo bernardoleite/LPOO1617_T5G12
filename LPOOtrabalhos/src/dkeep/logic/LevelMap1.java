@@ -6,6 +6,7 @@ public class LevelMap1 {
 	
 	public int Klever = 0;
 	public int reachS = 0;
+
 	
 	public int HeroMoves(char map[][] , String input, Hero hero, Lever lever, Guard guard )
 	{
@@ -176,18 +177,19 @@ public class LevelMap1 {
 	
 	return 1;
 	 }
+	 
 	 public int Crossing(Hero hero, Lever lever, Guard guard)
 	 {
 		 
-		 if (hero.x == guard.x && hero.y == guard.y) return 1;
+		 if (hero.x == guard.x && hero.y == guard.y && guard.dress == 'G' ) return 1;
 		 
-		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress == 'G') return 0;
+		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress == 'g') return 0;
 		 
-		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress == 'G') return 0;
+		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress == 'g') return 0;
 		 
-		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1) return 1;
+		 else if (hero.x == guard.x && Math.abs(hero.y - guard.y) == 1 && guard.dress == 'G') return 1;
 		 
-		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y) return 1;
+		 else if (Math.abs(hero.x - guard.x) == 1 && hero.y == guard.y && guard.dress == 'G') return 1;
 		 
 		 else return 0;
  
