@@ -32,6 +32,9 @@ public class Interface1 {
 	private StateOfGame novojogo;
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
 	private JComboBox comboBox;
+	private JLabel lblStatus;
+	private int NumberOgres = 0;
+	private int MyLevel = 1;
 	/**
 	 * Launch the application.
 	 */
@@ -46,6 +49,57 @@ public class Interface1 {
 				}
 			}
 		});
+	}
+	
+	public String getCurrentMap()
+	{
+		String aux;
+		String fim;
+		fim = "";
+		for (int i = 0; i < 10; i++)
+		{
+			
+			aux = String.valueOf(novojogo.getMap()[i]);
+			fim = fim + " " + aux + "\n";
+
+		}
+		
+		return fim;
+	}
+	
+	public void turnOffMovementButtoms()
+	{
+		btnUp.setEnabled(false);
+		btnDown.setEnabled(false);
+		btnLeft.setEnabled(false);
+		btnRight.setEnabled(false);
+		
+	}
+	
+	public void GameStatus()
+	{
+		if ( novojogo.GameState() == 1 ) {
+			
+			lblStatus.setText("Game Over!");
+			turnOffMovementButtoms();
+			btnNewGame.setEnabled(true);
+			
+			}
+		
+		else if ( novojogo.GameState() == 2 ) {
+			
+			lblStatus.setText("Win!");
+			MyLevel++;
+			
+			if (MyLevel == 2)
+				novojogo = new StateOfGame(2, 0, NumberOgres);
+			
+			else if (MyLevel == 3)
+				turnOffMovementButtoms();
+				btnNewGame.setEnabled(true);
+			}
+		
+		else lblStatus.setText("You Can Play Now");
 	}
 
 	/**
@@ -102,23 +156,19 @@ public class Interface1 {
 				String texto = numogres.getText();
 				ogres = Integer.parseInt(texto);
 				int tipoguarda = comboBox.getSelectedIndex();
-
-								
-				//Aqui come�a a impressao inicial do primeiro n�vel.
-				String aux;
-				String fim;
-				fim = "";
-				novojogo = new StateOfGame(1, tipoguarda, 2);
+				tipoguarda++;
 				
-				for (int i = 0; i < 10; i++)
-				{
-					
-					aux = String.valueOf(novojogo.getMap()[i]);
-					fim = fim + " " + aux + "\n";
-					
-				}
-								
-				txtArea.setText(fim);
+				novojogo = new StateOfGame(1, tipoguarda, 4);
+				
+				NumberOgres = ogres;
+				
+				txtArea.setText(getCurrentMap());
+				
+				GameStatus();
+				
+				
+				
+				
 			}
 		});	
 			
@@ -146,19 +196,12 @@ public class Interface1 {
 		btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				novojogo.Input("w");
-				String aux;
-				String fim;
-				fim = "";
-				for (int i = 0; i < 10; i++)
-				{
-					
-					aux = String.valueOf(novojogo.getMap()[i]);
-					fim = fim + " " + aux + "\n";
-					
-				}
 								
-				txtArea.setText(fim);
+				txtArea.setText(getCurrentMap());
+				
+				GameStatus();
 				
 				
 			}
@@ -171,19 +214,12 @@ public class Interface1 {
 		btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				novojogo.Input("s");
-				String aux;
-				String fim;
-				fim = "";
-				for (int i = 0; i < 10; i++)
-				{
-					
-					aux = String.valueOf(novojogo.getMap()[i]);
-					fim = fim + " " + aux + "\n";
-					
-				}
-								
-				txtArea.setText(fim);
+				
+				txtArea.setText(getCurrentMap());
+				
+				GameStatus();
 				
 			}
 		});
@@ -195,19 +231,12 @@ public class Interface1 {
 		btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				novojogo.Input("a");
-				String aux;
-				String fim;
-				fim = "";
-				for (int i = 0; i < 10; i++)
-				{
-					
-					aux = String.valueOf(novojogo.getMap()[i]);
-					fim = fim + " " + aux + "\n";
-					
-				}
-								
-				txtArea.setText(fim);
+				
+				txtArea.setText(getCurrentMap());
+				
+				GameStatus();
 				
 				
 			}
@@ -220,19 +249,14 @@ public class Interface1 {
 		btnRight = new JButton("Right");
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				novojogo.Input("d");
-				String aux;
-				String fim;
-				fim = "";
-				for (int i = 0; i < 10; i++)
-				{
-					
-					aux = String.valueOf(novojogo.getMap()[i]);
-					fim = fim + " " + aux + "\n";
-					
-				}
-								
-				txtArea.setText(fim);
+				
+				txtArea.setText(getCurrentMap());
+				
+				GameStatus();
+				
+				
 			}
 		});
 		btnRight.setEnabled(false);
@@ -240,8 +264,9 @@ public class Interface1 {
 		btnRight.setBounds(825, 302, 110, 23);
 		frame.getContentPane().add(btnRight);
 		
-		JLabel lblStatus = new JLabel("Status");
-		lblStatus.setBounds(61, 629, 46, 14);
+		lblStatus = new JLabel("Status");
+		lblStatus.setBounds(61, 629, 110, 14);
 		frame.getContentPane().add(lblStatus);
+
 	}
 }
