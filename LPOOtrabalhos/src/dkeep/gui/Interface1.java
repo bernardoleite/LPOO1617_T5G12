@@ -1,18 +1,24 @@
 package dkeep.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import dkeep.logic.Guard;
 import dkeep.logic.StateOfGame;
 
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,6 +34,7 @@ public class Interface1 {
 	private JButton btnRight;
 	private int ogres;
 	private JTextArea txtArea;
+	private JPanel image;
 	private JButton btnNewGame;
 	private StateOfGame novojogo;
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
@@ -35,6 +42,10 @@ public class Interface1 {
 	private JLabel lblStatus;
 	private int NumberOgres = 0;
 	private int MyLevel = 1;
+	private int start = 0;
+	private JPanel panel;
+	private JPanel novo;
+
 	/**
 	 * Launch the application.
 	 */
@@ -64,7 +75,14 @@ public class Interface1 {
 
 		}
 		
+
+		
 		return fim;
+	}
+	
+	public char[][] olaola()
+	{
+		return novojogo.getMap();
 	}
 	
 	public void turnOffMovementButtoms()
@@ -91,8 +109,13 @@ public class Interface1 {
 			lblStatus.setText("Win!");
 			MyLevel++;
 			
-			if (MyLevel == 2)
+			if (MyLevel > 1){
 				novojogo = new StateOfGame(2, 0, NumberOgres);
+				panel = new SimpleGraphicsPanel(novojogo);
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				
+				}
 			
 			else if (MyLevel == 3)
 				turnOffMovementButtoms();
@@ -160,6 +183,12 @@ public class Interface1 {
 				
 				novojogo = new StateOfGame(1, tipoguarda, 4);
 				
+				panel = new SimpleGraphicsPanel(novojogo);
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				panel.repaint();
+				
+				
 				NumberOgres = ogres;
 				
 				txtArea.setText(getCurrentMap());
@@ -190,7 +219,9 @@ public class Interface1 {
 		txtArea = new JTextArea();
 		txtArea.setText("Welcome to Ogre Dungeon!");
 		txtArea.setFont(new Font("Courier New", Font.PLAIN, 23));
-		txtArea.setBounds(51, 175, 589, 443);
+		txtArea.setBounds(453, 29, 223, 108);
+		frame.getContentPane().add(txtArea);
+		
 		frame.getContentPane().add(txtArea);
 		
 		btnUp = new JButton("Up");
@@ -200,6 +231,9 @@ public class Interface1 {
 				novojogo.Input("w");
 								
 				txtArea.setText(getCurrentMap());
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				panel.repaint();
 				
 				GameStatus();
 				
@@ -218,6 +252,9 @@ public class Interface1 {
 				novojogo.Input("s");
 				
 				txtArea.setText(getCurrentMap());
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				panel.repaint();
 				
 				GameStatus();
 				
@@ -235,6 +272,9 @@ public class Interface1 {
 				novojogo.Input("a");
 				
 				txtArea.setText(getCurrentMap());
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				panel.repaint();
 				
 				GameStatus();
 				
@@ -253,6 +293,9 @@ public class Interface1 {
 				novojogo.Input("d");
 				
 				txtArea.setText(getCurrentMap());
+				panel.setBounds(61, 163, 593, 435);
+				frame.getContentPane().add(panel);
+				panel.repaint();
 				
 				GameStatus();
 				
@@ -265,8 +308,21 @@ public class Interface1 {
 		frame.getContentPane().add(btnRight);
 		
 		lblStatus = new JLabel("Status");
-		lblStatus.setBounds(61, 629, 110, 14);
+		lblStatus.setBounds(61, 629, 206, 14);
 		frame.getContentPane().add(lblStatus);
+
+		
+
+
+		
+		
+		
+
+		
+		
+		
+		
+		
 
 	}
 }
