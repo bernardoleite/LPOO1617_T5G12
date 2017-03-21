@@ -206,7 +206,7 @@ public class LevelMap2 {
 	    	   
 	    	  if (map[ork.x-1][ork.y] == 'X');
 	    	  
-	    	  if (ork.x-1 == key.x && ork.y == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }
+	    	  if (ork.x-1 == key.x && ork.y == key.y && key.catched == 0 ) {ork.dressclub = '$'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }
 	    	   
 	    	  else if (map[ork.x-1][ork.y] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x - 1; ork.cluby = ork.y; }   
 	    	   
@@ -217,7 +217,7 @@ public class LevelMap2 {
 	       {
 	    	   	ork.setClubMovement('A');
 	    	   	if (map[ork.x][ork.y-1] == 'X');
-	    	   	if (ork.x == key.x && ork.y-1 == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; } 
+	    	   	if (ork.x == key.x && ork.y-1 == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; } 
 	    	   	else if (map[ork.x][ork.y-1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x ; ork.cluby = ork.y - 1; }
 		    	 
 		   }
@@ -226,7 +226,7 @@ public class LevelMap2 {
 	       {
 	    	   ork.setClubMovement('S');
 	    	   if (map[ork.x+1][ork.y] == 'X');
-	    	   if (ork.x+1 == key.x && ork.y == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }  
+	    	   if (ork.x+1 == key.x && ork.y == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }  
 	    	   else if (map[ork.x+1][ork.y] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x + 1; ork.cluby = ork.y; }   
 	    	     
 		      }
@@ -235,7 +235,7 @@ public class LevelMap2 {
 	       {
 	    	   ork.setClubMovement('D');
 	    	   if (map[ork.x][ork.y+1] == 'X');
-	    	   if (ork.x == key.x && ork.y+1 == key.y ) {ork.dressclub = '$'; ork.clubx = ork.x; ork.cluby = ork.y + 1; }  
+	    	   if (ork.x == key.x && ork.y+1 == key.y && key.catched == 0) {ork.dressclub = '$'; ork.clubx = ork.x; ork.cluby = ork.y + 1; }  
 	    	   else if (map[ork.x][ork.y+1] == ' ') {ork.dressclub = '*'; ork.clubx = ork.x; ork.cluby = ork.y + 1; } 
 	    	   	  
 		   }}

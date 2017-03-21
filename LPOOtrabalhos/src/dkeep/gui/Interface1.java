@@ -21,6 +21,8 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -34,7 +36,6 @@ public class Interface1 {
 	private JButton btnRight;
 	private int ogres;
 	private JTextArea txtArea;
-	private JPanel image;
 	private JButton btnNewGame;
 	private StateOfGame novojogo;
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
@@ -42,9 +43,9 @@ public class Interface1 {
 	private JLabel lblStatus;
 	private int NumberOgres = 0;
 	private int MyLevel = 1;
-	private int start = 0;
 	private JPanel panel;
-	private JPanel novo;
+
+	static Interface1 window;
 
 	/**
 	 * Launch the application.
@@ -53,7 +54,7 @@ public class Interface1 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Interface1 window = new Interface1();
+					window = new Interface1();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -111,7 +112,7 @@ public class Interface1 {
 			
 			if (MyLevel > 1){
 				novojogo = new StateOfGame(2, 0, NumberOgres);
-				panel = new SimpleGraphicsPanel(novojogo);
+				panel = new SimpleGraphicsPanel(window, novojogo);
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				
@@ -182,11 +183,11 @@ public class Interface1 {
 				tipoguarda++;
 				
 				novojogo = new StateOfGame(1, tipoguarda, 4);
-				
-				panel = new SimpleGraphicsPanel(novojogo);
+				panel = new SimpleGraphicsPanel(window,novojogo);	
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				panel.repaint();
+				panel.requestFocusInWindow();
 				
 				
 				NumberOgres = ogres;
@@ -194,6 +195,10 @@ public class Interface1 {
 				txtArea.setText(getCurrentMap());
 				
 				GameStatus();
+				panel.requestFocusInWindow();
+			
+				
+				
 				
 				
 				
@@ -228,14 +233,8 @@ public class Interface1 {
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				novojogo.Input("w");
-								
-				txtArea.setText(getCurrentMap());
-				panel.setBounds(61, 163, 593, 435);
-				frame.getContentPane().add(panel);
-				panel.repaint();
+				updateGame("w");				
 				
-				GameStatus();
 				
 				
 			}
@@ -249,16 +248,11 @@ public class Interface1 {
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				novojogo.Input("s");
-				
-				txtArea.setText(getCurrentMap());
-				panel.setBounds(61, 163, 593, 435);
-				frame.getContentPane().add(panel);
-				panel.repaint();
-				
-				GameStatus();
+				updateGame("s");
+			
 				
 			}
+
 		});
 		btnDown.setEnabled(false);
 		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -269,14 +263,7 @@ public class Interface1 {
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				novojogo.Input("a");
-				
-				txtArea.setText(getCurrentMap());
-				panel.setBounds(61, 163, 593, 435);
-				frame.getContentPane().add(panel);
-				panel.repaint();
-				
-				GameStatus();
+				updateGame("a");		
 				
 				
 			}
@@ -290,14 +277,7 @@ public class Interface1 {
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				novojogo.Input("d");
-				
-				txtArea.setText(getCurrentMap());
-				panel.setBounds(61, 163, 593, 435);
-				frame.getContentPane().add(panel);
-				panel.repaint();
-				
-				GameStatus();
+				updateGame("d");			
 				
 				
 			}
@@ -310,19 +290,19 @@ public class Interface1 {
 		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(61, 629, 206, 14);
 		frame.getContentPane().add(lblStatus);
-
-		
-
-
-		
-		
-		
-
-		
-		
-		
-		
-		
+	
 
 	}
+
+	public void updateGame(String dir) {
+		novojogo.Input(dir);
+		
+		txtArea.setText(getCurrentMap());
+		panel.setBounds(61, 163, 593, 435);
+		frame.getContentPane().add(panel);
+		panel.repaint();
+		panel.requestFocusInWindow();
+		GameStatus();
+	}
+
 }
