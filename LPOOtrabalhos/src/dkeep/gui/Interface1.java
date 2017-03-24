@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import dkeep.logic.Guard;
+import dkeep.logic.Ork;
 import dkeep.logic.StateOfGame;
 
 
@@ -23,6 +24,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -44,8 +46,33 @@ public class Interface1 {
 	private int NumberOgres = 0;
 	private int MyLevel = 1;
 	private JPanel panel;
+	private char[][] Map = null;
+	public char Map1[][]= {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, /*Tabuleiro do 1º nível*/
+			{'X', ' ', ' ', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
+			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
+			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
+			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
+			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
+			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
+			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
+			
+		};
 
+	
 	static Interface1 window;
+	private JButton btnEditKeepLevel;
+	private JButton btnLoadGame;
+	private JButton btnSaveGame;
+	
+	private int[] OrksPos = {1,2,3,4,5,6,7,8,9,10};
+	private int NumOrk = 0;
+	private int[] KeyPos = {1,2,3,4,5,6,7,8,9,10};
+	private int[] HeroPos = {1,2,3,4,5,6,7,8,9,10};
+	private int m = 0;
+	
+	private int lin = 10, col = 10;
 
 	/**
 	 * Launch the application.
@@ -63,12 +90,51 @@ public class Interface1 {
 		});
 	}
 	
+	public void MapToSend (char[][] MapToSend, int lin, int col)
+	{
+		this.Map = MapToSend;
+		this.lin = lin;
+		this.col = col;
+		
+	}
+
+	public void MapTreatment ()
+	{
+		
+		for(int i = 0;  i < lin; i++){
+	  		
+			for (int j = 0 ; j < col; j++){
+				
+				if (Map[i][j] == 'K')
+				{
+					KeyPos[0] = i; KeyPos[1] = j;
+					Map[i][j] = ' ';
+				}
+				
+				else if (Map[i][j] == 'H')
+				{
+					HeroPos[0] = i; HeroPos[1] = j;
+					Map[i][j] = ' ';
+				}
+	
+				else if (Map[i][j] == 'O')
+				{
+					OrksPos[NumOrk] = i; OrksPos[NumOrk+1] = j;
+					NumOrk = NumOrk + 2;
+					Map[i][j] = ' ';
+				}
+			
+			}
+			
+		}
+	}
+	
 	public String getCurrentMap()
 	{
 		String aux;
 		String fim;
 		fim = "";
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < lin; i++)
 		{
 			
 			aux = String.valueOf(novojogo.getMap()[i]);
@@ -79,11 +145,6 @@ public class Interface1 {
 
 		
 		return fim;
-	}
-	
-	public char[][] olaola()
-	{
-		return novojogo.getMap();
 	}
 	
 	public void turnOffMovementButtoms()
@@ -111,8 +172,29 @@ public class Interface1 {
 			MyLevel++;
 			
 			if (MyLevel > 1){
-				novojogo = new StateOfGame(2, 0, NumberOgres);
-				panel = new SimpleGraphicsPanel(window, novojogo);
+				
+				if(Map != null) 
+					
+				{
+					MapTreatment();
+					novojogo = new StateOfGame(2, 0, NumOrk-3);
+					novojogo.SetLevel2Map(Map);
+					novojogo.SetLinAndCol(lin, col);
+					novojogo.GetHero().setHeroPos(HeroPos[0], HeroPos[1]);
+					novojogo.GetKey().setKeypos(KeyPos[0], KeyPos[1]);
+					for (int k = 0; k < novojogo.GetOrk().size(); k++)
+					{
+						novojogo.GetOrk().get(k).setOrkPositicions(OrksPos[m], OrksPos[m+1]);
+						m=m+2;
+					}
+					
+				}
+				
+				else {novojogo = new StateOfGame(2, 0, NumberOgres);}
+				
+				
+				
+				panel = new GraphicsLevel1And2(window, novojogo,lin,col);
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				
@@ -183,7 +265,7 @@ public class Interface1 {
 				tipoguarda++;
 				
 				novojogo = new StateOfGame(1, tipoguarda, 4);
-				panel = new SimpleGraphicsPanel(window,novojogo);	
+				panel = new GraphicsLevel1And2(window,novojogo,10,10);	
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				panel.repaint();
@@ -208,7 +290,7 @@ public class Interface1 {
 			
 			
 		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewGame.setBounds(750, 112, 110, 23);
+		btnNewGame.setBounds(751, 171, 146, 23);
 		frame.getContentPane().add(btnNewGame);
 		
 		JButton btnExit = new JButton("Exit");
@@ -218,7 +300,7 @@ public class Interface1 {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(750, 543, 110, 23);
+		btnExit.setBounds(751, 360, 146, 23);
 		frame.getContentPane().add(btnExit);
 		
 		txtArea = new JTextArea();
@@ -241,7 +323,7 @@ public class Interface1 {
 		});
 		btnUp.setEnabled(false);
 		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnUp.setBounds(750, 244, 110, 23);
+		btnUp.setBounds(710, 522, 110, 23);
 		frame.getContentPane().add(btnUp);
 		
 		btnDown = new JButton("Down");
@@ -256,7 +338,7 @@ public class Interface1 {
 		});
 		btnDown.setEnabled(false);
 		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnDown.setBounds(750, 366, 110, 23);
+		btnDown.setBounds(710, 620, 110, 23);
 		frame.getContentPane().add(btnDown);
 		
 		btnLeft = new JButton("Left");
@@ -270,7 +352,7 @@ public class Interface1 {
 		});
 		btnLeft.setEnabled(false);
 		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLeft.setBounds(676, 302, 110, 23);
+		btnLeft.setBounds(633, 571, 110, 23);
 		frame.getContentPane().add(btnLeft);
 		
 		btnRight = new JButton("Right");
@@ -284,12 +366,39 @@ public class Interface1 {
 		});
 		btnRight.setEnabled(false);
 		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRight.setBounds(825, 302, 110, 23);
+		btnRight.setBounds(774, 571, 110, 23);
 		frame.getContentPane().add(btnRight);
 		
 		lblStatus = new JLabel("Status");
 		lblStatus.setBounds(61, 629, 206, 14);
 		frame.getContentPane().add(lblStatus);
+		
+		btnEditKeepLevel = new JButton("Edit Keep Level");
+		btnEditKeepLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EditKeepLevelInterface editkeep = new EditKeepLevelInterface(window);
+				editkeep.NewWindow();
+		
+			}
+		});
+		btnEditKeepLevel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnEditKeepLevel.setBounds(751, 218, 146, 23);
+		frame.getContentPane().add(btnEditKeepLevel);
+		
+		btnLoadGame = new JButton("Load Game");
+		btnLoadGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnLoadGame.setBounds(751, 267, 146, 23);
+		frame.getContentPane().add(btnLoadGame);
+		
+		btnSaveGame = new JButton("Save Game");
+		btnSaveGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSaveGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnSaveGame.setBounds(751, 316, 146, 23);
+		frame.getContentPane().add(btnSaveGame);
 	
 
 	}
@@ -303,6 +412,7 @@ public class Interface1 {
 		panel.repaint();
 		panel.requestFocusInWindow();
 		GameStatus();
+	
 	}
 
 }

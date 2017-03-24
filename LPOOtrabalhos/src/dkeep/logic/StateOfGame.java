@@ -42,6 +42,19 @@ public class StateOfGame {
 	public Guard guard;
 	public int MyLevel;
 	public int status = 0;
+	private int lin = 10, col = 10;
+	
+	public void SetLevel2Map(char map[][])
+	{
+		this.Map2 = map;
+		
+	}
+	
+	public void SetLinAndCol(int lin, int col)
+	{
+		this.lin = lin;
+		this.col = col;
+	}
 	
 	public LevelMap1 GetLevelMap1()
 	{
@@ -219,8 +232,8 @@ public class StateOfGame {
 	{
 		if(MyLevel == 1)
 		{
-		 	for(int i = 0; i < map.length; i++){
-	    		for (int j = 0 ; j < map.length; j++){
+		 	for(int i = 0; i < lin; i++){
+	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
 	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
@@ -232,8 +245,8 @@ public class StateOfGame {
 		
 		 if (MyLevel == 2)
 		{
-		 	for(int i = 0; i < map.length; i++){
-	    		for (int j = 0 ; j < map.length; j++){
+		 	for(int i = 0; i < lin; i++){
+	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
 	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
@@ -250,7 +263,7 @@ public class StateOfGame {
 		int next = 1; //Variaveis para nao desconfigurar impressao
 		int ver = 0; //Variaveis para nao desconfigurar impressao
 		int cont = 0;
-		char  clonemap[][] = new char[10][10];
+		char  clonemap[][] = new char[lin][col];
 		
 		
 	if (MyLevel == 1)
@@ -302,16 +315,16 @@ public class StateOfGame {
 	else if (MyLevel == 2) //change orks prints
 		
 	{
-		for (int c = 0; c < 10; c++ ){
-			for (int v = 0; v < 10; v++){
+		for (int c = 0; c < lin; c++ ){
+			for (int v = 0; v < col; v++){
 				clonemap[c][v] = Map2[c][v];
 			}
 		}
 
 		
-	for(int i = 0;  i < 10; i++){
+	for(int i = 0;  i < lin; i++){
   		
-		for (int j = 0 ; j < 10; j++){
+		for (int j = 0 ; j < col; j++){
 			
 			if (key.x == i && key.y == j && key.locked == 0)
 			{
@@ -338,7 +351,6 @@ public class StateOfGame {
 				if (orks.get(m).clubx == i && orks.get(m).cluby == j ) clonemap[i][j] = orks.get(m).dressclub;;
 			}
 		
-			
 			
 		}
 		

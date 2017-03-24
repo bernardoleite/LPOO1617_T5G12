@@ -19,7 +19,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x-1][hero.y] == 'X' )  ;
 			   
-			   else if (hero.x-1 == 8 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x--;}
+			   else if (hero.x-1 == 2 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x--;}
 			   
 			   else if (map[hero.x-1][hero.y] == 'S') {reachS = 1; hero.x--;}
 			   
@@ -36,7 +36,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x][hero.y-1] == 'X' )  ;
 			   
-			   else  if (hero.x == 8 && hero.y-1 == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.y--;}
+			   else  if (hero.x == 2 && hero.y-1 == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.y--;}
 			   
 			   else  if (map[hero.x][hero.y-1] == 'S' ) {reachS = 1; hero.y--;}
 			   
@@ -53,7 +53,7 @@ public class LevelMap2 {
 			   
 			   if (map[hero.x+1][hero.y] == 'X')  ;
 			   
-			   else if (hero.x+1 == 8 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x++;}
+			   else if (hero.x+1 == 2 && hero.y == 2 && hero.armed == 0) {hero.armed = 1; hero.dress = 'A'; hero.x++;}
 			   
 			   else if (map[hero.x+1][hero.y] == 'S' ) {reachS = 1; hero.x++;}
 			   
@@ -68,7 +68,7 @@ public class LevelMap2 {
 		   {
 			   if (map[hero.x][hero.y+1] == 'X')  ;
 			   
-			   else if (hero.x == 8 && hero.y+1 == 2 && hero.armed == 0)  {hero.armed = 1; hero.dress = 'A'; hero.y++;}
+			   else if (hero.x == 2 && hero.y+1 == 2 && hero.armed == 0)  {hero.armed = 1; hero.dress = 'A'; hero.y++;}
 			  
 			   else if (map[hero.x][hero.y+1] == 'S')  {reachS = 1; hero.y++;}
 			   

@@ -14,37 +14,54 @@ import dkeep.logic.StateOfGame;
 
 
 
-public class SimpleGraphicsPanel extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
+public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 	
   // Coordinates of the elipse “bounding rectangle”
 
-	public char map[][]= {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, /*Tabuleiro do 1º nível*/
-			{'X', ' ', ' ', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', ' ', ' ', 'X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'X', 'X', ' ', 'X', 'X', 'X', 'X', ' ', 'X'},
-			{'X', ' ', 'I', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
-			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
-			
-		};
+	private char map[][] ;
 	
 	private StateOfGame thegame;
 	private BufferedImage doorclose, dooropen, guard, hero, ork, spiek, wall, stuned, heroarmed, key, armer, sleeping, lever;
+	private Graphics graphics;
+	EditKeepLevelInterface window;
+	private int lin, col;
 	
-	Interface1 window;
-  
+	
   // Constructor, adding mouse and keyboard listeneres
   
   
-  public SimpleGraphicsPanel(Interface1 window, StateOfGame novojogo) {
-	  this.window = window;
+  public GraphicsEditKeep(EditKeepLevelInterface window, int lin, int col) {
+	  	this.window = window;
        addMouseListener(this);
        addMouseMotionListener(this);
        this.addKeyListener(this);
-       this.thegame = novojogo;
+       this.lin = lin;
+       this.col = col;
+       
+       int i = 0;
+       
+       map = new char[lin][col];
+       
+       while(i < col){
+    	   map[0][i] = 'X';
+    	   map[lin-1][i] = 'X';
+    	   i++;
+       }
+       
+       i = 0;
+       
+       while(i < lin){
+    	   map[i][0] = 'X';
+    	   map[i][col-1] = 'X';
+    	   i++;
+       }
+       
+       for (i = 1; i < lin -1; i++)
+    	   for (int j = 1;  j < col -1; j++)
+    	   {
+    		   map[i][j] = ' ';
+    	   }
+       
        
        try {                
     	   hero = ImageIO.read(getClass().getResourceAsStream("hero.png"));
@@ -63,39 +80,33 @@ public class SimpleGraphicsPanel extends JPanel implements MouseListener, MouseM
         } catch (IOException ex) {
              // handle exception...
         }
+      
        
        
        
 }
   // Redraws the panel, only when requested by SWING
   public void paintComponent(Graphics g) {
-       super.paintComponent(g); // limpa fundo ...
-       
-       map = thegame.getMap();
-    
+       super.paintComponent(g); 
+       this.graphics = g;
+      
        int i, j;
        int m = 0, n = 0;
        
-       g.setColor(Color.BLUE);
-       
-     
-       for (i = 0; i < map.length; i++)
+   
+       for (i = 0; i < lin; i++)
        {
-    	   for (j = 0; j < map.length; j++)
+    	   for (j = 0; j < col; j++)
     	   {	
     		  if(map[i][j] == 'X') 		{g.drawImage(wall, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'H') {g.drawImage(hero, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'H') {g.drawImage(hero, m, n, 50, 50, null, null);}
     		  else if(map[i][j] == 'O') {g.drawImage(ork, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == '*') {g.drawImage(spiek, m, n, 25, 25, null, null);}
     		  else if(map[i][j] == 'G') {g.drawImage(guard, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'I') {g.drawImage(doorclose, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'S') {g.drawImage(dooropen, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == '$') {g.drawImage(stuned, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'A' && thegame.GetHero().getHeroDress() == 'A') {g.drawImage(heroarmed, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'A') {g.drawImage(armer, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'K' && thegame.GetMyLevel() == 1) {g.drawImage(lever, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'K' && thegame.GetMyLevel() == 2 && thegame.GetKey().StatusKey() == 0 ) {g.drawImage(key, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'K' && thegame.GetKey().StatusKey() == 1) {g.drawImage(heroarmed, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'K' ) {g.drawImage(key, m, n, 35, 35, null, null);}
+
     		  else if(map[i][j] == 'g') {g.drawImage(sleeping, m, n, 35, 35, null, null);}
     		  m = m + 30;
     	   }
@@ -104,16 +115,12 @@ public class SimpleGraphicsPanel extends JPanel implements MouseListener, MouseM
 
        }
        
-    
-       
-      // g.drawImage(image, 0, 0, 50, 50, null, null);
-       
-       
-       
-       
 }
 
-
+public char[][] getMap()
+{
+	return map;
+	}
 
 @Override
 public void mouseDragged(MouseEvent e) {
@@ -127,8 +134,28 @@ public void mouseMoved(MouseEvent e) {
 }
 @Override
 public void mouseClicked(MouseEvent e) {
-	// TODO Auto-generated method stub
 	
+	if (window.getNameToAdd() == "fbtnAddHero" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'H';
+		
+	else if (window.getNameToAdd() == "fbtnAddOrks" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'O';
+		
+	else if (window.getNameToAdd() == "fbtnAddWalls" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'X';
+		
+	else if (window.getNameToAdd() == "fbtnAddKey" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'K';
+		
+	else if (window.getNameToAdd() == "fbtnAddExitDoor" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'I';
+	
+
+    repaint();
+    
+    window.MapRefresh(map);
+    
+    
 }
 @Override
 public void mousePressed(MouseEvent e) {
@@ -158,34 +185,7 @@ public void keyTyped(KeyEvent e) {
 @Override
 public void keyPressed(KeyEvent e) {
 	
-	if (e.getKeyCode() == KeyEvent.VK_UP)
-	{
 
-		window.updateGame("w");
-		
-	}
-	
-	if (e.getKeyCode() == KeyEvent.VK_LEFT)
-	{
-
-		window.updateGame("a");
-		
-	}
-	
-	if (e.getKeyCode() == KeyEvent.VK_DOWN)
-	{
-
-		window.updateGame("s");
-		
-	}
-	
-	if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-	{
-		window.updateGame("d");
-		
-	}
-	
-	repaint();
 	
 }
 @Override
