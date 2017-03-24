@@ -125,6 +125,7 @@ public class StateOfGame {
 			lever = new Lever (8,7);
 			level1 = new LevelMap1();
 		}
+	
 		
 		else if (Level == 2)
 		{
@@ -336,7 +337,7 @@ public class StateOfGame {
 				clonemap[i][j] = hero.dress;
 			}
 			
-			if (i == 8 && j == 2 && hero.armed == 0)
+			if (i == 2 && j == 2 && hero.armed == 0)
 			{
 				clonemap[i][j] = 'A';
 			}

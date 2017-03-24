@@ -113,37 +113,11 @@ public class LevelMap2 {
 			   EffectiveMovement(map, hero ,key , orks.get(i) , aleaMov1, aleaClub1);
 		   }
 		   
-		/*  
-		   Random mov = new Random();
-		   Random mov2 = new Random();
-		   Random mov3 = new Random();
-		   Random mov4 = new Random();
-		   
-		   Random club = new Random();
-		   Random club2 = new Random();
-		   Random club3 = new Random();
-		   Random club4 = new Random();	  
-
-	       aleaMov1 = mov.nextInt(4)+1;
-	       aleaMov2 = mov2.nextInt(4)+1;
-	       aleaMov3 = mov3.nextInt(4)+1;
-	       aleaMov4 = mov4.nextInt(4)+1;
-	       
-	       aleaClub1 = club.nextInt(4)+1;	  
-	       aleaClub2 = club2.nextInt(4)+1;
-	       aleaClub3 = club3.nextInt(4)+1;
-	      aleaClub4 = club4.nextInt(4)+1;
-	           
-	       EffectiveMovement(map, hero ,key ,ork, aleaMov1, aleaClub1);
-	       EffectiveMovement(map, hero ,key ,ork2, aleaMov2, aleaClub2);
-	       EffectiveMovement(map, hero ,key ,ork3, aleaMov3, aleaClub3);
-	       EffectiveMovement(map, hero ,key ,ork4, aleaMov4, aleaClub4);*/
 		   
 	   }
 	   
 	   public void EffectiveMovement(char[][] map, Hero hero ,Key key ,Ork ork, int aleaMov, int aleaClub)
 	   {
-		   //if (ork.freeze > 0) ork.freeze--;
 		     
 	       if (aleaMov == 1) //W
 	    	{
@@ -153,7 +127,6 @@ public class LevelMap2 {
 	    	   
 	    	   	else if (ork.x-1 == key.x && ork.y == key.y && ork.freeze == 0 && key.catched == 0 ) { ork.dress = '$'; ork.x--;}
 	    	    
-	    	   // else if (ork.x-1 == hero.x && ork.y == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.x--; }
 	    	    
 	    	    else if (map[ork.x-1][ork.y] == ' ' && ork.freeze == 0 ) {ork.dress = 'O'; ork.x--;}
     
@@ -167,7 +140,6 @@ public class LevelMap2 {
 	        
 	        else if (ork.x == key.x && ork.y-1 == key.y && ork.freeze == 0 && key.catched == 0 ) {ork.dress = '$';  ork.y--;}
 	    	  
-	    	 // else if (ork.x == hero.x && ork.y-1 == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.y--; }
 	    	  
 	    	  else if (map[ork.x][ork.y-1] == ' ' && ork.freeze == 0 ) {ork.dress = 'O'; ork.y--;}
 	       }
@@ -180,7 +152,6 @@ public class LevelMap2 {
 	    	   
 	    	   else if (ork.x+1 == key.x && ork.y == key.y && ork.freeze == 0 && key.catched == 0 ) {ork.dress = '$'; ork.x++;}
 	    	  
-	    	 // else if (ork.x+1 == hero.x && ork.y == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.x++; }
 	    	  
 	    	  else if (map[ork.x+1][ork.y] == ' ' && ork.freeze == 0  ) {ork.dress = 'O'; ork.x++;}
 	       }
@@ -193,7 +164,6 @@ public class LevelMap2 {
 
 	        	else if (ork.x == key.x && ork.y+1 == key.y && ork.freeze == 0  && key.catched == 0) {ork.dress = '$'; ork.y++;}
 	    	  
-	    	  //else if (ork.x == hero.x && ork.y+1 == hero.y  && hero.armed == 1) { ork.dress = '8';  ork.freeze = 2; ork.y++; }
 	    	  
 	    	  else if (map[ork.x][ork.y+1] == ' ' && ork.freeze == 0  ) {ork.dress = 'O';  ork.y++;}
 	       }
@@ -252,12 +222,7 @@ public class LevelMap2 {
 		   if (hero.x == key.x && hero.y == key.y && key.locked  == 0) {keycatched = 1; key.catched =1 ; key.dress = ' '; hero.dress = 'K';}
 
 		   if (ork.freeze > 0 && ork.permanent == 0) ork.freeze--;
-	/*	   	   
-		   if (ork.x == key.x && ork.y == key.y || ork.clubx == key.x && ork.cluby == key.y  )
-		   {
-			   key.locked = 1;
-		   }   */
-		   
+
 		   else key.locked = 0;
 		   
 		   	if (hero.x == ork.x && hero.y == ork.y && this.imortality == 0) return 1;	   

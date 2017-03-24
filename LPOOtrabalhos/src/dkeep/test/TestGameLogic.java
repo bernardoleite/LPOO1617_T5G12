@@ -82,6 +82,7 @@ public class TestGameLogic {
 	public void testDoorsOpenWhenLeverIsReached() {
 		
 		StateOfGame novo = new StateOfGame(1, 0, 2);
+		novo.SetLinAndCol(5, 5);
 		novo.GetLever().SetLeverPos(3, 1);
 		novo.HeroMovement("s", map);
 		novo.HeroMovement("s", map);
@@ -93,6 +94,7 @@ public class TestGameLogic {
 	public void testProgresstoKeep() {
 		
 		StateOfGame novo = new StateOfGame(1, 0, 2);
+		novo.SetLinAndCol(5, 5);
 		novo.GetLever().SetLeverPos(3, 1);
 		novo.HeroMovement("s", map);
 		novo.HeroMovement("s", map);
@@ -199,7 +201,7 @@ public class TestGameLogic {
 
 		
 		StateOfGame novo = new StateOfGame(2,0,1);
-		
+		novo.SetLinAndCol(5, 5);
 		
 		for (int i = 0; i < novo.getOrks().size(); i++){
 			novo.getOrks().get(i).setOrkPositicions(1, 3);}
@@ -232,7 +234,7 @@ public class TestGameLogic {
 
 		
 		StateOfGame novo = new StateOfGame(2,0,1);
-
+		novo.SetLinAndCol(5, 5);
 		
 		novo.getMap();
 		
@@ -256,7 +258,6 @@ public class TestGameLogic {
 		novo.HeroMovement("a", map);
 		novo.HeroMovement("a", map); //plus this movement to exit
 
-		
 		assertEquals (2, novo.GameState()); //win
 		
 

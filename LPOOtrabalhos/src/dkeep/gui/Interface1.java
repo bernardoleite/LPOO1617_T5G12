@@ -66,7 +66,7 @@ public class Interface1 {
 	private JButton btnLoadGame;
 	private JButton btnSaveGame;
 	
-	private int[] OrksPos = {1,2,3,4,5,6,7,8,9,10};
+	private int[] OrksPos = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
 	private int NumOrk = 0;
 	private int[] KeyPos = {1,2,3,4,5,6,7,8,9,10};
 	private int[] HeroPos = {1,2,3,4,5,6,7,8,9,10};
@@ -100,6 +100,7 @@ public class Interface1 {
 
 	public void MapTreatment ()
 	{
+		int aux = 0;
 		
 		for(int i = 0;  i < lin; i++){
 	  		
@@ -119,8 +120,9 @@ public class Interface1 {
 	
 				else if (Map[i][j] == 'O')
 				{
-					OrksPos[NumOrk] = i; OrksPos[NumOrk+1] = j;
-					NumOrk = NumOrk + 2;
+					OrksPos[aux] = i; OrksPos[aux+1] = j;
+					aux = aux + 2;
+					NumOrk = NumOrk + 1;
 					Map[i][j] = ' ';
 				}
 			
@@ -177,7 +179,7 @@ public class Interface1 {
 					
 				{
 					MapTreatment();
-					novojogo = new StateOfGame(2, 0, NumOrk-3);
+					novojogo = new StateOfGame(2, 0, NumOrk);
 					novojogo.SetLevel2Map(Map);
 					novojogo.SetLinAndCol(lin, col);
 					novojogo.GetHero().setHeroPos(HeroPos[0], HeroPos[1]);
@@ -187,6 +189,7 @@ public class Interface1 {
 						novojogo.GetOrk().get(k).setOrkPositicions(OrksPos[m], OrksPos[m+1]);
 						m=m+2;
 					}
+					m = 0;
 					
 				}
 				
