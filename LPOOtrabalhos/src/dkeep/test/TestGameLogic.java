@@ -55,7 +55,7 @@ public class TestGameLogic {
 		assertEquals(vet2[1], novo.hero.getHeroPos()[1]);
 		
 	}
-	
+
 	@Test
 	public void testHeroIsCapturedByGuard() {
 		

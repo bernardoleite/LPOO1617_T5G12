@@ -32,7 +32,7 @@ public class EditKeepLevelInterface extends JFrame {
 	private char[][] Map;
 	
 	private int lin, col;
-	private boolean  fbtnAddHero = false, fbtnAddOrks = false, fbtnAddWalls = false, fbtnAddKey = false, fbtnAddExitDoor = false;
+	private boolean  fbtnAddHero = false, fbtnAddOrks = false, fbtnAddWalls = false, fbtnAddKey = false, fbtnAddExitDoor = false, fbtnRemove = false;
 	
 	
 	public String getNameToAdd()
@@ -43,6 +43,7 @@ public class EditKeepLevelInterface extends JFrame {
 		else if (fbtnAddWalls) return "fbtnAddWalls";
 		else if (fbtnAddKey) return "fbtnAddKey";
 		else if (fbtnAddExitDoor) return "fbtnAddExitDoor";
+		else if (fbtnRemove) return "fbtnRemove";
 		
 		return null;
 		
@@ -131,7 +132,7 @@ public class EditKeepLevelInterface extends JFrame {
 		btnAddWalls.setBounds(621, 118, 117, 29);
 		
 		JButton btnSaveReturn = new JButton("Save & Return");
-		btnSaveReturn.setBounds(621, 330, 117, 42);
+		btnSaveReturn.setBounds(621, 365, 117, 42);
 		btnSaveReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -167,7 +168,7 @@ public class EditKeepLevelInterface extends JFrame {
 				
 			}
 		});
-		btnAddExitDoor.setBounds(621, 289, 117, 29);
+		btnAddExitDoor.setBounds(621, 282, 117, 29);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnAddHero);
 		frame.getContentPane().add(btnAddOrks);
@@ -227,6 +228,22 @@ public class EditKeepLevelInterface extends JFrame {
 		JLabel info = new JLabel("Status");
 		info.setBounds(434, 6, 332, 16);
 		frame.getContentPane().add(info);
+		
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				fbtnAddHero = false;
+				fbtnAddOrks = false;
+				fbtnAddWalls = false;
+				fbtnAddKey = false;
+				fbtnAddExitDoor = false;
+				fbtnRemove = true;
+				
+			}
+		});
+		btnRemove.setBounds(621, 323, 117, 29);
+		frame.getContentPane().add(btnRemove);
 		
 		
 	

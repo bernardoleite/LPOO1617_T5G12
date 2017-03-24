@@ -112,6 +112,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
     	   }
     	   m = 0;
     	   n = n + 35;
+    	   
 
        }
        
@@ -149,6 +150,9 @@ public void mouseClicked(MouseEvent e) {
 		
 	else if (window.getNameToAdd() == "fbtnAddExitDoor" )
 		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'I';
+	
+	else if (window.getNameToAdd() == "fbtnRemove" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = ' ';
 	
 
     repaint();

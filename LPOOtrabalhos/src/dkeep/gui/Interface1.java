@@ -37,7 +37,6 @@ public class Interface1 {
 	private JButton btnLeft;
 	private JButton btnRight;
 	private int ogres;
-	private JTextArea txtArea;
 	private JButton btnNewGame;
 	private StateOfGame novojogo;
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
@@ -73,7 +72,7 @@ public class Interface1 {
 	private int m = 0;
 	
 	private int lin = 10, col = 10;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -277,7 +276,7 @@ public class Interface1 {
 				
 				NumberOgres = ogres;
 				
-				txtArea.setText(getCurrentMap());
+				
 				
 				GameStatus();
 				panel.requestFocusInWindow();
@@ -305,14 +304,6 @@ public class Interface1 {
 		});
 		btnExit.setBounds(751, 360, 146, 23);
 		frame.getContentPane().add(btnExit);
-		
-		txtArea = new JTextArea();
-		txtArea.setText("Welcome to Ogre Dungeon!");
-		txtArea.setFont(new Font("Courier New", Font.PLAIN, 23));
-		txtArea.setBounds(453, 29, 223, 108);
-		frame.getContentPane().add(txtArea);
-		
-		frame.getContentPane().add(txtArea);
 		
 		btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
@@ -409,7 +400,6 @@ public class Interface1 {
 	public void updateGame(String dir) {
 		novojogo.Input(dir);
 		
-		txtArea.setText(getCurrentMap());
 		panel.setBounds(61, 163, 593, 435);
 		frame.getContentPane().add(panel);
 		panel.repaint();

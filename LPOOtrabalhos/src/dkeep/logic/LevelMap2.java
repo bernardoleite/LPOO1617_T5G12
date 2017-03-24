@@ -11,7 +11,7 @@ public class LevelMap2 {
 	public int reachS = 0;
 	private int imortality = 0;
 	
-	
+
 	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS
 		   
 			  
@@ -25,7 +25,6 @@ public class LevelMap2 {
 			   
 			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;}
 			   
-			   //if (hero.x-1 == key.x && hero.y == key.y && key.locked  == 0) {keycatched = 1; key.dress = ' ';  hero.dress = 'K';}
 			   
 			   else  if (map[hero.x-1][hero.y] == 'I' && keycatched == 1) {needchange = 1;}
 			   
@@ -42,8 +41,6 @@ public class LevelMap2 {
 			   
 			   else if (map[hero.x][hero.y-1] == ' ') {hero.y--;}
 			   
-			  // if (hero.x == key.x && hero.y-1 == key.y && key.locked  == 0) {keycatched = 1; key.dress = ' '; hero.dress = 'K';}
-			   
 			   else  if (map[hero.x][hero.y-1] == 'I' && keycatched == 1) {needchange = 1;}					   	
 
 		   }
@@ -59,7 +56,6 @@ public class LevelMap2 {
 			   
 			   else if (map[hero.x+1][hero.y] == ' ') {hero.x++;}
 			   
-			   //if (hero.x+1 == key.x && hero.y == key.y && key.locked  == 0) {keycatched = 1; key.dress = ' '; hero.dress = 'K';}
 			   
 			   else if (map[hero.x+1][hero.y] == 'I' && keycatched == 1) {needchange = 1;}
 		   }
@@ -73,8 +69,7 @@ public class LevelMap2 {
 			   else if (map[hero.x][hero.y+1] == 'S')  {reachS = 1; hero.y++;}
 			   
 			   else if (map[hero.x][hero.y+1] == ' ')  	{hero.y++;}
-			   
-			   // if ( hero.x == key.x && hero.y+1 == key.y && key.locked  == 0)	{keycatched = 1; key.dress = ' '; hero.dress = 'K'; hero.y++;}
+
 			   
 			   else if (map[hero.x][hero.y+1] == 'I' && keycatched == 1) {needchange = 1;}
 
