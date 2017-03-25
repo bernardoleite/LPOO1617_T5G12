@@ -92,7 +92,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
       
        int i, j;
        int m = 0, n = 0;
-       
+ 
    
        for (i = 0; i < lin; i++)
        {
@@ -111,7 +111,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
     		  m = m + 30;
     	   }
     	   m = 0;
-    	   n = n + 35;
+    	   n = n + 35; 
     	   
 
        }
@@ -163,12 +163,54 @@ public void mouseClicked(MouseEvent e) {
 }
 @Override
 public void mousePressed(MouseEvent e) {
-	// TODO Auto-generated method stub
+	if (window.getNameToAdd() == "fbtnAddHero" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'H';
+		
+	else if (window.getNameToAdd() == "fbtnAddOrks" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'O';
+		
+	else if (window.getNameToAdd() == "fbtnAddWalls" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'X';
+		
+	else if (window.getNameToAdd() == "fbtnAddKey" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'K';
+		
+	else if (window.getNameToAdd() == "fbtnAddExitDoor" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'I';
+	
+	else if (window.getNameToAdd() == "fbtnRemove" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = ' ';
+	
+
+    repaint();
+    
+    window.MapRefresh(map);
 	
 }
 @Override
 public void mouseReleased(MouseEvent e) {
-	// TODO Auto-generated method stub
+	if (window.getNameToAdd() == "fbtnAddHero" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'H';
+		
+	else if (window.getNameToAdd() == "fbtnAddOrks" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'O';
+		
+	else if (window.getNameToAdd() == "fbtnAddWalls" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'X';
+		
+	else if (window.getNameToAdd() == "fbtnAddKey" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'K';
+		
+	else if (window.getNameToAdd() == "fbtnAddExitDoor" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'I';
+	
+	else if (window.getNameToAdd() == "fbtnRemove" )
+		map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = ' ';
+	
+
+    repaint();
+    
+    window.MapRefresh(map);
 	
 }
 @Override

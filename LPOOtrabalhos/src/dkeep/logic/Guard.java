@@ -9,7 +9,7 @@ public class Guard extends Enemy {
 	public String typeguard = " ";
 	public char dress = 'G';
 	public int timestopped = 0;
-	
+	public int number = 1;
 	private int freeze = 0;
 	
 	public Guard(int Cordx, int Cordy)
@@ -17,12 +17,12 @@ public class Guard extends Enemy {
 		
 		this.x = Cordx;
 		this.y = Cordy;
-
+ 
 	}
 	
 	public void ChooseGuardRandom()
 	{
-		   int number = 1 ;
+		   
 		   
 		   Random num = new Random();
 

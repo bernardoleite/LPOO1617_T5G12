@@ -24,6 +24,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -76,7 +79,7 @@ public class Interface1 {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -165,6 +168,8 @@ public class Interface1 {
 			turnOffMovementButtoms();
 			btnNewGame.setEnabled(true);
 			
+			
+			
 			}
 		
 		else if ( novojogo.GameState() == 2 ) {
@@ -192,7 +197,7 @@ public class Interface1 {
 					
 				}
 				
-				else {novojogo = new StateOfGame(2, 0, NumberOgres);}
+				else {novojogo = new StateOfGame(2, 0, NumberOgres); }
 				
 				
 				
@@ -220,9 +225,9 @@ public class Interface1 {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()  {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 961, 697);
+		frame.setBounds(100, 100, 952, 728);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -261,8 +266,12 @@ public class Interface1 {
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
 				btnNewGame.setEnabled(false);
-				String texto = numogres.getText();
-				ogres = Integer.parseInt(texto);
+				if (numogres.getText().length()== 0){
+					ogres =1;
+				}else{
+					String texto = numogres.getText();
+					ogres = Integer.parseInt(texto);
+				}
 				int tipoguarda = comboBox.getSelectedIndex();
 				tipoguarda++;
 				
@@ -271,13 +280,7 @@ public class Interface1 {
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				panel.repaint();
-				panel.requestFocusInWindow();
-				
-				
-				NumberOgres = ogres;
-				
-				
-				
+				NumberOgres = ogres;	
 				GameStatus();
 				panel.requestFocusInWindow();
 			
@@ -292,7 +295,7 @@ public class Interface1 {
 			
 			
 		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewGame.setBounds(751, 171, 146, 23);
+		btnNewGame.setBounds(764, 227, 146, 23);
 		frame.getContentPane().add(btnNewGame);
 		
 		JButton btnExit = new JButton("Exit");
@@ -300,9 +303,10 @@ public class Interface1 {
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
+				
 			}
 		});
-		btnExit.setBounds(751, 360, 146, 23);
+		btnExit.setBounds(764, 367, 146, 23);
 		frame.getContentPane().add(btnExit);
 		
 		btnUp = new JButton("Up");
@@ -317,7 +321,7 @@ public class Interface1 {
 		});
 		btnUp.setEnabled(false);
 		btnUp.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnUp.setBounds(710, 522, 110, 23);
+		btnUp.setBounds(774, 422, 110, 23);
 		frame.getContentPane().add(btnUp);
 		
 		btnDown = new JButton("Down");
@@ -332,7 +336,7 @@ public class Interface1 {
 		});
 		btnDown.setEnabled(false);
 		btnDown.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnDown.setBounds(710, 620, 110, 23);
+		btnDown.setBounds(774, 492, 110, 23);
 		frame.getContentPane().add(btnDown);
 		
 		btnLeft = new JButton("Left");
@@ -346,7 +350,7 @@ public class Interface1 {
 		});
 		btnLeft.setEnabled(false);
 		btnLeft.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLeft.setBounds(633, 571, 110, 23);
+		btnLeft.setBounds(720, 457, 110, 23);
 		frame.getContentPane().add(btnLeft);
 		
 		btnRight = new JButton("Right");
@@ -360,11 +364,11 @@ public class Interface1 {
 		});
 		btnRight.setEnabled(false);
 		btnRight.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnRight.setBounds(774, 571, 110, 23);
+		btnRight.setBounds(825, 457, 110, 23);
 		frame.getContentPane().add(btnRight);
 		
 		lblStatus = new JLabel("Status");
-		lblStatus.setBounds(61, 629, 206, 14);
+		lblStatus.setBounds(34, 686, 206, 14);
 		frame.getContentPane().add(lblStatus);
 		
 		btnEditKeepLevel = new JButton("Edit Keep Level");
@@ -373,38 +377,52 @@ public class Interface1 {
 				
 				EditKeepLevelInterface editkeep = new EditKeepLevelInterface(window);
 				editkeep.NewWindow();
+				
 		
 			}
 		});
 		btnEditKeepLevel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEditKeepLevel.setBounds(751, 218, 146, 23);
+		btnEditKeepLevel.setBounds(764, 262, 146, 23);
 		frame.getContentPane().add(btnEditKeepLevel);
 		
 		btnLoadGame = new JButton("Load Game");
+		btnLoadGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				FileInputStream fis = new FileInputStream(f);
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/
+				
+			}
+		});
 		btnLoadGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLoadGame.setBounds(751, 267, 146, 23);
+		btnLoadGame.setBounds(764, 297, 146, 23);
 		frame.getContentPane().add(btnLoadGame);
 		
 		btnSaveGame = new JButton("Save Game");
 		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			/*
+				File f = new File ("Obj.txt");
+				FileOutputStream fos = new FileOutputStream(f);
+				ObjectOutputStream oss = new ObjectOutputStream(fos);
+				oss.writeObject(novojogo);*/
 			}
 		});
 		btnSaveGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSaveGame.setBounds(751, 316, 146, 23);
+		btnSaveGame.setBounds(764, 332, 146, 23);
 		frame.getContentPane().add(btnSaveGame);
-	
+
 
 	}
 
 	public void updateGame(String dir) {
 		novojogo.Input(dir);
-		
 		panel.setBounds(61, 163, 593, 435);
 		frame.getContentPane().add(panel);
 		panel.repaint();
-		panel.requestFocusInWindow();
 		GameStatus();
+		panel.requestFocusInWindow();
 	
 	}
 

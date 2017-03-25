@@ -84,13 +84,12 @@ public class EditKeepLevelInterface extends JFrame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 772, 516);
+		frame.setBounds(100, 100, 774, 618);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnAddHero = new JButton("Add Hero");
 		btnAddHero.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 
 				fbtnAddHero = true;
 				fbtnAddOrks = false;

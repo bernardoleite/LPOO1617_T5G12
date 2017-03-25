@@ -32,7 +32,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
 		};
 	
 	private StateOfGame thegame;
-	private BufferedImage doorclose, dooropen, guard, hero, ork, spiek, wall, stuned, heroarmed, key, armer, sleeping, lever;
+	private BufferedImage doorclose, dooropen, guard, hero, ork, spiek, wall, stuned, heroarmed, key, armer, sleeping, lever, keylocked, doors;
 	private int lin = 10, col = 10;
 	
 	Interface1 window;
@@ -63,6 +63,8 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     	   armer = ImageIO.read(getClass().getResourceAsStream("armer.png"));
     	   sleeping = ImageIO.read(getClass().getResourceAsStream("sleeping.png"));
     	   lever = ImageIO.read(getClass().getResourceAsStream("lever.png"));
+    	   keylocked = ImageIO.read(getClass().getResourceAsStream("keylocked.png"));
+    	   doors = ImageIO.read(getClass().getResourceAsStream("doors.png"));
         } catch (IOException ex) {
              // handle exception...
         }
@@ -87,14 +89,18 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     	   for (j = 0; j < col; j++)
     	   {	
     		  if(map[i][j] == 'X') 		{g.drawImage(wall, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'H') {g.drawImage(hero, m, n, 50, 50, null, null);}
+    		  else if(map[i][j] == 'H') {g.drawImage(hero, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'O') {g.drawImage(ork, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == '8') {g.drawImage(stuned, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == '*') {g.drawImage(spiek, m, n, 25, 25, null, null);}
     		  else if(map[i][j] == 'G') {g.drawImage(guard, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'I') {g.drawImage(doorclose, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'S') {g.drawImage(dooropen, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == '$') {g.drawImage(stuned, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'I' && j != 0) {g.drawImage(doors, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'I' && j == 0) {g.drawImage(doorclose, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'I' && thegame.GetMyLevel() > 1) {g.drawImage(doorclose, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'S' && j == 0) {g.drawImage(dooropen, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'S' && j != 0) {g.drawImage(doors, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'S' && thegame.GetMyLevel() > 1) {g.drawImage(dooropen, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == '$') {g.drawImage(keylocked, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'A' && thegame.GetHero().getHeroDress() == 'A') {g.drawImage(heroarmed, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'A') {g.drawImage(armer, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'K' && thegame.GetMyLevel() == 1) {g.drawImage(lever, m, n, 35, 35, null, null);}
@@ -116,7 +122,6 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
        
        
 }
-
 
 
 @Override
@@ -190,6 +195,7 @@ public void keyPressed(KeyEvent e) {
 	}
 	
 	repaint();
+	
 	
 }
 @Override

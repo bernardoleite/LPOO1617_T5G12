@@ -9,7 +9,7 @@ public class LevelMap2 {
 	public int keycatched = 0;
 	public int needchange = 0;
 	public int reachS = 0;
-	private int imortality = 0;
+	public int imortality = 0; 
 	
 
 	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS

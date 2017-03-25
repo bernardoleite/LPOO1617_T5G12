@@ -17,7 +17,7 @@ public class Cli {
     public static void main(String[] args) {
     	
     	StateOfGame novojogo = new StateOfGame(1, 0, 2); //Novo Jogo
-    	
+    	novojogo.GetGuard().StopMovement();
     	int flag1 = 1;
     	
     	while (flag1 == 1)

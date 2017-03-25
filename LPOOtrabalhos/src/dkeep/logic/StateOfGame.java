@@ -1,10 +1,11 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class StateOfGame {
+public class StateOfGame implements Serializable{
 	
 
 	public char Map1[][]= {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, /*Tabuleiro do 1º nível*/
@@ -47,6 +48,12 @@ public class StateOfGame {
 	public void SetLevel2Map(char map[][])
 	{
 		this.Map2 = map;
+		
+	}
+	
+	public void SetLevel1Map(char map[][])
+	{
+		this.Map1 = map;
 		
 	}
 	
@@ -102,7 +109,7 @@ public class StateOfGame {
 	}
 	
 	
-	public StateOfGame(int Level, int GuardPersonality, int numberOrks)	//Precisa de mudança aquando acrescento de nivel
+	public StateOfGame(int Level, int GuardPersonality, int numberOrks) 	//Precisa de mudança aquando acrescento de nivel
 	{
 		this.MyLevel = Level;
 		if (Level == 1) NewGame(1,GuardPersonality, numberOrks);
@@ -239,7 +246,7 @@ public class StateOfGame {
 	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
 	    		}
 
-	    	}
+	    	} 
 			  	
 			 return 1;
 		}
