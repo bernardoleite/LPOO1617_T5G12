@@ -17,7 +17,7 @@ public class Cli {
     public static void main(String[] args) {
     	
     	StateOfGame novojogo = new StateOfGame(1, 0, 2); //Novo Jogo
-    	novojogo.GetGuard().StopMovement();
+
     	int flag1 = 1;
     	
     	while (flag1 == 1)
@@ -28,7 +28,7 @@ public class Cli {
 		
 		Scanner reader = new Scanner (System.in);
 		
-		String movement = reader.next(); 
+		String movement = reader.next();  
 		
 		novojogo.Input(movement); //Ler Teclado
 
