@@ -409,8 +409,8 @@ public class Interface1 {
 					panel.setBounds(61, 163, 593, 435);
 					frame.getContentPane().add(panel);
 					panel.repaint();
-					//NumberOgres = ogres;	
-					//GameStatus();
+					NumberOgres = 1;	
+					GameStatus();
 					panel.requestFocusInWindow();
 					is.close();
 				} catch (FileNotFoundException e1) {

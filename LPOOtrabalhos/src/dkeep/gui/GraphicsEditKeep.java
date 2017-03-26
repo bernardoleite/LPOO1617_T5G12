@@ -38,7 +38,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
        this.lin = lin;
        this.col = col;
        
-       int i = 0;
+       int i = 0; 
        
        map = new char[lin][col];
        
@@ -75,14 +75,14 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
     	   sleeping = ImageIO.read(getClass().getResourceAsStream("sleeping.png"));
     	   lever = ImageIO.read(getClass().getResourceAsStream("lever.png"));
         } catch (IOException ex) {
-             // handle exception...
+             
         }
       
        
        
        
 }
-  // Redraws the panel, only when requested by SWING
+
   public void paintComponent(Graphics g) {
        super.paintComponent(g); 
       
@@ -155,12 +155,12 @@ public void MapEditor(MouseEvent e)
 
 @Override
 public void mouseDragged(MouseEvent e) {
-	// TODO Auto-generated method stub
+
 	
 }
 @Override
 public void mouseMoved(MouseEvent e) {
-	// TODO Auto-generated method stub
+
 	
 }
 @Override
@@ -182,17 +182,17 @@ public void mouseReleased(MouseEvent e) {
 }
 @Override
 public void mouseEntered(MouseEvent e) {
-	// TODO Auto-generated method stub
+
 	
 }
 @Override
 public void mouseExited(MouseEvent e) {
-	// TODO Auto-generated method stub
+
 	
 }
 @Override
 public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
@@ -203,7 +203,7 @@ public void keyPressed(KeyEvent e) {
 }
 @Override
 public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
+
 	
 }
   
