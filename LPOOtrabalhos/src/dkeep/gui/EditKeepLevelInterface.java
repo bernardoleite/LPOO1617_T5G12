@@ -31,6 +31,7 @@ public class EditKeepLevelInterface {
 	private JTextField columns;
 	private char[][] Map;
 	public JLabel info;
+	private int painted = 0;
 	
 	private int lin = 0, col = 0;
 	private boolean  fbtnAddHero = false, fbtnAddOrks = false, fbtnAddWalls = false, fbtnAddKey = false, fbtnAddExitDoor = false, fbtnRemove = false;
@@ -54,7 +55,7 @@ public class EditKeepLevelInterface {
 	public void MapRefresh(char[][] mapToSend)
 	{
 		
-		this.Map = mapToSend;
+		this.Map = mapToSend; 
 	}
 
 	/**
@@ -199,6 +200,11 @@ public class EditKeepLevelInterface {
 				btnAddKey.setEnabled(true);
 				btnAddHero.setEnabled(true);
 				
+				if(painted == 1 ) {
+				frame.getContentPane().remove(mypanel);
+				frame.revalidate();
+				}
+
 				String linhas = " ";
 				String colunas = " " ;
 				
@@ -215,6 +221,7 @@ public class EditKeepLevelInterface {
 	
 				if(fAcceptDim == 1)
 				{
+				painted = 1;
 				mypanel = new GraphicsEditKeep(window, lin, col);
 				mypanel.setBounds(22, 23, 500, 500);
 				frame.getContentPane().add(mypanel);

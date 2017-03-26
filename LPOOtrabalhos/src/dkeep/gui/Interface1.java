@@ -80,6 +80,7 @@ public class Interface1 {
 	
 	private int lin = 10, col = 10;
 	private String fileName = "data.bin";
+	private JLabel lblStatus2;
 	
 	/**
 	 * Launch the application.
@@ -137,6 +138,8 @@ public class Interface1 {
 			}
 			
 		}
+		
+		if(NumOrk < 1) NumOrk = 1;
 	}
 	
 	public String getCurrentMap()
@@ -210,6 +213,7 @@ public class Interface1 {
 				panel = new GraphicsLevel1And2(window, novojogo,lin,col);
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
+				panel.repaint();
 				
 				
 				}
@@ -221,6 +225,7 @@ public class Interface1 {
 			}
 		
 		else lblStatus.setText("You Can Play Now");
+		
 	}
 
 	/**
@@ -275,10 +280,17 @@ public class Interface1 {
 				
 				if (numogres.getText().length()== 0){
 					ogres =1;
-				}else{
+				}
+				else if(numogres.getText().length() > 0 ){
 					String texto = numogres.getText();
 					ogres = Integer.parseInt(texto);
 				}
+				
+				
+				if (ogres > 5){
+					lblStatus2.setText("Max Ogres: 5. Only 5 will appear.");
+					ogres = 5;}
+				
 				int tipoguarda = comboBox.getSelectedIndex();
 				tipoguarda++;
 				
@@ -295,8 +307,7 @@ public class Interface1 {
 		
 			}
 		});	
-			
-			
+						
 		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewGame.setBounds(764, 227, 146, 23);
 		frame.getContentPane().add(btnNewGame);
@@ -447,6 +458,10 @@ public class Interface1 {
 		btnSaveGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSaveGame.setBounds(764, 332, 146, 23);
 		frame.getContentPane().add(btnSaveGame);
+		
+		lblStatus2 = new JLabel("Status");
+		lblStatus2.setBounds(570, 6, 206, 14);
+		frame.getContentPane().add(lblStatus2);
 
 
 	}
