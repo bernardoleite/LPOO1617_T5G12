@@ -89,12 +89,13 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     	   for (j = 0; j < col; j++)
     	   {	
     		  if(map[i][j] == 'X') 		{g.drawImage(wall, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'H') {g.drawImage(hero, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'H' ) {g.drawImage(hero, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'O') {g.drawImage(ork, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == '8') {g.drawImage(stuned, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == '*') {g.drawImage(spiek, m, n, 25, 25, null, null);}
     		  else if(map[i][j] == 'G') {g.drawImage(guard, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'I' && j != 0) {g.drawImage(doors, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'I' && j != 0 && thegame.MyLevel == 1) {g.drawImage(doors, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'I' && j != 0 && thegame.MyLevel == 2) {g.drawImage(doorclose, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'I' && j == 0) {g.drawImage(doorclose, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'I' && thegame.GetMyLevel() > 1) {g.drawImage(doorclose, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'S' && j == 0) {g.drawImage(dooropen, m, n, 35, 35, null, null);}

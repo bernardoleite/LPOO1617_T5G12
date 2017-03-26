@@ -170,16 +170,15 @@ public class Interface1 {
 			panel.removeKeyListener((KeyListener) panel);
 			btnNewGame.setEnabled(true);
 			
-			
-			
 			}
 		
 		else if ( novojogo.GameState() == 2 ) {
 			
 			lblStatus.setText("Win!");
+			
 			MyLevel++;
 			
-			if (MyLevel > 1){
+			if (MyLevel == 2){
 				
 				if(Map != null) 
 					
@@ -210,9 +209,10 @@ public class Interface1 {
 				
 				}
 			
-			else if (MyLevel == 3)
+			else if (MyLevel == 3){
 				turnOffMovementButtoms();
-				btnNewGame.setEnabled(true);
+				panel.removeKeyListener((KeyListener) panel);
+				btnNewGame.setEnabled(true);}
 			}
 		
 		else lblStatus.setText("You Can Play Now");
@@ -265,7 +265,7 @@ public class Interface1 {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				btnUp.setEnabled(true); btnDown.setEnabled(true); btnLeft.setEnabled(true); btnRight.setEnabled(true); btnNewGame.setEnabled(true);
-				
+				MyLevel = 1;
 				if (numogres.getText().length()== 0){
 					ogres =1;
 				}else{
@@ -308,9 +308,7 @@ public class Interface1 {
 			public void actionPerformed(ActionEvent e) {
 				
 				updateGame("w");				
-				
-				
-				
+	
 			}
 		});
 		btnUp.setEnabled(false);

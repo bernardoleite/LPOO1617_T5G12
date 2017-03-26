@@ -9,7 +9,7 @@ import dkeep.logic.Hero;
 import dkeep.logic.StateOfGame;
 import dkeep.logic.Ork;
 
-/*ola*/
+
 public class Cli {
 	
 
