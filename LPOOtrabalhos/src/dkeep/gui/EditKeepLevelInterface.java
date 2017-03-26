@@ -265,6 +265,10 @@ public class EditKeepLevelInterface {
 		btnRemove.setBounds(621, 323, 117, 29);
 		frame.getContentPane().add(btnRemove);
 		
+		JLabel lblNewLabel = new JLabel("You are Able to Insert 1 Hero and 1 Key.");
+		lblNewLabel.setBounds(266, 574, 434, 16);
+		frame.getContentPane().add(lblNewLabel);
+		
 		
 	
 	}

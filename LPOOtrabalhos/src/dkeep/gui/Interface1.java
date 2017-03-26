@@ -65,7 +65,7 @@ public class Interface1 {
 			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 			
 		};
-
+ 
 	
 	static Interface1 window;
 	private JButton btnEditKeepLevel;
@@ -292,6 +292,7 @@ public class Interface1 {
 				GameStatus();
 				panel.requestFocusInWindow();
 		
+		
 			}
 		});	
 			
@@ -423,7 +424,7 @@ public class Interface1 {
 		btnLoadGame.setBounds(764, 297, 146, 23);
 		frame.getContentPane().add(btnLoadGame);
 		
-		btnSaveGame = new JButton("Save Game");
+		btnSaveGame = new JButton("Save & Exit");
 		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -440,12 +441,7 @@ public class Interface1 {
 					e1.printStackTrace();
 				}
 				lblStatus.setText("You have Saved Current Game!");
-				
-			/*
-				File f = new File ("Obj.txt");
-				FileOutputStream fos = new FileOutputStream(f);
-				ObjectOutputStream oss = new ObjectOutputStream(fos);
-				oss.writeObject(novojogo);*/
+				System.exit(0);
 			}
 		});
 		btnSaveGame.setFont(new Font("Tahoma", Font.PLAIN, 14));

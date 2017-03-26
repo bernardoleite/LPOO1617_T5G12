@@ -66,7 +66,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     	   keylocked = ImageIO.read(getClass().getResourceAsStream("keylocked.png"));
     	   doors = ImageIO.read(getClass().getResourceAsStream("doors.png"));
         } catch (IOException ex) {
-             // handle exception...
+             // handle exception... 
         }
        
        
@@ -106,7 +106,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     		  else if(map[i][j] == 'A') {g.drawImage(armer, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'K' && thegame.GetMyLevel() == 1) {g.drawImage(lever, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'K' && thegame.GetMyLevel() == 2 && thegame.GetKey().StatusKey() == 0 ) {g.drawImage(key, m, n, 35, 35, null, null);}
-    		  else if(map[i][j] == 'K' && thegame.GetKey().StatusKey() == 1) {g.drawImage(heroarmed, m, n, 35, 35, null, null);}
+    		  else if(map[i][j] == 'K' && thegame.GetKey().StatusKey() == 1) {g.drawImage(key, m, n, 35, 35, null, null);}
     		  else if(map[i][j] == 'g') {g.drawImage(sleeping, m, n, 35, 35, null, null);}
     		  m = m + 30;
     	   }
@@ -167,6 +167,7 @@ public void keyTyped(KeyEvent e) {
 }
 @Override
 public void keyPressed(KeyEvent e) {
+	
 	
 	if (e.getKeyCode() == KeyEvent.VK_UP)
 	{

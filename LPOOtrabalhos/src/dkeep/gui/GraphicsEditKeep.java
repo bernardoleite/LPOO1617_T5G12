@@ -24,7 +24,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
 	private BufferedImage doorclose, dooropen, guard, hero, ork, spiek, wall, stuned, heroarmed, key, armer, sleeping, lever;
 	EditKeepLevelInterface window;
 	private int lin, col;
-	private int countHero = 0, countKey = 0;
+	private int countHero = 0, countKey = 0, countOrks = 0;
 	
 	
   // Constructor, adding mouse and keyboard listeneres
@@ -126,20 +126,22 @@ public void MapEditor(MouseEvent e)
 {
 	if (window.getNameToAdd() == "fbtnAddHero" )
 	{
-		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0)
-			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'H';
+		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0 && countHero == 0)
+			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'H'; countHero++;
 	}
 	else if (window.getNameToAdd() == "fbtnAddOrks" ){
-		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0)
-			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'O';}
+		
+		
+		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0 )
+			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'O'; }
 		
 	else if (window.getNameToAdd() == "fbtnAddWalls" ){
 		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0)
 			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'X';}
 		
 	else if (window.getNameToAdd() == "fbtnAddKey" ){
-		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0)
-			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'K';}
+		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0 && countKey == 0)
+			map[(e.getY()*col) / ((col*335)/10)][(e.getX()*lin) / ((lin*290)/10)] = 'K'; countKey++;}
 		
 	else if (window.getNameToAdd() == "fbtnAddExitDoor" ){
 		if (((e.getY()*col) / ((col*335)/10)) < lin-1 && ((e.getY()*col) / ((col*335)/10)) > 0 && ((e.getX()*lin) / ((lin*290)/10)) < col-1 && ((e.getX()*lin) / ((lin*290)/10)) > 0)
