@@ -40,7 +40,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
   // Constructor, adding mouse and keyboard listeneres
   
   
-  public GraphicsLevel1And2(Interface1 window, StateOfGame novojogo, int lin, int col) {
+  public GraphicsLevel1And2(Interface1 window, StateOfGame novojogo, int lin, int col) { 
 	  this.window = window;
        addMouseListener(this);
        addMouseMotionListener(this);
@@ -50,11 +50,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
        this.col = col;
        
        try {                
-    	   hero = ImageIO.read(getClass().getResourceAsStream("hero.png"));
-    	   doorclose = ImageIO.read(getClass().getResourceAsStream("doorclose.png"));
-    	   dooropen = ImageIO.read(getClass().getResourceAsStream("dooropen.png"));
-    	   guard = ImageIO.read(getClass().getResourceAsStream("guard.png"));
-    	   ork = ImageIO.read(getClass().getResourceAsStream("ork.png"));
+    	   hero = ImageIO.read(getClass().getResourceAsStream("hero.png"));doorclose = ImageIO.read(getClass().getResourceAsStream("doorclose.png")); dooropen = ImageIO.read(getClass().getResourceAsStream("dooropen.png")); guard = ImageIO.read(getClass().getResourceAsStream("guard.png")); ork = ImageIO.read(getClass().getResourceAsStream("ork.png"));
     	   spiek = ImageIO.read(getClass().getResourceAsStream("spiek.png"));
     	   wall = ImageIO.read(getClass().getResourceAsStream("wall.png"));
     	   stuned = ImageIO.read(getClass().getResourceAsStream("stuned.png"));

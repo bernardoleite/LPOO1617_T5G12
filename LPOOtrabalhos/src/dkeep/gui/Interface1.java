@@ -49,7 +49,7 @@ public class Interface1 {
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
 	private JComboBox comboBox;
 	private JLabel lblStatus;
-	private int NumberOgres = 0;
+	private int NumberOgres = 0; 
 	private int MyLevel = 1;
 	private JPanel panel;
 	private char[][] Map = null;

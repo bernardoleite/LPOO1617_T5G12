@@ -40,7 +40,7 @@ public class Cli {
 		
 		String movement = reader.next();  
 		
-		novojogo.Input(movement); //Ler Teclado
+		novojogo.Input(movement); //Ler Teclado 
 
 		
 		for (int i = 0; i < 10; i++)
