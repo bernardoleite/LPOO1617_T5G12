@@ -16,7 +16,7 @@ import dkeep.logic.StateOfGame;
 
 public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 	
-  // Coordinates of the elipse “bounding rectangle”
+  // Coordinates of the elipse 
 
 	private char map[][] ;
 	
@@ -78,7 +78,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
     	   sleeping = ImageIO.read(getClass().getResourceAsStream("sleeping.png"));
     	   lever = ImageIO.read(getClass().getResourceAsStream("lever.png"));
         } catch (IOException ex) {
-             // handle exception...
+           
         }
       
        
@@ -158,12 +158,12 @@ public void MapEditor(MouseEvent e)
 
 @Override
 public void mouseDragged(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseMoved(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
@@ -185,17 +185,16 @@ public void mouseReleased(MouseEvent e) {
 }
 @Override
 public void mouseEntered(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseExited(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
 	
 }
 @Override
@@ -206,7 +205,7 @@ public void keyPressed(KeyEvent e) {
 }
 @Override
 public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
   

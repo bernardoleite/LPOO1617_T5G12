@@ -398,8 +398,7 @@ public class Interface1 {
 					panel.setBounds(61, 163, 593, 435);
 					frame.getContentPane().add(panel);
 					panel.repaint();
-					//NumberOgres = ogres;	
-					//GameStatus();
+				
 					panel.requestFocusInWindow();
 					is.close();
 				} catch (FileNotFoundException e1) {
@@ -409,11 +408,8 @@ public class Interface1 {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				/*
-				FileInputStream fis = new FileInputStream(f);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/ catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
+				catch (ClassNotFoundException e1) {
+					
 					e1.printStackTrace();
 				}
 				
@@ -434,10 +430,10 @@ public class Interface1 {
 					os.writeObject(novojogo);
 					os.close();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+				
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				lblStatus.setText("You have Saved Current Game!");

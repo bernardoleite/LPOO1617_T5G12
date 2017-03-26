@@ -16,7 +16,7 @@ import dkeep.logic.StateOfGame;
 
 public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 	
-  // Coordinates of the elipse “bounding rectangle”
+  // Coordinates of the elipse 
 
 	public char map[][]= {{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, /*Tabuleiro do 1º nível*/
 			{'X', ' ', ' ', ' ', 'I', ' ', 'X', ' ', ' ', 'X'},
@@ -66,7 +66,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
     	   keylocked = ImageIO.read(getClass().getResourceAsStream("keylocked.png"));
     	   doors = ImageIO.read(getClass().getResourceAsStream("doors.png"));
         } catch (IOException ex) {
-             // handle exception... 
+         
         }
        
        
@@ -117,7 +117,7 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
        
     
        
-      // g.drawImage(image, 0, 0, 50, 50, null, null);
+      
        
        
        
@@ -127,42 +127,42 @@ public class GraphicsLevel1And2 extends JPanel implements MouseListener, MouseMo
 
 @Override
 public void mouseDragged(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseMoved(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseClicked(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mousePressed(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseReleased(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseEntered(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void mouseExited(MouseEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
 public void keyTyped(KeyEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
 @Override
@@ -202,7 +202,7 @@ public void keyPressed(KeyEvent e) {
 }
 @Override
 public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
+	
 	
 }
   

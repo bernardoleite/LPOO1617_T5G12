@@ -243,7 +243,7 @@ public class StateOfGame implements Serializable{
 		 	for(int i = 0; i < lin; i++){
 	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
-	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
+	    			
 	    		}
 
 	    	} 
@@ -256,7 +256,7 @@ public class StateOfGame implements Serializable{
 		 	for(int i = 0; i < lin; i++){
 	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
-	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
+	    			
 	    		}
 
 	    	}
