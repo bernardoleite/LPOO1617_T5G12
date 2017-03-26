@@ -12,6 +12,11 @@ public class Hero {
 		this.y = CordY;
 	}
 	
+	/**  
+	    * Retrieve the Hero Positions.
+	    * @return An Integer 
+	    */ 
+	
 	public int[] getHeroPos()
 	{
 		int vec[] = {this.x,this.y};
@@ -20,12 +25,23 @@ public class Hero {
 	}
 	
 	
+	/**  
+	    * Set the Hero Positions 
+	    * @param CordX is the X
+	    * @param CordY is the Y
+	    */  
+	
 	public void setHeroPos(int CordX, int CordY)
 	{
 		this.x = CordX;
 		this.y = CordY;
 			
 	}
+	
+	/**  
+	    * Set the Hero Dress
+	    * @return a Char that represents Dress
+	    */  
 	
 	public char getHeroDress()
 	{

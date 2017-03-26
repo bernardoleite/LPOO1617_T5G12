@@ -18,11 +18,21 @@ public class Cli {
     	
     	StateOfGame novojogo = new StateOfGame(1, 0, 2); //Novo Jogo
 
-    	int flag1 = 1;
+    	int flag1 = 1, flag45  = 0;
     	
     	while (flag1 == 1)
     		
 		{
+    		for (int i = 0; i < 10; i++)
+    		{
+    			for (int j = 0; j < 10 ; j++)
+    			{
+    				System.out.print(novojogo.getMap()[i][j]);
+
+    			}
+    			
+    			System.out.printf("\n");
+    		}
 		
 		System.out.printf("Movimento? (W,A,S,D) ");
 		
@@ -38,13 +48,12 @@ public class Cli {
 			for (int j = 0; j < 10 ; j++)
 			{
 				System.out.print(novojogo.getMap()[i][j]);
-				System.out.printf(" ");
 			}
 			
 			System.out.printf("\n");
 		}
 		
-		if ( novojogo.GameState() == 1 ) {System.out.printf("!!!Game Over!!!\n"); flag1 = 0;}
+		if ( novojogo.GameState() == 1 ) {System.out.printf("!!!Game Over!!!\n"); flag1 = 0; flag45 = 1; }
 		
 		if ( novojogo.GameState() == 2 ) {System.out.printf("!!!You Win this Level!!!\n"); flag1 = 0;}
 		
@@ -52,8 +61,10 @@ public class Cli {
     	
     	novojogo = new StateOfGame(2, 0, 2); //Novo Jogo
     	
-    	flag1 = 1;
+    	if(flag45 == 0) flag1 = 1;
     	
+  if(flag1 ==1){
+	  
     	while (flag1 == 1)
     		
 		{
@@ -72,7 +83,6 @@ public class Cli {
 			for (int j = 0; j < 10 ; j++)
 			{
 				System.out.print(novojogo.getMap()[i][j]);
-				System.out.printf(" ");
 			}
 			
 			System.out.printf("\n");
@@ -83,6 +93,7 @@ public class Cli {
 		if ( novojogo.GameState() == 2 ) {System.out.printf("!!!You Win the Game!!!\n"); flag1 = 0;}
 		
 		}
+    					}
  
 }
 }

@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class EditKeepLevelInterface extends JFrame {
+public class EditKeepLevelInterface {
 
 	private JFrame frame;
 	private JPanel mypanel;
@@ -96,7 +96,7 @@ public class EditKeepLevelInterface extends JFrame {
 				fbtnAddWalls = false;
 				fbtnAddKey = false;
 				fbtnAddExitDoor = false;
-				setVisible(false);
+	
 			}
 		});
 		btnAddHero.setBounds(621, 159, 117, 29);
@@ -136,7 +136,7 @@ public class EditKeepLevelInterface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				windowOriginal.MapToSend(Map, lin, col);
-				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(false);
 			}
 		});
 		
@@ -150,7 +150,7 @@ public class EditKeepLevelInterface extends JFrame {
 				fbtnAddWalls = false;
 				fbtnAddKey = true;
 				fbtnAddExitDoor = false;
-				
+
 			}
 		});
 		btnAddKey.setBounds(621, 241, 117, 29);
@@ -185,6 +185,8 @@ public class EditKeepLevelInterface extends JFrame {
 				btnAddWalls.setVisible(true);
 				btnAddKey.setVisible(true);
 				btnAddExitDoor.setVisible(true);
+				btnAddKey.setEnabled(true);
+				btnAddHero.setEnabled(true);
 				
 				
 				String linhas = lines.getText();

@@ -8,12 +8,23 @@ public class LevelMap1 {
 	public int reachS = 0;
 	public int Imortality = 0;
 
+	/**  
+	    * Hero Movement
+	    * @param map is a char
+	    * @param input is a String
+	    * @param hero is an object type
+	    * @param lever is an object type
+	    * @param guard is an object type
+	    * @return an integer that represents success
+	    */  
 	
 	public int HeroMoves(char map[][] , String input, Hero hero, Lever lever, Guard guard )
 	{
 		 if ( input.equals("W") || input.equals("w") )
 		   {
-			   if (map[hero.x-1][hero.y] == 'X' || map[hero.x-1][hero.y] == 'I')  ;
+			   if (map[hero.x-1][hero.y] == 'X' )  ;
+			   
+			   else if (map[hero.x-1][hero.y] == 'I' && hero.x-1 != map.length-1)  hero.x--;
 			   
 			   else if (map[hero.x-1][hero.y] == 'S' && (hero.x-1 == 0 || hero.y == map.length)) {reachS =1; hero.x--;}
 			   
@@ -26,7 +37,9 @@ public class LevelMap1 {
 		   
 		   else  if ( input.equals("A") || input.equals("a") )
 		   {
-			   if (map[hero.x][hero.y-1] == 'X' || map[hero.x][hero.y-1] == 'I')  ;
+			   if (map[hero.x][hero.y-1] == 'X' )  ;
+			   
+			   else if (map[hero.x][hero.y-1] == 'I' && hero.y-1 != 0)  hero.y--;
 			   
 			   else  if (map[hero.x][hero.y-1] == 'S' && (hero.y-1 == 0 || hero.y == map.length)) {reachS =1; hero.y--;}
 			   
@@ -40,7 +53,9 @@ public class LevelMap1 {
 		   else if ( input.equals("S") || input.equals("s") )
 		   {
 			   
-			   if (map[hero.x+1][hero.y] == 'X' || map[hero.x+1][hero.y] == 'I')  ;
+			   if (map[hero.x+1][hero.y] == 'X' )  ;
+			   
+			   else if (map[hero.x+1][hero.y] == 'I' && hero.x+1 != map.length-1) hero.x++  ;
 			   
 			   else if (map[hero.x+1][hero.y] == 'S' && (hero.x+1 == map.length-1 || hero.y == map.length)) {reachS =1; hero.x++;}
 			   
@@ -55,7 +70,9 @@ public class LevelMap1 {
 		
 		   else  if ( input.equals("D") || input.equals("d") )
 		   {
-			   if (map[hero.x][hero.y+1] == 'X' || map[hero.x][hero.y+1] == 'I')  ;
+			   if (map[hero.x][hero.y+1] == 'X' )  ;
+			   
+			   else if (map[hero.x][hero.y+1] == 'I' && hero.y+1 != map.length-1) hero.y++  ;
 			   
 			   else if (map[hero.x][hero.y+1] == 'S' && (hero.y+1 == 0 || hero.y+1 == map.length-1))  {reachS =1; hero.y++;}
 			   
@@ -82,6 +99,14 @@ public class LevelMap1 {
 	}
 	
 	
+	/**  
+	    * Guard Movement
+	    * @param hero is an object type
+	    * @param lever is an object type
+	    * @param guard is an object type
+	    * @return an integer that represents success
+	    */  
+
 	 public int GuardMovement(Hero hero, Lever lever, Guard guard)
 	 {
 		 
@@ -187,6 +212,15 @@ public class LevelMap1 {
 	return 1;
 	 }
 	 
+		/**  
+	    * Verify Crossing between Guard and Hero
+	    * @param hero is an object type
+	    * @param lever is an object type
+	    * @param guard is an object type
+	    * @return an integer that represents success
+	    */  
+	 
+	 
 	 public int Crossing(Hero hero, Lever lever, Guard guard)
 	 {
 		 
@@ -204,7 +238,13 @@ public class LevelMap1 {
  
 	 }
 	 
-	 
+		/**  
+	    * Movement of Guard
+	    * @param hero is an object type
+	    * @param lever is an object type
+	    * @param guard is an object type
+	    * @return an integer that represents success
+	    */  
 	 
 	 public int Movement(Hero hero, Lever lever, Guard guard)
 	 {

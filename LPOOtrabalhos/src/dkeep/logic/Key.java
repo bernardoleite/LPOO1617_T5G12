@@ -13,11 +13,22 @@ public class Key {
 		y = CoordenadaY;
 	}
 	
+	/**  
+	    * Set the Key Positions 
+	    * @param x is the X
+	    * @param y is the Y
+	    */  
+	
 	public void setKeypos(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**  
+	    * Verify is the Key has been catched 
+	    * @return an integer status
+	    */  
 	
 	public int StatusKey()
 	{

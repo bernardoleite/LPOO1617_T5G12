@@ -98,6 +98,7 @@ public class Interface1 {
 		this.lin = lin;
 		this.col = col;
 		
+		
 	}
 
 	public void MapTreatment ()
@@ -166,6 +167,7 @@ public class Interface1 {
 			
 			lblStatus.setText("Game Over!");
 			turnOffMovementButtoms();
+			panel.removeKeyListener((KeyListener) panel);
 			btnNewGame.setEnabled(true);
 			
 			
@@ -205,6 +207,7 @@ public class Interface1 {
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
 				
+				
 				}
 			
 			else if (MyLevel == 3)
@@ -235,37 +238,34 @@ public class Interface1 {
 		label.setBounds(472, 5, 0, 0);
 		frame.getContentPane().add(label);
 		
-		JLabel lblNewLabel = new JLabel("Number of Ogres:");
+		JLabel lblNewLabel = new JLabel("Number of Ogres (If edited, don't need):");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(100, 69, 124, 32);
+		lblNewLabel.setBounds(84, 30, 270, 53);
 		frame.getContentPane().add(lblNewLabel);
 		
 		numogres = new JTextField();
-		numogres.setBounds(228, 77, 92, 20);
+		numogres.setBounds(415, 47, 116, 20);
 		frame.getContentPane().add(numogres);
 		numogres.setColumns(10);
 		
 		JLabel lblGuardPersonality = new JLabel("Guard Personality:");
 		lblGuardPersonality.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGuardPersonality.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGuardPersonality.setBounds(100, 112, 124, 32);
+		lblGuardPersonality.setBounds(94, 71, 124, 32);
 		frame.getContentPane().add(lblGuardPersonality);
 		
 		comboBox = new JComboBox(guarda);
 		comboBox.setToolTipText("Choose the Guard's Personality");
-		comboBox.setBounds(228, 120, 135, 20);
+		comboBox.setBounds(412, 79, 124, 20);
 		frame.getContentPane().add(comboBox);
 		
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				btnUp.setEnabled(true);
-				btnDown.setEnabled(true);
-				btnLeft.setEnabled(true);
-				btnRight.setEnabled(true);
-				btnNewGame.setEnabled(false);
+				btnUp.setEnabled(true); btnDown.setEnabled(true); btnLeft.setEnabled(true); btnRight.setEnabled(true); btnNewGame.setEnabled(true);
+				
 				if (numogres.getText().length()== 0){
 					ogres =1;
 				}else{
@@ -283,13 +283,7 @@ public class Interface1 {
 				NumberOgres = ogres;	
 				GameStatus();
 				panel.requestFocusInWindow();
-			
-				
-				
-				
-				
-				
-				
+		
 			}
 		});	
 			

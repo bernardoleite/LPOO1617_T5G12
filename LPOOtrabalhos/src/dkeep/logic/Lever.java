@@ -17,6 +17,12 @@ public class Lever {
 		return catched;
 	}
 	
+	/**  
+	    * Set the Lever Positions
+	    * @param CordX is the x
+	    * @param CordY is the y
+	    */  
+	
 	public void SetLeverPos(int CordX, int CordY){
 		
 		this.x = CordX;

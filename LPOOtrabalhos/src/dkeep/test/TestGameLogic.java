@@ -1039,6 +1039,62 @@ public class TestGameLogic {
 		assertEquals (3,novo.GetHero().y);
 	}
 	
+	/*
+	public char map5[][]= {
+			{'X', 'I', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}, 
+			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'G', 'X'},
+			{'X', ' ', 'K', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'I', ' ', ' ', 'I', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+			{'X', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'I'},
+			{'X', 'X', 'I', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
+			
+		};*/
+	
+	@Test
+	public void HeroEscapes() {
+
+		StateOfGame novo = new StateOfGame(1,1,1);
+		novo.SetLevel1Map(map5);
+		novo.SetLinAndCol(10, 10);
+		novo.GetGuard().setGuardPositions(1, 8);
+		novo.GetGuard().StopMovement();
+		novo.GetHero().setHeroPos(8, 1);
+		novo.GetLever().SetLeverPos(2, 2);
+
+		novo.HeroMovement("w", map5);	
+		novo.HeroMovement("w", map5);
+		novo.HeroMovement("w", map5);
+		novo.HeroMovement("w", map5);
+		novo.HeroMovement("w", map5);
+		novo.HeroMovement("w", map5);
+		
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("a", map5);
+		
+		novo.HeroMovement("s", map5);
+		novo.HeroMovement("s", map5);
+		novo.HeroMovement("s", map5);
+		novo.HeroMovement("s", map5);
+		novo.HeroMovement("s", map5);
+		novo.HeroMovement("s", map5);
+		
+		novo.HeroMovement("D", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		novo.HeroMovement("d", map5);
+		
+		assertEquals (1, novo.GetLevelMap1().reachS);
+		assertEquals (9,novo.GetHero().y);
+	}
+	
 	
 	/*
 	public char map5[][]= {
@@ -1336,6 +1392,8 @@ public class TestGameLogic {
 		assertEquals (1,novo.GetGuard().getGuardPos()[0]);
 		assertEquals (8,novo.GetGuard().getGuardPos()[1]);
 		
+		assertEquals(1,novo.GetLevelMap1().Movement(novo.GetHero(), novo.GetLever(), novo.GetGuard()));
+		assertEquals(1,novo.GetLevelMap1().GuardMovement(novo.GetHero(), novo.GetLever(), novo.GetGuard()));
 	}
 	
 	@Test

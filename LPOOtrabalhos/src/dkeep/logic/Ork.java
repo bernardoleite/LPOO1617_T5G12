@@ -38,12 +38,22 @@ public class Ork extends Enemy {
 		 
 	}
 	
+	/**  
+	    * Function that Stops Ogre's Movement
+	    */  
+	
 	public void StopMovement()
 	{
 		this.freeze = 1;
 		this.permanent = 1;
 		this.freezeclub = 1;
 	}
+	
+	/**  
+	    * Set the Orks Positions
+	    * @param x is x coordinate
+	    * @param y is y coordinate
+	    */  
 	
 	public void setOrkPositicions(int x, int y)
 	{
