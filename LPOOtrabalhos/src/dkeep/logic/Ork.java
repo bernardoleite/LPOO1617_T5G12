@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Ork extends Enemy {
+public class Ork extends Enemy implements Serializable{
 	
 	public int x;
 	public int y;

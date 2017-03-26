@@ -25,7 +25,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -75,6 +79,7 @@ public class Interface1 {
 	private int m = 0;
 	
 	private int lin = 10, col = 10;
+	private String fileName = "data.bin";
 	
 	/**
 	 * Launch the application.
@@ -266,6 +271,8 @@ public class Interface1 {
 				
 				btnUp.setEnabled(true); btnDown.setEnabled(true); btnLeft.setEnabled(true); btnRight.setEnabled(true); btnNewGame.setEnabled(true);
 				MyLevel = 1;
+				
+				
 				if (numogres.getText().length()== 0){
 					ogres =1;
 				}else{
@@ -274,6 +281,7 @@ public class Interface1 {
 				}
 				int tipoguarda = comboBox.getSelectedIndex();
 				tipoguarda++;
+				
 				
 				novojogo = new StateOfGame(1, tipoguarda, 4);
 				panel = new GraphicsLevel1And2(window,novojogo,10,10);	
@@ -380,10 +388,34 @@ public class Interface1 {
 		btnLoadGame = new JButton("Load Game");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
+					novojogo = (StateOfGame) is.readObject();
+					lblStatus.setText("The Last Game Was Loaded");
+					panel = new GraphicsLevel1And2(window,novojogo,10,10);	
+					panel.setBounds(61, 163, 593, 435);
+					frame.getContentPane().add(panel);
+					panel.repaint();
+					//NumberOgres = ogres;	
+					//GameStatus();
+					panel.requestFocusInWindow();
+					is.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				/*
 				FileInputStream fis = new FileInputStream(f);
 				ObjectInputStream ois = new ObjectInputStream(fis);
-				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/
+				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/ catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});
@@ -394,6 +426,21 @@ public class Interface1 {
 		btnSaveGame = new JButton("Save Game");
 		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				try {
+					ObjectOutputStream os = new ObjectOutputStream( new FileOutputStream(fileName));
+					os.writeObject(novojogo);
+					os.close();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				lblStatus.setText("You have Saved Current Game!");
+				
 			/*
 				File f = new File ("Obj.txt");
 				FileOutputStream fos = new FileOutputStream(f);

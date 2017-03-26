@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Guard extends Enemy {
+public class Guard extends Enemy implements Serializable{
 	
 	public int x, y;
 	public int steps = 0;

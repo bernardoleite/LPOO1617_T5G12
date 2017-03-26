@@ -1,6 +1,8 @@
 package dkeep.logic;
 
-public class Armadure {
+import java.io.Serializable;
+
+public class Armadure implements Serializable{
 	
 	public int x = 2;
 	public int y = 2;

@@ -1,9 +1,10 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LevelMap2 {
+public class LevelMap2 implements Serializable{
 	
 
 	public int keycatched = 0;

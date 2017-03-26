@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class LevelMap1 {
+public class LevelMap1 implements Serializable{
 	
 	public int Klever = 0;
 	public int reachS = 0;

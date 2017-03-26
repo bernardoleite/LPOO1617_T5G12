@@ -1,6 +1,8 @@
 package dkeep.logic;
 
-public class Key {
+import java.io.Serializable;
+
+public class Key implements Serializable{
 	
 	public char dress = 'K';
 	public int locked = 0; //if unlocked , locked = 0; else if locked = 1;
