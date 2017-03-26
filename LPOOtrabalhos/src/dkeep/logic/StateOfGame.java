@@ -30,7 +30,7 @@ public class StateOfGame implements Serializable{
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 			{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
+			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'} 
 			
 		};
 	 
@@ -45,17 +45,32 @@ public class StateOfGame implements Serializable{
 	public int status = 0;
 	private int lin = 10, col = 10;
 	
+	/**  
+	    * Set the Level2 Map 
+	    * @param map is the Map to be used.
+	    */  
+	
 	public void SetLevel2Map(char map[][])
 	{
 		this.Map2 = map;
 		
 	}
 	
+	/**  
+	    * Set the Level1 Map
+	    * @param map is the Map to be used.
+	    */  
+	
 	public void SetLevel1Map(char map[][])
 	{
 		this.Map1 = map;
 		
 	}
+	/**  
+	    * Set Lines And Cols of Game
+	    * @param lin is the number of lines
+	    * @param col is the number of columns
+	    */  
 	
 	public void SetLinAndCol(int lin, int col)
 	{
@@ -63,50 +78,98 @@ public class StateOfGame implements Serializable{
 		this.col = col;
 	}
 	
+	/**  
+	    * Get LevelMap1
+	    * @return the object corresponding to the LevelMap1
+	    */  
+	
 	public LevelMap1 GetLevelMap1()
 	{
 		return level1;
 	}
+	
+	/**  
+	    * Get LevelMap2
+	    * @return the object corresponding to the LevelMap2
+	    */ 
 	
 	public LevelMap2 GetLevelMap2()
 	{
 		return level2;
 	}
 	
+	/**  
+	    * Get Hero Object
+	    * @return Hero's object
+	    */  
+	
 	public Hero GetHero()
 	{
 		return hero;
 	}
+	
+	/**  
+	    * Get Lever Object
+	    * @return Lever's Object
+	    */  
 	
 	public Lever GetLever()
 	{
 		return lever;
 	}
 	
+	/**  
+	    * Get Key Object
+	    * @return ke's object.
+	    */  
+	
 	public Key GetKey()
 	{
 		return key;
 	}
 	
+	/**  
+	    * Get an ArrayList of Ogres
+	    * @return ork's array.
+	    */  
+	
 	public ArrayList<Ork> GetOrk()
 	{
 		return orks;
 	}
+	/**  
+	    * Get the Guard Object
+	    * @return guard's object.
+	    */  
 	
 	public Guard GetGuard()
 	{
 		return guard;
 	}
 	
+	/**  
+	    * Get Current Level
+	    * @return current level.
+	    */  
+	
 	public int GetMyLevel()
 	{
 		return MyLevel;
 	}
 	
+	/**  
+	    * Get the Orks Array
+	    * @return ork's array.
+	    */  
+	
 	public ArrayList<Ork> getOrks()
 	{
 		return this.orks;
 	}
+	
+	/**  
+	    * Create StateOfGame
+	    */  
 	
 	
 	public StateOfGame(int Level, int GuardPersonality, int numberOrks) 	
@@ -116,7 +179,13 @@ public class StateOfGame implements Serializable{
 		if (Level == 2) NewGame(2, GuardPersonality, numberOrks);
 		
 	}
-	
+	/**  
+	    * Create New Game
+	    * @param Level is the lever's object
+	    * @param GuardPersonality is the Guard Personality
+	    * @param numberOrks is the number of Ogres
+	    * @return an integer that represents success.
+	    */  
 	public int NewGame(int Level, int GuardPersonality, int numberOrks) 
 	{
 		int num = 0;
@@ -158,6 +227,12 @@ public class StateOfGame implements Serializable{
 		return 1;
 	}
 	
+	/**  
+	    * Input from Keyboard
+	    * @param input is the String that represents movement.
+	    * @return an integer that represents success.
+	    */  
+	
 	public int Input (String input)	
 	{
 		if (MyLevel == 1 )HeroMovement(input, Map1);
@@ -166,6 +241,10 @@ public class StateOfGame implements Serializable{
 		return 1;
 	}
 	
+	/**  
+	    * Stops Orks Movement (Onty for Unit Tests)
+	    */  
+	
 	public void StopOrksMovement()
 	{
 		for (int i = 0; i < orks.size(); i++)
@@ -173,6 +252,13 @@ public class StateOfGame implements Serializable{
 			orks.get(i).StopMovement();
 		}
 	}
+	
+	/**  
+	    * Hero Movement
+	    * @param input is the String that represents movement.
+	    * @param Map is the Map used 
+	    * @return an integer that represents success.
+	    */  
 	
 	
 	public int HeroMovement(String input, char map[][])	
@@ -218,6 +304,11 @@ public class StateOfGame implements Serializable{
 		return 1;
 	}
 	
+	/**  
+	    * Game State to Know Anytime what is the State of Game.
+	    * @return an integer that represents success.
+	    */ 
+	
 	public int GameState()
 	{
 		if (status == 1) return 1;
@@ -230,11 +321,21 @@ public class StateOfGame implements Serializable{
 		
 	}
 	
+	/**  
+	    * Set Imortality to the Hero (Only For Unit Tests)
+	    */ 
+	
 	public void NothingHappens()
 	{
 		level2.setImortality();
 		
 	}
+	
+	/**  
+	    * Changing the map
+	    * @param map is the Map received to make a refresh.
+	    * @return an integer that represents success.
+	    */ 
 	
 	public int MapChange(char map[][])
 	{
@@ -265,6 +366,11 @@ public class StateOfGame implements Serializable{
 		
 		return 1;
 	}
+	
+	/**  
+	    * Get the  Current Map
+	    * @return present Map.
+	    */ 
 	
 	public char[][] getMap()
 	{

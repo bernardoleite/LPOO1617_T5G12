@@ -33,7 +33,7 @@ public class LevelMap2 implements Serializable{
 			   
 			   else if (map[hero.x-1][hero.y] == 'S') {reachS = 1; hero.x--;}
 			   
-			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;}
+			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;} 
 			   
 			   
 			   else  if (map[hero.x-1][hero.y] == 'I' && keycatched == 1) {needchange = 1;}

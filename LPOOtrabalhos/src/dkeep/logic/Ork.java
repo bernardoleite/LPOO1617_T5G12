@@ -43,7 +43,7 @@ public class Ork extends Enemy implements Serializable{
 	    * Function that Stops Ogre's Movement
 	    */  
 	
-	public void StopMovement()
+	public void StopMovement() 
 	{
 		this.freeze = 1;
 		this.permanent = 1;
@@ -62,6 +62,12 @@ public class Ork extends Enemy implements Serializable{
 		this.y = y;
 	}
 	
+	/**  
+	    * Get the Orks Positions
+	    * @return array with positions.
+	    */  
+	
+	
 	public int[] getOrkPos()
 	{
 		int vec[] = {this.x,this.y};
@@ -69,20 +75,40 @@ public class Ork extends Enemy implements Serializable{
 		return vec;
 	}
 	
+	/**  
+	    * Set the Orks Movement 
+	    * @param letter is the keyboard input
+	    */  
+	
+	
 	public void setOgreMovement(char letter)
 	{
 		this.OgreMovement = letter;
 	}
+	
+	/**  
+	    * Set the Club Momevement
+	    * @param letter is the keyboard input
+	    */  
 	
 	public void setClubMovement(char letter)
 	{
 		this.OgresClubMovement = letter;
 	}
 	
+	/**  
+	    * Get Ogre Movement
+	    */  
+	
 	public char getOgreMovement()
 	{
 		return this.OgreMovement;
 	}
+	
+	/**  
+	    * Get Club Movement
+	    * @return the Club Movement
+	    */  
 	
 	public char getClubMovement()
 	{
