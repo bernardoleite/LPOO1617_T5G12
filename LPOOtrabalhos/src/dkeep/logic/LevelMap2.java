@@ -1,9 +1,10 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LevelMap2 {
+public class LevelMap2 implements Serializable{
 	
 
 	public int keycatched = 0;
@@ -11,7 +12,16 @@ public class LevelMap2 {
 	public int reachS = 0;
 	public int imortality = 0; 
 	
-
+	
+	/**  
+	    * Hero Movement
+	    * @param map is a char
+	    * @param input is the letter that represents movement
+	    * @param hero is an object type
+	    * @param key is an object type
+	    * @param orks is an ArrayList containing all the Ogres
+	    * @return an integer that represents success
+	    */  
 	   public int HeroMoves(char[][] map ,String input ,Hero hero ,Key key , ArrayList<Ork> orks){ //CHANGE ORKS
 		   
 			  
@@ -23,7 +33,7 @@ public class LevelMap2 {
 			   
 			   else if (map[hero.x-1][hero.y] == 'S') {reachS = 1; hero.x--;}
 			   
-			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;}
+			   else if (map[hero.x-1][hero.y] == ' ') {hero.x--;} 
 			   
 			   
 			   else  if (map[hero.x-1][hero.y] == 'I' && keycatched == 1) {needchange = 1;}
@@ -75,9 +85,8 @@ public class LevelMap2 {
 
 		   }
 		   
-		   
 		     
-			OrksMovement(map, hero ,key , orks); //OrksMovement(map, hero, key, orks);
+			OrksMovement(map, hero ,key , orks); 
 			
 			 for (int i = 0 ; i < orks.size(); i++)
 			 {
@@ -93,6 +102,13 @@ public class LevelMap2 {
 	   }
 	   
 	   
+		/**  
+	    * Orks Movement
+	    * @param map is a char
+	    * @param hero is an object type
+	    * @param key is an object type
+	    * @param orks is an ArrayList containing all the Ogres
+	    */ 
 	   public void OrksMovement(char[][] map, Hero hero ,Key key ,ArrayList<Ork> orks) //CHANGE ORKS
 	   {
 		   
@@ -110,6 +126,16 @@ public class LevelMap2 {
 		   
 		   
 	   }
+	   
+		/**  
+	    * The Effective Movement Taken by Ogres
+	    * @param map is a char
+	    * @param hero is an object type
+	    * @param key is an object type
+	    * @param orks is an ArrayList containing all the Ogres
+	    * @param aleaMov is an Integer that represent the Ogre's Random Movement
+	    * @param aleaClub is an Integer that represent the Spike's Random Movement
+	    */ 
 	   
 	   public void EffectiveMovement(char[][] map, Hero hero ,Key key ,Ork ork, int aleaMov, int aleaClub)
 	   {
@@ -209,6 +235,15 @@ public class LevelMap2 {
 		 public void setImortality(){
 			 this.imortality = 1;
 		 }
+		 
+			/**  
+		    * Crossing
+		    * @param map is a char
+		    * @param hero is an object type
+		    * @param key is an object type
+		    * @param ork is an object type
+		    * @return an integer that represents success or not
+		    */  
 	   
 	   public int Crossing (char[][] map, Hero hero ,Key key ,Ork ork)
 	   

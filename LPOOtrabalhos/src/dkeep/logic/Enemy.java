@@ -1,5 +1,8 @@
 package dkeep.logic;
-public class Enemy {
+
+import java.io.Serializable;
+
+public class Enemy implements Serializable{
 	
 	int posisaox;
 	int posisaoy;

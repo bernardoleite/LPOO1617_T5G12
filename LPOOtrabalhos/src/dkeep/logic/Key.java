@@ -1,6 +1,8 @@
 package dkeep.logic;
 
-public class Key {
+import java.io.Serializable;
+
+public class Key implements Serializable{
 	
 	public char dress = 'K';
 	public int locked = 0; //if unlocked , locked = 0; else if locked = 1;
@@ -13,11 +15,22 @@ public class Key {
 		y = CoordenadaY;
 	}
 	
+	/**  
+	    * Set the Key Positions 
+	    * @param x is the X
+	    * @param y is the Y
+	    */  
+	
 	public void setKeypos(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**  
+	    * Verify is the Key has been catched 
+	    * @return an integer status
+	    */  
 	
 	public int StatusKey()
 	{

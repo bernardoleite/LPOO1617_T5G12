@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class EditKeepLevelInterface extends JFrame {
+public class EditKeepLevelInterface {
 
 	private JFrame frame;
 	private JPanel mypanel;
@@ -30,10 +30,13 @@ public class EditKeepLevelInterface extends JFrame {
 	private JTextField lines;
 	private JTextField columns;
 	private char[][] Map;
+	public JLabel info;
+	private int painted = 0;
 	
-	private int lin, col;
+	private int lin = 0, col = 0;
 	private boolean  fbtnAddHero = false, fbtnAddOrks = false, fbtnAddWalls = false, fbtnAddKey = false, fbtnAddExitDoor = false, fbtnRemove = false;
-	
+	private int fAcceptDim = 0;
+
 	
 	public String getNameToAdd()
 	{
@@ -52,7 +55,7 @@ public class EditKeepLevelInterface extends JFrame {
 	public void MapRefresh(char[][] mapToSend)
 	{
 		
-		this.Map = mapToSend;
+		this.Map = mapToSend; 
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class EditKeepLevelInterface extends JFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 774, 618);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JButton btnAddHero = new JButton("Add Hero");
 		btnAddHero.addActionListener(new ActionListener() {
@@ -96,7 +99,7 @@ public class EditKeepLevelInterface extends JFrame {
 				fbtnAddWalls = false;
 				fbtnAddKey = false;
 				fbtnAddExitDoor = false;
-				setVisible(false);
+	
 			}
 		});
 		btnAddHero.setBounds(621, 159, 117, 29);
@@ -135,8 +138,17 @@ public class EditKeepLevelInterface extends JFrame {
 		btnSaveReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				if( fAcceptDim == 1 ){
 				windowOriginal.MapToSend(Map, lin, col);
-				setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(false);}
+				
+				if(fAcceptDim == 0){
+					info.setText("You must Creat A Map");
+				}
+				
+				
+				
+				fAcceptDim = 0;
 			}
 		});
 		
@@ -150,7 +162,7 @@ public class EditKeepLevelInterface extends JFrame {
 				fbtnAddWalls = false;
 				fbtnAddKey = true;
 				fbtnAddExitDoor = false;
-				
+
 			}
 		});
 		btnAddKey.setBounds(621, 241, 117, 29);
@@ -185,22 +197,38 @@ public class EditKeepLevelInterface extends JFrame {
 				btnAddWalls.setVisible(true);
 				btnAddKey.setVisible(true);
 				btnAddExitDoor.setVisible(true);
+				btnAddKey.setEnabled(true);
+				btnAddHero.setEnabled(true);
 				
+				if(painted == 1 ) {
+				frame.getContentPane().remove(mypanel);
+				frame.revalidate();
+				}
+
+				String linhas = " ";
+				String colunas = " " ;
 				
-				String linhas = lines.getText();
-				String colunas = columns.getText();
-				
-				lin = Integer.parseInt(linhas);
-				col = Integer.parseInt(colunas);
-				
+				if (lines.getText().length()== 0 || columns.getText().length() ==0){
+					info.setText("You must insert valid height and weight!");
+				}else{
+					info.setText("You can Start Creating Your Map.");
+					linhas = lines.getText();
+					colunas = columns.getText();
+					lin = Integer.parseInt(linhas);
+					col = Integer.parseInt(colunas);
+					fAcceptDim = 1;
+				}
+	
+				if(fAcceptDim == 1)
+				{
+				painted = 1;
 				mypanel = new GraphicsEditKeep(window, lin, col);
-				//mypanel.setBounds(22, 23, (lin*320)/10, (col*350)/10);
 				mypanel.setBounds(22, 23, 500, 500);
 				frame.getContentPane().add(mypanel);
 				mypanel.repaint();
 				mypanel.requestFocusInWindow();
-				
-				
+				}
+
 			}
 		});
 		btnStartEditing.setBounds(621, 64, 117, 42);
@@ -224,7 +252,7 @@ public class EditKeepLevelInterface extends JFrame {
 		lblColumns.setBounds(548, 223, 61, 16);
 		frame.getContentPane().add(lblColumns);
 		
-		JLabel info = new JLabel("Status");
+		info = new JLabel("Status");
 		info.setBounds(434, 6, 332, 16);
 		frame.getContentPane().add(info);
 		
@@ -243,6 +271,10 @@ public class EditKeepLevelInterface extends JFrame {
 		});
 		btnRemove.setBounds(621, 323, 117, 29);
 		frame.getContentPane().add(btnRemove);
+		
+		JLabel lblNewLabel = new JLabel("You are Able to Insert 1 Hero and 1 Key.");
+		lblNewLabel.setBounds(266, 574, 434, 16);
+		frame.getContentPane().add(lblNewLabel);
 		
 		
 	

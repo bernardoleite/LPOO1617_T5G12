@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Guard extends Enemy {
+public class Guard extends Enemy implements Serializable{
 	
 	public int x, y;
 	public int steps = 0;
@@ -45,12 +46,18 @@ public class Guard extends Enemy {
 
 	}
 	
+	/**  
+	    * Retrieve Guard Positions  
+	    * @return Array (Integer)  
+	    */ 
+	
 	public int[] getGuardPos()
 	{
 		int vec[] = {this.x,this.y};
 		
 		return vec;
 	}
+	
 	
 	
 	public void setGuardPositions(int CordX, int CordY)
@@ -72,6 +79,12 @@ public class Guard extends Enemy {
 	{
 		this.freeze = 1;
 	}
+	
+	
+	/**  
+	    * Retrieve a Value that says if Guard is Frozen or Not 
+	    * @return An Integer
+	    */ 
 	
 	public int getMovement()
 	{

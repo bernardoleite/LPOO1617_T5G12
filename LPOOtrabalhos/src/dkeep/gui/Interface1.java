@@ -25,7 +25,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -45,7 +49,7 @@ public class Interface1 {
 	String [] guarda = {"Rookie","Drunken", "Suspicious"};
 	private JComboBox comboBox;
 	private JLabel lblStatus;
-	private int NumberOgres = 0;
+	private int NumberOgres = 0; 
 	private int MyLevel = 1;
 	private JPanel panel;
 	private char[][] Map = null;
@@ -61,7 +65,7 @@ public class Interface1 {
 			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 			
 		};
-
+ 
 	
 	static Interface1 window;
 	private JButton btnEditKeepLevel;
@@ -75,6 +79,8 @@ public class Interface1 {
 	private int m = 0;
 	
 	private int lin = 10, col = 10;
+	private String fileName = "data.bin"; 
+	private JLabel lblStatus2;
 	
 	/**
 	 * Launch the application.
@@ -97,6 +103,7 @@ public class Interface1 {
 		this.Map = MapToSend;
 		this.lin = lin;
 		this.col = col;
+		
 		
 	}
 
@@ -131,6 +138,8 @@ public class Interface1 {
 			}
 			
 		}
+		
+		if(NumOrk < 1) NumOrk = 1;
 	}
 	
 	public String getCurrentMap()
@@ -166,18 +175,18 @@ public class Interface1 {
 			
 			lblStatus.setText("Game Over!");
 			turnOffMovementButtoms();
+			panel.removeKeyListener((KeyListener) panel);
 			btnNewGame.setEnabled(true);
-			
-			
 			
 			}
 		
 		else if ( novojogo.GameState() == 2 ) {
 			
 			lblStatus.setText("Win!");
+			
 			MyLevel++;
 			
-			if (MyLevel > 1){
+			if (MyLevel == 2){
 				
 				if(Map != null) 
 					
@@ -204,15 +213,19 @@ public class Interface1 {
 				panel = new GraphicsLevel1And2(window, novojogo,lin,col);
 				panel.setBounds(61, 163, 593, 435);
 				frame.getContentPane().add(panel);
+				panel.repaint();
+				
 				
 				}
 			
-			else if (MyLevel == 3)
+			else if (MyLevel == 3){
 				turnOffMovementButtoms();
-				btnNewGame.setEnabled(true);
+				panel.removeKeyListener((KeyListener) panel);
+				btnNewGame.setEnabled(true);}
 			}
 		
 		else lblStatus.setText("You Can Play Now");
+		
 	}
 
 	/**
@@ -235,45 +248,52 @@ public class Interface1 {
 		label.setBounds(472, 5, 0, 0);
 		frame.getContentPane().add(label);
 		
-		JLabel lblNewLabel = new JLabel("Number of Ogres:");
+		JLabel lblNewLabel = new JLabel("Number of Ogres (If edited, don't need):");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(100, 69, 124, 32);
+		lblNewLabel.setBounds(84, 30, 270, 53);
 		frame.getContentPane().add(lblNewLabel);
 		
 		numogres = new JTextField();
-		numogres.setBounds(228, 77, 92, 20);
+		numogres.setBounds(415, 47, 116, 20);
 		frame.getContentPane().add(numogres);
 		numogres.setColumns(10);
 		
 		JLabel lblGuardPersonality = new JLabel("Guard Personality:");
 		lblGuardPersonality.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGuardPersonality.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGuardPersonality.setBounds(100, 112, 124, 32);
+		lblGuardPersonality.setBounds(94, 71, 124, 32);
 		frame.getContentPane().add(lblGuardPersonality);
 		
 		comboBox = new JComboBox(guarda);
 		comboBox.setToolTipText("Choose the Guard's Personality");
-		comboBox.setBounds(228, 120, 135, 20);
+		comboBox.setBounds(412, 79, 124, 20);
 		frame.getContentPane().add(comboBox);
 		
 		btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				btnUp.setEnabled(true);
-				btnDown.setEnabled(true);
-				btnLeft.setEnabled(true);
-				btnRight.setEnabled(true);
-				btnNewGame.setEnabled(false);
+				btnUp.setEnabled(true); btnDown.setEnabled(true); btnLeft.setEnabled(true); btnRight.setEnabled(true); btnNewGame.setEnabled(true);
+				MyLevel = 1;
+				
+				
 				if (numogres.getText().length()== 0){
 					ogres =1;
-				}else{
+				}
+				else if(numogres.getText().length() > 0 ){
 					String texto = numogres.getText();
 					ogres = Integer.parseInt(texto);
 				}
+				
+				
+				if (ogres > 5){
+					lblStatus2.setText("Max Ogres: 5. Only 5 will appear.");
+					ogres = 5;}
+				
 				int tipoguarda = comboBox.getSelectedIndex();
 				tipoguarda++;
+				
 				
 				novojogo = new StateOfGame(1, tipoguarda, 4);
 				panel = new GraphicsLevel1And2(window,novojogo,10,10);	
@@ -283,17 +303,11 @@ public class Interface1 {
 				NumberOgres = ogres;	
 				GameStatus();
 				panel.requestFocusInWindow();
-			
-				
-				
-				
-				
-				
-				
+		
+		
 			}
 		});	
-			
-			
+						
 		btnNewGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewGame.setBounds(764, 227, 146, 23);
 		frame.getContentPane().add(btnNewGame);
@@ -314,9 +328,7 @@ public class Interface1 {
 			public void actionPerformed(ActionEvent e) {
 				
 				updateGame("w");				
-				
-				
-				
+	
 			}
 		});
 		btnUp.setEnabled(false);
@@ -388,10 +400,33 @@ public class Interface1 {
 		btnLoadGame = new JButton("Load Game");
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				FileInputStream fis = new FileInputStream(f);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/
+				
+				try {
+					ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));
+					novojogo = (StateOfGame) is.readObject();
+					lblStatus.setText("The Last Game Was Loaded");
+					panel = new GraphicsLevel1And2(window,novojogo,10,10);	
+					panel.setBounds(61, 163, 593, 435);
+					frame.getContentPane().add(panel);
+					panel.repaint();
+					NumberOgres = 1;	
+					GameStatus();
+					panel.requestFocusInWindow();
+					is.close();
+				} catch (FileNotFoundException e1) {
+					
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+				
+				
+				 catch (ClassNotFoundException e1) {
+					
+					e1.printStackTrace();
+				}
+				
 				
 			}
 		});
@@ -399,19 +434,33 @@ public class Interface1 {
 		btnLoadGame.setBounds(764, 297, 146, 23);
 		frame.getContentPane().add(btnLoadGame);
 		
-		btnSaveGame = new JButton("Save Game");
+		btnSaveGame = new JButton("Save & Exit");
 		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			/*
-				File f = new File ("Obj.txt");
-				FileOutputStream fos = new FileOutputStream(f);
-				ObjectOutputStream oss = new ObjectOutputStream(fos);
-				oss.writeObject(novojogo);*/
+				
+				
+				try {
+					ObjectOutputStream os = new ObjectOutputStream( new FileOutputStream(fileName));
+					os.writeObject(novojogo);
+					os.close();
+				} catch (FileNotFoundException e1) {
+					
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+				lblStatus.setText("You have Saved Current Game!");
+				System.exit(0);
 			}
 		});
 		btnSaveGame.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSaveGame.setBounds(764, 332, 146, 23);
 		frame.getContentPane().add(btnSaveGame);
+		
+		lblStatus2 = new JLabel("Status");
+		lblStatus2.setBounds(570, 6, 206, 14);
+		frame.getContentPane().add(lblStatus2);
 
 
 	}

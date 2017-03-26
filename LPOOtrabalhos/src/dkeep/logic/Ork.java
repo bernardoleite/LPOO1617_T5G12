@@ -1,8 +1,9 @@
 package dkeep.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Ork extends Enemy {
+public class Ork extends Enemy implements Serializable{
 	
 	public int x;
 	public int y;
@@ -38,18 +39,34 @@ public class Ork extends Enemy {
 		 
 	}
 	
-	public void StopMovement()
+	/**  
+	    * Function that Stops Ogre's Movement
+	    */  
+	
+	public void StopMovement() 
 	{
 		this.freeze = 1;
 		this.permanent = 1;
 		this.freezeclub = 1;
 	}
 	
+	/**  
+	    * Set the Orks Positions
+	    * @param x is x coordinate
+	    * @param y is y coordinate
+	    */  
+	
 	public void setOrkPositicions(int x, int y)
 	{
 		this.x = x;
 		this.y = y;
 	}
+	
+	/**  
+	    * Get the Orks Positions
+	    * @return array with positions.
+	    */  
+	
 	
 	public int[] getOrkPos()
 	{
@@ -58,20 +75,40 @@ public class Ork extends Enemy {
 		return vec;
 	}
 	
+	/**  
+	    * Set the Orks Movement 
+	    * @param letter is the keyboard input
+	    */  
+	
+	
 	public void setOgreMovement(char letter)
 	{
 		this.OgreMovement = letter;
 	}
+	
+	/**  
+	    * Set the Club Momevement
+	    * @param letter is the keyboard input
+	    */  
 	
 	public void setClubMovement(char letter)
 	{
 		this.OgresClubMovement = letter;
 	}
 	
+	/**  
+	    * Get Ogre Movement
+	    */  
+	
 	public char getOgreMovement()
 	{
 		return this.OgreMovement;
 	}
+	
+	/**  
+	    * Get Club Movement
+	    * @return the Club Movement
+	    */  
 	
 	public char getClubMovement()
 	{

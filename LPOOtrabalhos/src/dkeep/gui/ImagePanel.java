@@ -17,14 +17,14 @@ public class ImagePanel extends JPanel{
        try {                
           image = ImageIO.read(new File("image name and path"));
        } catch (IOException ex) {
-            // handle exception...
+         
        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this); // see javadoc for more info on the parameters            
+        g.drawImage(image, 0, 0, this);             
     }
 
 }
