@@ -33,7 +33,7 @@ public class StateOfGame implements Serializable{
 			{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
 			
 		};
-	
+	 
 	public LevelMap1 level1;
 	public LevelMap2 level2;
 	public Hero hero;
@@ -109,7 +109,7 @@ public class StateOfGame implements Serializable{
 	}
 	
 	
-	public StateOfGame(int Level, int GuardPersonality, int numberOrks) 	//Precisa de mudança aquando acrescento de nivel
+	public StateOfGame(int Level, int GuardPersonality, int numberOrks) 	
 	{
 		this.MyLevel = Level;
 		if (Level == 1) NewGame(1,GuardPersonality, numberOrks);
@@ -117,7 +117,7 @@ public class StateOfGame implements Serializable{
 		
 	}
 	
-	public int NewGame(int Level, int GuardPersonality, int numberOrks) //Precisa de mudança aquando acrescento de nivel
+	public int NewGame(int Level, int GuardPersonality, int numberOrks) 
 	{
 		int num = 0;
 		
@@ -175,7 +175,7 @@ public class StateOfGame implements Serializable{
 	}
 	
 	
-	public int HeroMovement(String input, char map[][])	//Precisa de mudança aquando acrescento de nivel
+	public int HeroMovement(String input, char map[][])	
 	{
 		int current;
 		
@@ -183,13 +183,13 @@ public class StateOfGame implements Serializable{
 			
 			current = level1.HeroMoves(map ,input ,hero ,lever ,guard );
 			
-			if(current == 1) 	//Se receber 1 Guarda e Hero cruzaram-se
+			if(current == 1) 	
 				status = 1;
 				
-			else if(current == 2) //Se receber 2 Vitória
+			else if(current == 2)
 				status = 2;
 			
-			else if(current == 3) // Necessario Mudar Mapa
+			else if(current == 3) 
 			{
 				status = 3;
 				MapChange(map);
@@ -201,13 +201,13 @@ public class StateOfGame implements Serializable{
 			
 			current = level2.HeroMoves(map ,input ,hero ,key , orks );
 			
-			if(current == 1) 	//Se receber 1 Guarda e Ork cruzaram-se
+			if(current == 1) 	
 				status = 1;
 				
-			else if(current == 2) //Se receber 2 Vitória
+			else if(current == 2) 
 				status = 2;
 			
-			else if(current == 3) // Necessario Mudar Mapa
+			else if(current == 3)
 				{
 				status = 3;
 				MapChange(map);
@@ -243,7 +243,7 @@ public class StateOfGame implements Serializable{
 		 	for(int i = 0; i < lin; i++){
 	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
-	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
+
 	    		}
 
 	    	} 
@@ -256,7 +256,7 @@ public class StateOfGame implements Serializable{
 		 	for(int i = 0; i < lin; i++){
 	    		for (int j = 0 ; j < col; j++){
 	    			if (map[i][j] == 'I') map[i][j] = 'S';
-	    			//else if (map[i][j] == 'K') map[i][j] = ' ';
+
 	    		}
 
 	    	}
@@ -266,10 +266,10 @@ public class StateOfGame implements Serializable{
 		return 1;
 	}
 	
-	public char[][] getMap() //Precisa de mudança aquando acrescento de nivel
+	public char[][] getMap()
 	{
-		int next = 1; //Variaveis para nao desconfigurar impressao
-		int ver = 0; //Variaveis para nao desconfigurar impressao
+		int next = 1; 
+		int ver = 0; 
 		int cont = 0;
 		char  clonemap[][] = new char[lin][col];
 		
@@ -320,7 +320,7 @@ public class StateOfGame implements Serializable{
 		}
 	
 	
-	else if (MyLevel == 2) //change orks prints
+	else if (MyLevel == 2) 
 		
 	{
 		for (int c = 0; c < lin; c++ ){

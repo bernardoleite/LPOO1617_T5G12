@@ -79,7 +79,7 @@ public class Interface1 {
 	private int m = 0;
 	
 	private int lin = 10, col = 10;
-	private String fileName = "data.bin";
+	private String fileName = "data.bin"; 
 	private JLabel lblStatus2;
 	
 	/**
@@ -414,17 +414,16 @@ public class Interface1 {
 					panel.requestFocusInWindow();
 					is.close();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
-				/*
-				FileInputStream fis = new FileInputStream(f);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				StateofGame obj1 = (StateOfGame) ois.readObjetct();*/ catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
+				
+				
+				 catch (ClassNotFoundException e1) {
+					
 					e1.printStackTrace();
 				}
 				
@@ -445,10 +444,10 @@ public class Interface1 {
 					os.writeObject(novojogo);
 					os.close();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 				lblStatus.setText("You have Saved Current Game!");

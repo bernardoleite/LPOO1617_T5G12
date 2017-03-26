@@ -16,7 +16,7 @@ import dkeep.logic.StateOfGame;
 
 public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMotionListener, KeyListener {
 	
-  // Coordinates of the elipse “bounding rectangle”
+
 
 	private char map[][] ;
 	
@@ -27,7 +27,7 @@ public class GraphicsEditKeep extends JPanel implements MouseListener, MouseMoti
 	private int countHero = 0, countKey = 0, countOrks = 0;
 	
 	
-  // Constructor, adding mouse and keyboard listeneres
+
   
   
   public GraphicsEditKeep(EditKeepLevelInterface window, int lin, int col) { 
