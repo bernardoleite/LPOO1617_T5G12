@@ -5,32 +5,28 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lpoo.zombieinvaders.GUI.Scenes.Hud;
-import com.lpoo.zombieinvaders.GUI.Sprites.RickGrimes;
+import com.lpoo.zombieinvaders.GUI.Entities.RickGrimes;
 import com.lpoo.zombieinvaders.GUI.Tools.B2WorldCreator;
-import com.lpoo.zombieinvaders.ZombieInvaders;
+import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 /**
  * Created by bernardoleite on 11/05/17.
  */
 
 public class PlayScreen implements Screen {
+
+    //criar Textura da personagem - 10
+    private TextureAtlas atlas;
 
     //objeto principal game
     private ZombieInvaders game;
@@ -57,6 +53,10 @@ public class PlayScreen implements Screen {
     private RickGrimes player;
 
     public PlayScreen(ZombieInvaders game){
+
+        //criar Textura da personagem - 10
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
+
         this.game = game;
 
         gamecam = new OrthographicCamera();
@@ -83,15 +83,24 @@ public class PlayScreen implements Screen {
         //faz o debug das linhas da box2d
         b2dr = new Box2DDebugRenderer();
 
-        //Criar as Layers do Mundo - 9
+        //Criar as Layers do Mundo - 9 (adicionado segundo argumento em 10)
         new B2WorldCreator(world,map);
 
         //Inicializar Rick - 8
-        player = new RickGrimes(world);
+        player = new RickGrimes(world, this);
 
 
 
     }
+
+    //Criado para criar Personagem - 10
+
+    public TextureAtlas getAtlas(){
+
+        return atlas;
+    }
+
+
     @Override
     public void show() {
 
@@ -121,6 +130,9 @@ public class PlayScreen implements Screen {
         //toma 1 passo na simulação de física( 60 vezes por segundo) - 8
         world.step(1/60f, 6, 2);
 
+        //Criação de Sprite em torno da circunferência - 10
+        player.update(dt);
+
         //Sempre que a personagem se move , utiliza-se isto para o seguir
         //Reparar que isto aplica-se ao movimento nos eixo do x apenas - 8
         gamecam.position.x = player.b2body.getPosition().x;
@@ -148,6 +160,14 @@ public class PlayScreen implements Screen {
 
         //render Box2dDebugLines - 7
         b2dr.render(world,gamecam.combined);
+
+
+        //Criação de Sprite em torno da circunferência - 10
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
+
 
         //Hud - 4
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

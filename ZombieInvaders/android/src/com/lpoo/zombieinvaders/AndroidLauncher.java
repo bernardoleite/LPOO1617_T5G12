@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.lpoo.zombieinvaders.ZombieInvaders;
+import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override

@@ -2,7 +2,7 @@ package com.lpoo.zombieinvaders.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.lpoo.zombieinvaders.ZombieInvaders;
+import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

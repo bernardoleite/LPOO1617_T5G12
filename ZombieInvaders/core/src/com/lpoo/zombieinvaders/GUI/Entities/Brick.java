@@ -1,4 +1,4 @@
-package com.lpoo.zombieinvaders.GUI.Sprites;
+package com.lpoo.zombieinvaders.GUI.Entities;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;

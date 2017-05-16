@@ -1,4 +1,4 @@
-package com.lpoo.zombieinvaders;
+package com.lpoo.zombieinvaders.Logic;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

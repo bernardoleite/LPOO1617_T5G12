@@ -1,4 +1,4 @@
-package com.lpoo.zombieinvaders.GUI.Sprites;
+package com.lpoo.zombieinvaders.GUI.Entities;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.zombieinvaders.ZombieInvaders;
+import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 /**
  * Created by bernardoleite on 12/05/17.

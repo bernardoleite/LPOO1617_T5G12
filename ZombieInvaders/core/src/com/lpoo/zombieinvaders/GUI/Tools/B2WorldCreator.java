@@ -9,9 +9,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.zombieinvaders.GUI.Sprites.Brick;
-import com.lpoo.zombieinvaders.GUI.Sprites.Coin;
-import com.lpoo.zombieinvaders.ZombieInvaders;
+import com.lpoo.zombieinvaders.GUI.Entities.Brick;
+import com.lpoo.zombieinvaders.GUI.Entities.Coin;
+import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 /**
  * Created by bernardoleite on 11/05/17.
