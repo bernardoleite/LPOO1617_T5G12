@@ -5,4 +5,8 @@ package com.lpoo.zombieinvaders.Logic.Entities;
  */
 
 public class RickGrimesModel {
+
+
+
+    
 }

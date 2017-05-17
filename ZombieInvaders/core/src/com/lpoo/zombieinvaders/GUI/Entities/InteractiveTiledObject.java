@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.lpoo.zombieinvaders.GUI.PlayScreen;
 import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 /**
@@ -22,11 +23,14 @@ public abstract class InteractiveTiledObject {
     protected Rectangle bounds;
     protected Body body;
 
+    //16 refactoring
+    public InteractiveTiledObject(PlayScreen screen, Rectangle bounds){
 
-    public InteractiveTiledObject(World world, TiledMap map, Rectangle bounds){
+        //16 refactoring
+        this.world = screen.getWorld();
+        this.map = screen.getMap();
 
-        this.world = world;
-        this.map = map;
+
         this.bounds = bounds;
 
         BodyDef bdef = new BodyDef();

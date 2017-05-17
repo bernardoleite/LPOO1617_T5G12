@@ -3,6 +3,7 @@ package com.lpoo.zombieinvaders.GUI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -24,6 +25,10 @@ import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
  */
 
 public class PlayScreen implements Screen {
+
+    //11 - Music
+
+    private Music music;
 
     //criar Textura da personagem - 10
     private TextureAtlas atlas;
@@ -83,15 +88,22 @@ public class PlayScreen implements Screen {
         //faz o debug das linhas da box2d
         b2dr = new Box2DDebugRenderer();
 
+        //16 - Refactoring
         //Criar as Layers do Mundo - 9 (adicionado segundo argumento em 10)
-        new B2WorldCreator(world,map);
+        new B2WorldCreator(this);
 
         //Inicializar Rick - 8
-        player = new RickGrimes(world, this);
+        player = new RickGrimes(this);
 
-
+        //11 - Music
+        music = ZombieInvaders.manager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
 
     }
+
+
+
 
     //Criado para criar Personagem - 10
 
@@ -99,6 +111,10 @@ public class PlayScreen implements Screen {
 
         return atlas;
     }
+
+
+
+
 
 
     @Override
@@ -110,7 +126,7 @@ public class PlayScreen implements Screen {
 
     //Input Rato - 8
     public void handleInput(float dt){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.getCanJump())
             player.b2body.applyLinearImpulse(new Vector2(0,4f), player.b2body.getWorldCenter(), true);
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2)
             player.b2body.applyLinearImpulse(new Vector2(0.1f,0), player.b2body.getWorldCenter(), true);
@@ -182,6 +198,17 @@ public class PlayScreen implements Screen {
     public void resize(int width, int height) {
         gamePort.update(width,height);
     }
+
+
+    //16 -  Zombie Anatomy
+    public TiledMap getMap(){
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
+    }
+
 
     @Override
     public void pause() {

@@ -26,7 +26,7 @@ public class RickGrimes extends Sprite{
     private Animation<TextureRegion> rickJump;
     private boolean runningRight;
     private float stateTimer;
-
+    private boolean canJump = true;
     //O mundo em que o Sprite vai viver/atuar
     public World world;
     public Body b2body;
@@ -35,12 +35,14 @@ public class RickGrimes extends Sprite{
     private TextureRegion rickStand;
 
     //adicionado argumento em 10
-    public RickGrimes(World world, PlayScreen screen){
+    //16 refactoring
+    public RickGrimes( PlayScreen screen){
 
         ///Criação de Sprite em torno da circunferência - 10
         super(screen.getAtlas().findRegion("little_mario"));
 
-        this.world = world;
+         // 16 - refactoring
+        this.world = screen.getWorld();
 
         // 11 - Jump & Run
         currentState = State.STANDING;
@@ -118,14 +120,21 @@ public class RickGrimes extends Sprite{
 
      // 11 - Jump & Run
     public State getState(){
-         if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y < 0 &&  previousState == State.JUMPING)
-             return State.JUMPING;
+         if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y < 0 &&  previousState == State.JUMPING){
+             canJump = false;
+             return State.JUMPING;}
          else if (b2body.getLinearVelocity().y < 0)
             return State.FALLING;
-        else if (b2body.getLinearVelocity().x != 0)
-            return State.RUNNING;
-        else
-            return State.STANDING;
+        else if (b2body.getLinearVelocity().x != 0){
+             canJump = true;
+            return State.RUNNING;}
+        else{
+             canJump = true;
+            return State.STANDING;}
+    }
+
+    public boolean getCanJump() {
+        return  canJump;
     }
 
     public void defineRick(){

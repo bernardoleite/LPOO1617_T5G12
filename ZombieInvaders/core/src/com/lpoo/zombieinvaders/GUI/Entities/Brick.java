@@ -3,6 +3,7 @@ package com.lpoo.zombieinvaders.GUI.Entities;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
+import com.lpoo.zombieinvaders.GUI.PlayScreen;
 
 /**
  * Created by bernardoleite on 12/05/17.
@@ -10,7 +11,9 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Brick extends InteractiveTiledObject {
 
-    public Brick(World world, TiledMap map, Rectangle bounds){
-        super(world,map, bounds);
+    //16 refactoring
+    public Brick(PlayScreen screen, Rectangle bounds){
+
+        super(screen, bounds);
     }
 }
