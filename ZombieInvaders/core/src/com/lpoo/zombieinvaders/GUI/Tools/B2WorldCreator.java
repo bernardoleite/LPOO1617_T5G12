@@ -57,6 +57,9 @@ public class B2WorldCreator {
 
             shape.setAsBox(rect.getWidth() / 2 / ZombieInvaders.PPM, rect.getHeight() / 2 / ZombieInvaders.PPM);
             fdef.shape = shape;
+
+            //16
+            fdef.filter.categoryBits =  ZombieInvaders.OBJECT_BIT;
             body.createFixture(fdef);
         }
 

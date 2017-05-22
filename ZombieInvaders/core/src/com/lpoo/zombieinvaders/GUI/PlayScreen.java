@@ -15,9 +15,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.lpoo.zombieinvaders.GUI.Entities.Walker;
 import com.lpoo.zombieinvaders.GUI.Scenes.Hud;
 import com.lpoo.zombieinvaders.GUI.Entities.RickGrimes;
 import com.lpoo.zombieinvaders.GUI.Tools.B2WorldCreator;
+import com.lpoo.zombieinvaders.GUI.Tools.WorldContactListener;
 import com.lpoo.zombieinvaders.Logic.ZombieInvaders;
 
 /**
@@ -57,6 +59,9 @@ public class PlayScreen implements Screen {
     //Rick class object - 8
     private RickGrimes player;
 
+    //16 - Criar Walker
+   private Walker walker;
+
     public PlayScreen(ZombieInvaders game){
 
         //criar Textura da personagem - 10
@@ -95,13 +100,20 @@ public class PlayScreen implements Screen {
         //Inicializar Rick - 8
         player = new RickGrimes(this);
 
+
+        //12 - Identificar Colisões
+        world.setContactListener(new WorldContactListener());
+
         //11 - Music
         music = ZombieInvaders.manager.get("audio/music/mario_music.ogg", Music.class);
         music.setLooping(true);
         music.play();
 
-    }
+        //16 - Criar Enimigo
+        walker = new Walker(this, 5.64f, .32f);
 
+
+    }
 
 
 
@@ -148,6 +160,7 @@ public class PlayScreen implements Screen {
 
         //Criação de Sprite em torno da circunferência - 10
         player.update(dt);
+        walker.update(dt); //16
 
         //Sempre que a personagem se move , utiliza-se isto para o seguir
         //Reparar que isto aplica-se ao movimento nos eixo do x apenas - 8
@@ -182,6 +195,7 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+        walker.draw(game.batch); // 16
         game.batch.end();
 
 

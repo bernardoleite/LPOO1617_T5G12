@@ -3,9 +3,11 @@ package com.lpoo.zombieinvaders.GUI.Entities;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -152,11 +154,30 @@ public class RickGrimes extends Sprite{
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5/ ZombieInvaders.PPM);
+        shape.setRadius(6/ ZombieInvaders.PPM);
+
+        //13 - Breacking Stuff
+        fdef.filter.categoryBits = ZombieInvaders.RICK_BIT;
+        fdef.filter.maskBits =
+                ZombieInvaders.GROUND_BIT |
+                ZombieInvaders.COIN_BIT |
+                ZombieInvaders.BRICK_BIT |
+                        ZombieInvaders.ENEMY_BIT |
+                        ZombieInvaders.OBJECT_BIT |
+                        ZombieInvaders.ENEMY_HEAD_BIT
+        ;
+
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
+
+        //12 - Identificar colisões
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(-2 / ZombieInvaders.PPM, 6 / ZombieInvaders.PPM), new Vector2(2 / ZombieInvaders.PPM, 6 / ZombieInvaders.PPM));
+        fdef.shape = head;
+        fdef.isSensor = true;
+        b2body.createFixture(fdef).setUserData("head");
 
     }
 }
