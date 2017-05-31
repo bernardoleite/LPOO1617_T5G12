@@ -11,6 +11,11 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		config = new AndroidApplicationConfiguration();
+		config.useGyroscope = false;  //default is false
+//you may want to switch off sensors that are on by default if they are no longer needed.
+		config.useAccelerometer = true;
+		config.useCompass = false;
 		initialize(new ZombieInvaders(), config);
 	}
 }

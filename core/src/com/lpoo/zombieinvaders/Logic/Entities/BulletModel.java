@@ -29,7 +29,7 @@ public class BulletModel {
         this.rect = new ShapeCollision(x, y,WIDTH, HEIGHT);
 
         if (texture == null)
-            texture = new Texture("bullet.png");
+            texture = new Texture("banana2.png");
     }
 
     public void update (float deltaTime) {

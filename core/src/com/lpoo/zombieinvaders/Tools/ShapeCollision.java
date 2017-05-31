@@ -25,7 +25,10 @@ public class ShapeCollision {
 
     //funcao que faz o check da colisão (imaginar colisão entre retangulos)
     public boolean checkCollision (ShapeCollision rect){
-        return x < rect.x + rect.width && y < rect.y + rect.height && x + width > rect.x && y + height > rect.y;
+        return  x < rect.x + rect.width &&
+                y < rect.y + rect.height &&
+                x + width > rect.x &&
+                y + height > rect.y;
     }
 
 

@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.utils.Align;
+import com.lpoo.zombieinvaders.Logic.Entities.EndScreenModel;
 import com.lpoo.zombieinvaders.ZombieInvaders;
+
+import java.util.ArrayList;
 //import com.sun.xml.internal.messaging.saaj.packaging.mime.util.BEncoderStream;
 
 /**
@@ -18,35 +21,63 @@ import com.lpoo.zombieinvaders.ZombieInvaders;
 
 public class EndScreen implements Screen {
 
-    int myscore, bestScore;
-    ZombieInvaders game;
+    GlyphLayout replayShape;
+    GlyphLayout backMenuShape;
 
-    Texture theEndflag;
-    BitmapFont fontScore;
 
-    private static final int FLAG_WIDTH = 350;
-    private static final int FLAG_HEIGHT = 100;
+    private float replayA;
+    private float replayB;
+    private float backMenuA;
+    private float backMenuB;
+
+    float clickA;
+    float clickB;
+
+
+    private EndScreenModel endScreenModel;
+    ZombieInvaders game ;
+
 
     public EndScreen(ZombieInvaders game, int myscore){
+
+        endScreenModel = new EndScreenModel(game, myscore);
+
         this.game = game;
-        this.myscore = myscore;
 
-        //Para obter o melhor score
-        Preferences conf = Gdx.app.getPreferences("zombieinvaders");
-        this.bestScore = conf.getInteger("bestScore", 0);
+    }
 
+    public int optionMenu(){
 
-        //Verificar se o score bate o melhorScore
+        replayShape = new GlyphLayout(endScreenModel.getFontScore(), "Play Again");
+        backMenuShape = new GlyphLayout(endScreenModel.getFontScore(), "Return Menu");
 
-        if(myscore > bestScore){
-            conf.putInteger("bestScore", 0);
-            conf.flush();
+        replayA = ZombieInvaders.WIDTH / 2 - replayShape.width / 2;
+        replayB = ZombieInvaders.HEIGHT / 2 - replayShape.height / 2;
+        backMenuA = ZombieInvaders.WIDTH / 2 - backMenuShape.width / 2;
+        backMenuB = ZombieInvaders.HEIGHT / 2 - backMenuShape.height / 2 - replayShape.height - 15;
+
+        clickA = game.mycam.getInputInGameWorld().x;
+        clickB = ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y;
+
+        if (Gdx.input.isTouched()) {
+            if (clickA > replayA && clickA < replayA + replayShape.width && clickB > replayB - replayShape.height && clickB < replayB) {
+                this.dispose();
+                game.batch.end();
+                game.setScreen(new GameScreen(game));
+                return 1;
+            }
+
+            if (clickA > backMenuA && clickA < backMenuA + backMenuShape.width && clickB > backMenuB - backMenuShape.height && clickB < backMenuB) {
+                this.dispose();
+                game.batch.end();
+                game.setScreen(new GameMenu(game));
+                return 1;
+            }
+
         }
 
+        return 0;
 
-        //Carregar texturas e fontes
-        theEndflag = new Texture("game_over.png");
-        fontScore = new BitmapFont(Gdx.files.internal("score.fnt"));
     }
 
     @Override
@@ -61,46 +92,20 @@ public class EndScreen implements Screen {
 
         game.batch.begin();
 
-        game.batch.draw(theEndflag, ZombieInvaders.WIDTH / 2 - FLAG_WIDTH
-        / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - 15, FLAG_WIDTH, FLAG_HEIGHT);
+        game.batch.draw(endScreenModel.getTheEndflag(), ZombieInvaders.WIDTH / 2 - endScreenModel.FLAG_WIDTH
+        / 2, ZombieInvaders.HEIGHT - endScreenModel.FLAG_HEIGHT - 15, endScreenModel.FLAG_WIDTH, endScreenModel.FLAG_HEIGHT);
 
-        GlyphLayout scoreShape = new GlyphLayout(fontScore, "Score: \n" + myscore, Color.WHITE, 0, Align.left, false);
-        GlyphLayout bestScoreShape = new GlyphLayout(fontScore, "Best Score: \n" + myscore, Color.WHITE, 0, Align.left, false);
+        GlyphLayout scoreShape = new GlyphLayout(endScreenModel.getFontScore(), "Score: \n" + endScreenModel.getMyscore(), Color.WHITE, 0, Align.left, false);
+        GlyphLayout bestScoreShape = new GlyphLayout(endScreenModel.getFontScore(), "Max Score: \n" + endScreenModel.getBestScore(), Color.WHITE, 0, Align.left, false);
 
-        fontScore.draw(game.batch, scoreShape, ZombieInvaders.WIDTH / 2 - scoreShape.width / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - 15 * 2 );
-        fontScore.draw(game.batch, bestScoreShape, ZombieInvaders.WIDTH / 2 - bestScoreShape.width / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - scoreShape.height - 15 * 3 );
+        endScreenModel.getFontScore().draw(game.batch, scoreShape, ZombieInvaders.WIDTH / 2 - scoreShape.width / 2, ZombieInvaders.HEIGHT - endScreenModel.FLAG_HEIGHT - 15 * 2 );
+        endScreenModel.getFontScore().draw(game.batch, bestScoreShape, ZombieInvaders.WIDTH / 2 - bestScoreShape.width / 2, ZombieInvaders.HEIGHT - endScreenModel.FLAG_HEIGHT - scoreShape.height - 15 * 3 );
 
-        GlyphLayout replayShape = new GlyphLayout(fontScore, "Replay");
-        GlyphLayout backMenuShape = new GlyphLayout(fontScore, "Back to Menu");
+        if( optionMenu() == 1)
+            return;
 
-        float replayA = ZombieInvaders.WIDTH / 2 - replayShape.width / 2;
-        float replayB = ZombieInvaders.HEIGHT / 2 - replayShape.height / 2;
-        float backMenuA = ZombieInvaders.WIDTH / 2 - backMenuShape.width / 2;
-        float backMenuB = ZombieInvaders.HEIGHT / 2 - backMenuShape.height / 2 - replayShape.height - 15;
-
-        float clickA = game.mycam.getInputInGameWorld().x;
-        float clickB = ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y;
-
-
-        if (Gdx.input.isTouched()) {
-            if (clickA > replayA && clickA < replayA + replayShape.width && clickB > replayB - replayShape.height && clickB < replayB) {
-                this.dispose();
-                game.batch.end();
-                game.setScreen(new GameScreen(game));
-                return;
-            }
-
-            if (clickA > backMenuA && clickA < backMenuA + backMenuShape.width && clickB > backMenuB - backMenuShape.height && clickB < backMenuB) {
-                this.dispose();
-                game.batch.end();
-                game.setScreen(new GameMenu(game));
-                return;
-            }
-
-        }
-
-        fontScore.draw(game.batch, replayShape, replayA,replayB);
-        fontScore.draw(game.batch, backMenuShape, backMenuA, backMenuB);
+        endScreenModel.getFontScore().draw(game.batch, replayShape, replayA,replayB);
+        endScreenModel.getFontScore().draw(game.batch, backMenuShape, backMenuA, backMenuB);
 
         game.batch.end();
     }
