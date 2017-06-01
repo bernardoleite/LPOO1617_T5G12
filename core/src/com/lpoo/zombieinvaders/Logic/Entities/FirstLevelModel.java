@@ -22,7 +22,7 @@ public class FirstLevelModel {
 
     CharacterModel person;
 
-    public boolean areWeTesting = true;
+    public boolean areWeTesting = false;
 
     public static final float TESTING_VELOCITY = 3f;
 
