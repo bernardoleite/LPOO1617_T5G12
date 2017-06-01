@@ -111,6 +111,7 @@ project(":core") {
     apply plugin: "java"
 
     sourceSets.test.java.srcDirs = ["/test"]
+
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
@@ -128,3 +129,4 @@ project(":core") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+

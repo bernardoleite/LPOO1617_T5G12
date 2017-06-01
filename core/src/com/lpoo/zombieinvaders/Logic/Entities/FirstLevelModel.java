@@ -22,6 +22,10 @@ public class FirstLevelModel {
 
     CharacterModel person;
 
+    public boolean areWeTesting = true;
+
+    public static final float TESTING_VELOCITY = 3f;
+
     public static final float ZOMBIE_TIMER_SPAWN_MIN = 0.3f;
     public static final float ZOMBIE_TIMER_SPAWN_MAX = 0.6f;
 
@@ -31,9 +35,12 @@ public class FirstLevelModel {
     public static final float MORANGOS_TIMER_SPAWN_MIN = 0.1f;
     public static final float MORANGOS_TIMER_SPAWN_MAX = 13f;
 
+    public  boolean zombie_bullet = false;
+    public  boolean morango_person = false;
+
     private Music music;
 
-    Animation<TextureRegion>[] rolls;
+    //Animation<TextureRegion>[] rolls;
 
 
     int roll;
@@ -54,12 +61,12 @@ public class FirstLevelModel {
     ArrayList<MorangoModel> morangos;
 
     ShapeCollision healthBar;
-
+/*
     BitmapFont myscore;
     BitmapFont mybananas;
     BitmapFont mylife;
-
-    Texture whiteshape;
+*/
+    //Texture whiteshape;
 
     int thescore;
     int nrbananas = 20;
@@ -87,12 +94,7 @@ public class FirstLevelModel {
         bananas = new ArrayList<BananasModel>();
         morangos = new ArrayList<MorangoModel>();
 
-        myscore = new BitmapFont(Gdx.files.internal("score.fnt"));
-        mybananas = new BitmapFont(Gdx.files.internal("score.fnt"));
-        mylife = new BitmapFont(Gdx.files.internal("score.fnt"));
-
         healthBar = new ShapeCollision(0, 0, person.PERSON_WIDTH, person.PERSON_HEIGHT );
-        whiteshape = new Texture("blank.png");
 
         thescore = 0;
 
@@ -103,13 +105,13 @@ public class FirstLevelModel {
 
         roll = 2;
         rollTimer = 0;
-        rolls = new Animation[5];
+      //  rolls = new Animation[5];
 
-        TextureRegion[][] rollSpriteSheet = TextureRegion.split(new Texture("rick2.png"), person.PERSON_WIDTH_PIXEL, person.PERSON_HEIGHT_PIXEL);
+        //TextureRegion[][] rollSpriteSheet = TextureRegion.split(new Texture("rick2.png"), person.PERSON_WIDTH_PIXEL, person.PERSON_HEIGHT_PIXEL);
 
         //rolls[0] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[2]);//All left
         //rolls[1] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[1]);
-        rolls[2] = new Animation(person.PERSON_ANIMATION_SPEED, rollSpriteSheet[0]);//No tilt
+      //  rolls[2] = new Animation(person.PERSON_ANIMATION_SPEED, rollSpriteSheet[0]);//No tilt
         //rolls[3] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[3]);
         //rolls[4] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[4]);//Right
 
@@ -240,7 +242,12 @@ public class FirstLevelModel {
     public void treatLeftMovement(float delta){
 
         if (model.isLeft()) {
-            person.x -= person.SPEED * Gdx.graphics.getDeltaTime() ;
+
+            if(areWeTesting)
+            {
+                person.x -= TESTING_VELOCITY;
+            }
+            else person.x -= person.SPEED * Gdx.graphics.getDeltaTime() ;
 
             if (person.x < 0)
                  person.x = 0;
@@ -252,7 +259,13 @@ public class FirstLevelModel {
             }
 
             //Update roll
-            rollTimer -= Gdx.graphics.getDeltaTime();
+            if(areWeTesting)
+            {
+                rollTimer -= TESTING_VELOCITY;
+            }
+            else rollTimer -= Gdx.graphics.getDeltaTime() ;
+
+
             if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll > 0) {
                 rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
                 // roll--;
@@ -270,10 +283,14 @@ public class FirstLevelModel {
     }
 
 
-    private void treatRightMovement(float delta) {
+    public void treatRightMovement(float delta) {
 
         if (model.isRight() ) {
-            person.x += person.SPEED * Gdx.graphics.getDeltaTime();
+            if(areWeTesting)
+            {
+                person.x += TESTING_VELOCITY;
+            }
+            else person.x += person.SPEED * Gdx.graphics.getDeltaTime() ;
 
 
             if (person.x + person.PERSON_WIDTH > ZombieInvaders.WIDTH)
@@ -285,7 +302,11 @@ public class FirstLevelModel {
             }
 
             //Update roll
-            rollTimer += Gdx.graphics.getDeltaTime();
+            if(areWeTesting)
+            {
+                rollTimer += TESTING_VELOCITY;
+            }
+            else rollTimer += Gdx.graphics.getDeltaTime() ;
             if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll < 4) {
                 rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
                 //roll++;
@@ -307,6 +328,7 @@ public class FirstLevelModel {
         for (BulletModel bullet: bullets){
             for (ZombieModel zombie: zombies){
                 if (bullet.getShapeCollision().checkCollision(zombie.getCollisionRect())){
+                    zombie_bullet = true;
                     bulletsToRemove.add(bullet);
                     zombiesToRemove.add(zombie);
                     explosions.add(new ExplosionModel(zombie.getXposition(), zombie.getYposition()));
@@ -342,6 +364,7 @@ public class FirstLevelModel {
 
         for( MorangoModel morango: morangos){
             if (morango.getCollisionRect().checkCollision(healthBar)){
+                morango_person = true;
                 morangosToRemove.add(morango);
                 health += 10;
 
@@ -387,14 +410,16 @@ public class FirstLevelModel {
 
         stateTime += delta;
 
+
+
     }
 
 
 
-    public Animation<TextureRegion>[] getRolls(){
+   /* public Animation<TextureRegion>[] getRolls(){
         return rolls;
     }
-
+*/
     public float getStateTime(){
         return stateTime;
     }
@@ -413,18 +438,6 @@ public class FirstLevelModel {
         return explosions;
     }
 
-    public BitmapFont getMyscore(){
-        return myscore;
-    }
-
-    public BitmapFont getMybananas(){
-        return mybananas;
-    }
-
-    public BitmapFont getMylife(){
-        return mylife;
-    }
-
     public int getThescore(){
         return thescore;
     }
@@ -441,10 +454,6 @@ public class FirstLevelModel {
         return roll;
     }
 
-    public Texture getWhiteshape(){
-        return whiteshape;
-    }
-
     public float getx(){
         return person.x;
     }
@@ -452,6 +461,5 @@ public class FirstLevelModel {
     public float gety(){
         return person.y;
     }
-
 
 }

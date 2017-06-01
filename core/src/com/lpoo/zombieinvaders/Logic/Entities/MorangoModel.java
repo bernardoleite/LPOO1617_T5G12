@@ -15,7 +15,7 @@ public class MorangoModel {
     public static final int SPEED = 250;
     public static final int WIDTH = 17;
     public static final int HEIGHT = 19;
-    private static Texture texture;
+
 
     float x, y;
     ShapeCollision rect;
@@ -25,9 +25,6 @@ public class MorangoModel {
         this.x = x;
         this.y = ZombieInvaders.HEIGHT;
         this.rect = new ShapeCollision(x, y, WIDTH, HEIGHT);
-
-        if (texture == null)
-            texture = new Texture("morango.png");
     }
 
     public void update (float deltaTime) {
@@ -44,10 +41,6 @@ public class MorangoModel {
 
     public float getYposition(){
         return y;
-    }
-
-    public void render (SpriteBatch batch) {
-        batch.draw(texture, x, y);
     }
 
     public ShapeCollision getCollisionRect () {

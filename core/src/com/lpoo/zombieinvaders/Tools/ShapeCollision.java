@@ -6,7 +6,7 @@ package com.lpoo.zombieinvaders.Tools;
 
 public class ShapeCollision {
 
-    float x, y;
+    public float x, y;
     int width, height;
 
     public ShapeCollision(float x, float y, int width, int height) {

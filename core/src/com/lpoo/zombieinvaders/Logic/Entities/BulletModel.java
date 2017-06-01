@@ -16,7 +16,7 @@ public class BulletModel {
     public static final int DEFAULT_Y = 40;
     public static final int WIDTH = 3;
     public static final int HEIGHT = 12;
-    private static Texture texture;
+
 
     float x, y;
     ShapeCollision rect;
@@ -28,8 +28,7 @@ public class BulletModel {
 
         this.rect = new ShapeCollision(x, y,WIDTH, HEIGHT);
 
-        if (texture == null)
-            texture = new Texture("banana2.png");
+
     }
 
     public void update (float deltaTime) {
@@ -40,12 +39,18 @@ public class BulletModel {
         rect.move(x,y);
     }
 
-    public void render (SpriteBatch batch) {
-        batch.draw(texture, x, y);
-    }
+
 
 
     public ShapeCollision getShapeCollision(){
         return rect;
+    }
+
+    public float getX(){
+        return x;
+    }
+
+    public float getY(){
+        return y;
     }
 }

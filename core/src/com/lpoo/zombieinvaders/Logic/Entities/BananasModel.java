@@ -14,7 +14,6 @@ public class BananasModel {
     public static final int SPEED = 250;
     public static final int WIDTH = 16;
     public static final int HEIGHT = 16;
-    private static Texture texture;
 
     float x, y;
     ShapeCollision rect;
@@ -24,9 +23,6 @@ public class BananasModel {
         this.x = x;
         this.y = ZombieInvaders.HEIGHT;
         this.rect = new ShapeCollision(x, y, WIDTH, HEIGHT);
-
-        if (texture == null)
-            texture = new Texture("bananas2.png");
     }
 
     public void update (float deltaTime) {
@@ -45,9 +41,6 @@ public class BananasModel {
         return y;
     }
 
-    public void render (SpriteBatch batch) {
-        batch.draw(texture, x, y);
-    }
 
     public ShapeCollision getCollisionRect () {
         return rect;

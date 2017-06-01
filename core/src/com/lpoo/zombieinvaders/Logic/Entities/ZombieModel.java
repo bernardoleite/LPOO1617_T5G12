@@ -15,7 +15,6 @@ public class ZombieModel {
     public static final int SPEED = 250;
     public static final int WIDTH = 36;
     public static final int HEIGHT = 36;
-    private static Texture texture;
 
     float x, y;
     ShapeCollision rect;
@@ -26,8 +25,6 @@ public class ZombieModel {
             this.y = ZombieInvaders.HEIGHT;
         this.rect = new ShapeCollision(x, y, WIDTH, HEIGHT);
 
-        if (texture == null)
-            texture = new Texture("zombie2.png");
     }
 
     public void update (float deltaTime) {
@@ -44,10 +41,6 @@ public class ZombieModel {
 
     public float getYposition(){
         return y;
-    }
-
-    public void render (SpriteBatch batch) {
-        batch.draw(texture, x, y);
     }
 
     public ShapeCollision getCollisionRect () {
