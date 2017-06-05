@@ -16,27 +16,23 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
+        mod.getmodel().treatLeftMovement(1);
 
-        model.treatLeftMovement(1);
+        mod.getmodel().treatRightMovement(1);
 
-        model.treatRightMovement(1);
-
-        float x1 = model.getx();
+        float x1 =  mod.getmodel().getx();
 
         mod.MoveLeft();
 
-        model.treatLeftMovement(1);
+        mod.getmodel().treatLeftMovement(1);
 
-        model.treatRightMovement(1);
+        mod.getmodel().treatRightMovement(1);
 
-        float x2 = model.getx();
+        float x2 =  mod.getmodel().getx();
 
         assertEquals(3, x1-x2, 0);
 
@@ -46,27 +42,23 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
+        mod.getmodel().treatLeftMovement(1);
 
-        model.treatLeftMovement(1);
+        mod.getmodel().treatRightMovement(1);
 
-        model.treatRightMovement(1);
-
-        float x1 = model.getx();
+        float x1 =  mod.getmodel().getx();
 
         mod.MoveRight();
 
-        model.treatLeftMovement(1);
+        mod.getmodel().treatLeftMovement(1);
 
-        model.treatRightMovement(1);
+        mod.getmodel().treatRightMovement(1);
 
-        float x2 = model.getx();
+        float x2 =  mod.getmodel().getx();
 
         assertEquals(3, x2-x1, 0);
 
@@ -76,31 +68,27 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
-
-        assertEquals(0, model.getBullets().size());
+        assertEquals(0,  mod.getmodel().getBullets().size());
 
         mod.Shoot();
 
-        model.shootingCode(1);
+        mod.getmodel().shootingCode(1);
 
-        model.getBullets().get(0).getY();
+        mod.getmodel().getBullets().get(0).getY();
 
-        assertEquals(1, model.getBullets().size());
+        assertEquals(1,  mod.getmodel().getBullets().size());
 
         mod.Shoot();
 
-        model.shootingCode(1);
+        mod.getmodel().shootingCode(1);
 
-        model.getBullets().get(0).getY();
+        mod.getmodel().getBullets().get(0).getY();
 
-        assertEquals(2, model.getBullets().size());
+        assertEquals(2,  mod.getmodel().getBullets().size());
 
     }
 
@@ -108,21 +96,17 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
-
-        assertEquals(20, model.getThenrbananas());
+        assertEquals(20,  mod.getmodel().getThenrbananas());
 
         mod.Shoot();
 
-        model.shootingCode(1);
+        mod.getmodel().shootingCode(1);
 
-        assertEquals(19, model.getThenrbananas());
+        assertEquals(19,  mod.getmodel().getThenrbananas());
 
     }
 
@@ -130,47 +114,42 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
+        mod.getmodel().render(1);
 
-        model.render(1);
-
-       float y1 = model.getZombies().get(0).getYposition();
+        float y1 =  mod.getmodel().getZombies().get(0).getYposition();
 
         assertEquals(470, y1, y1 - 470);
 
-        model.render(1);
+        mod.getmodel().render(1);
 
-        float y2 = model.getZombies().get(0).getYposition();
+        float y2 =  mod.getmodel().getZombies().get(0).getYposition();
 
         assertEquals(220, y2, y2- 220 );
 
     }
 
+
     public void testZombiePositionX(){
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.render(1);
+        mod.getmodel().render(1);
 
-        float x1 = model.getZombies().get(0).getXposition();
+        float x1 =  mod.getmodel().getZombies().get(0).getXposition();
 
         assertEquals(x1, x1, x1 - x1);
 
-        model.render(1);
+        mod.getmodel().render(1);
 
-        float x2 = model.getZombies().get(0).getXposition();
+        float x2 =  mod.getmodel().getZombies().get(0).getXposition();
 
         assertEquals(x2, x1,x2- x1 );
 
@@ -180,20 +159,15 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.render(10);
+        mod.getmodel().render(10);
 
-        float y1 = model.getBananas().get(0).getYposition();
+        float y1 =  mod.getmodel().getBananas().get(0).getYposition();
 
         assertEquals(-1780, y1, y1 - (-1780));
-
-
-
 
     }
 
@@ -203,15 +177,11 @@ public class TestSuit extends TestCase{
 
         ZombieInvaders game = new ZombieInvaders();
 
-        FirstLevelModel model;
-
         GameModel mod = new GameModel(game);
 
-        model = new FirstLevelModel(game, mod);
+        mod.getmodel().thebool = true;
 
-        model.areWeTesting = true;
-
-        assertEquals(100, model.getHealth());
+        assertEquals(100,  mod.getmodel().getHealth());
 
     }
 

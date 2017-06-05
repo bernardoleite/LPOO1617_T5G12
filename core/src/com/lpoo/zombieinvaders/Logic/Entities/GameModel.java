@@ -28,6 +28,10 @@ private FirstLevelModel firstLevel;
     public boolean moveLeft = false;
     public boolean shooting = false;
 
+    /**
+     *
+     * @param game is the main object from Libgdx Class generator of game
+     */
     public GameModel(ZombieInvaders game){
         this.game = game;
 
@@ -36,10 +40,17 @@ private FirstLevelModel firstLevel;
 
     }
 
+    /**
+     *
+     * @return the current level
+     */
     public FirstLevelModel getLevel(){
         return firstLevel;
     }
 
+    /**
+     * This function allows the right movement
+     */
 
     public void MoveRight(){
 
@@ -48,6 +59,9 @@ private FirstLevelModel firstLevel;
         this.shooting = false;
     }
 
+    /**
+     * This function allows the left movement
+     */
     public void MoveLeft(){
 
         this.moveRight = false;
@@ -55,6 +69,9 @@ private FirstLevelModel firstLevel;
         this.shooting = false;
     }
 
+    /**
+     * This function allows the shooting
+     */
     public void Shoot(){
 
         this.moveRight = false;
@@ -63,9 +80,13 @@ private FirstLevelModel firstLevel;
     }
 
 
+    /**
+     *
+     * @return catches all kind of events
+     */
     public boolean isRight() {
 
-        if (firstLevel.areWeTesting == true){
+        if (firstLevel.thebool == true){
             if (moveRight == true )
                 return true;
 
@@ -75,9 +96,13 @@ private FirstLevelModel firstLevel;
         return Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.getAccelerometerX() < 0 || (Gdx.input.isTouched() && game.mycam.getInputInGameWorld().x >= ZombieInvaders.WIDTH / 2);
     }
 
+    /**
+     *
+     * @return catches all kind of events
+     */
     public boolean isLeft(){
 
-        if (firstLevel.areWeTesting == true){
+        if (firstLevel.thebool == true){
             if (moveLeft == true )
                 return true;
 
@@ -88,9 +113,13 @@ private FirstLevelModel firstLevel;
         return Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.getAccelerometerX() > 0 || (Gdx.input.isTouched() && game.mycam.getInputInGameWorld().x < ZombieInvaders.WIDTH / 2);
     }
 
+    /**
+     *
+     * @return catches all kind of events
+     */
     public boolean isJustRight(){
 
-        if (firstLevel.areWeTesting == true){
+        if (firstLevel.thebool == true){
             if (moveRight == true )
                 return true;
 
@@ -101,9 +130,13 @@ private FirstLevelModel firstLevel;
         return Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || (Gdx.input.justTouched() && game.mycam.getInputInGameWorld().x >= ZombieInvaders.WIDTH / 2);
     }
 
+    /**
+     *
+     * @return catches all kind of events
+     */
     public boolean isJustLeft(){
 
-        if (firstLevel.areWeTesting == true){
+        if (firstLevel.thebool == true){
             if (moveLeft == true )
                 return true;
 
@@ -114,9 +147,13 @@ private FirstLevelModel firstLevel;
         return Gdx.input.isKeyJustPressed(Input.Keys.LEFT) || (Gdx.input.justTouched() && game.mycam.getInputInGameWorld().x < ZombieInvaders.WIDTH / 2);
     }
 
+    /**
+     *
+     * @return catches all kind of events
+     */
     public boolean isShooting(){
 
-        if (firstLevel.areWeTesting == true){
+        if (firstLevel.thebool == true){
             if (shooting == true )
                 return true;
 
@@ -124,6 +161,10 @@ private FirstLevelModel firstLevel;
         }
 
         return (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isTouched());
+    }
+
+    public FirstLevelModel getmodel(){
+        return firstLevel;
     }
 
 

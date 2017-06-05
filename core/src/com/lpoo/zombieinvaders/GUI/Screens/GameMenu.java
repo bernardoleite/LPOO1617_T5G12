@@ -18,6 +18,8 @@ public class GameMenu implements Screen {
     private static final int PLAY_BUTTON_HEIGHT = 120;
     private static final int EXIT_BUTTON_Y = 100;
     private static final int PLAY_BUTTON_Y = 230;
+    public static final int FLAG_WIDTH = 350;
+    public static final int FLAG_HEIGHT = 100;
 
     ZombieInvaders game;
 
@@ -25,6 +27,7 @@ public class GameMenu implements Screen {
     Texture playButtonInactive;
     Texture exitButtonActive;
     Texture exitButtonInactive;
+    Texture title, background ;
 
     public GameMenu (ZombieInvaders game) {
         this.game = game;
@@ -32,6 +35,8 @@ public class GameMenu implements Screen {
         playButtonInactive = new Texture("play_button_inactive.png");
         exitButtonActive = new Texture("exit_button_active.png");
         exitButtonInactive = new Texture("exit_button_inactive.png");
+        title = new Texture("title.png");
+        background = new Texture("background.jpg");
     }
 
     @Override
@@ -46,7 +51,9 @@ public class GameMenu implements Screen {
         Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-
+        game.batch.draw(background,0,0);
+        game.batch.draw(title, ZombieInvaders.WIDTH / 2 - FLAG_WIDTH
+                / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - 15, FLAG_WIDTH, FLAG_HEIGHT);
 
         int x = ZombieInvaders.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2;
         if (game.mycam.getInputInGameWorld().x < x + EXIT_BUTTON_WIDTH && game.mycam.getInputInGameWorld().x > x && ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT && ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y > EXIT_BUTTON_Y) {

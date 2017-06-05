@@ -22,8 +22,12 @@ public class BulletModel {
     ShapeCollision rect;
     public boolean remove = false;
 
+    /**
+     *
+     * @param x is where bullet will be generadted
+     */
     public BulletModel (float x) {
-        this.x = x;
+        this.x = x + 30;
         this.y = DEFAULT_Y;
 
         this.rect = new ShapeCollision(x, y,WIDTH, HEIGHT);
@@ -31,6 +35,10 @@ public class BulletModel {
 
     }
 
+    /**
+     *
+     * @param deltaTime is a value of time that is constantly being updated
+     */
     public void update (float deltaTime) {
         y += SPEED * deltaTime;
         if (y > ZombieInvaders.HEIGHT)
@@ -40,16 +48,26 @@ public class BulletModel {
     }
 
 
-
-
+    /**
+     *
+     * @return rectangle box for collision purposes
+     */
     public ShapeCollision getShapeCollision(){
         return rect;
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getX(){
         return x;
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getY(){
         return y;
     }

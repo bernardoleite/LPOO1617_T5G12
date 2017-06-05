@@ -19,12 +19,20 @@ public class BananasModel {
     ShapeCollision rect;
     public boolean remove = false;
 
+    /**
+     *
+     * @param x is where the banana will be generated
+     */
     public BananasModel (float x) {
         this.x = x;
         this.y = ZombieInvaders.HEIGHT;
         this.rect = new ShapeCollision(x, y, WIDTH, HEIGHT);
     }
 
+    /**
+     *
+     * @param deltaTime is a value of time that is constantly updated
+     */
     public void update (float deltaTime) {
         y -= SPEED * deltaTime;
         if (y < -HEIGHT)
@@ -33,15 +41,27 @@ public class BananasModel {
         rect.move(x, y);
     }
 
+    /**
+     *
+     * @return the position
+     */
     public float getXposition(){
         return x;
     }
 
+    /**
+     *
+     * @return the position
+     */
     public float getYposition(){
         return y;
     }
 
 
+    /**
+     *
+     * @return the virtual box that has the object for collision purposes
+     */
     public ShapeCollision getCollisionRect () {
         return rect;
     }

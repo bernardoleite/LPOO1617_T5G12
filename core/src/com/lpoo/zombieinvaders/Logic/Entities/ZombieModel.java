@@ -20,6 +20,10 @@ public class ZombieModel {
     ShapeCollision rect;
     public boolean remove = false;
 
+    /**
+     * Constructor to create a Zombie
+     * @param x is where the zombie will be generated
+     */
     public ZombieModel (float x) {
         this.x = x;
             this.y = ZombieInvaders.HEIGHT;
@@ -27,6 +31,10 @@ public class ZombieModel {
 
     }
 
+    /**
+     * Updates time
+     * @param deltaTime is a value of time that is constantly being updated
+     */
     public void update (float deltaTime) {
         y -= SPEED * deltaTime;
         if (y < -HEIGHT)
@@ -35,14 +43,26 @@ public class ZombieModel {
         rect.move(x, y);
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getXposition(){
         return x;
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getYposition(){
         return y;
     }
 
+    /**
+     *
+     * @return virtual box for collision purposes
+     */
     public ShapeCollision getCollisionRect () {
         return rect;
     }

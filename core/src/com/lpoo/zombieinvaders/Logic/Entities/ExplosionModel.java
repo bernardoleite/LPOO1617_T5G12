@@ -22,6 +22,11 @@ public class ExplosionModel {
     public boolean remove = false;
 
 
+    /**
+     * Constructor to generator an explosion
+     * @param x position
+     * @param y position
+     */
     public ExplosionModel(float x, float y){
         this.x = x - OFFSET;
         this.y = y - OFFSET;
@@ -32,6 +37,10 @@ public class ExplosionModel {
 
     }
 
+    /**
+     * Update constantly
+     * @param deltaTime is a value that is constantly being updated
+     */
     public void update (float deltaTime){
         timestate += deltaTime;
         if(explosion.isAnimationFinished(timestate)){
@@ -39,6 +48,10 @@ public class ExplosionModel {
         }
     }
 
+    /**
+     *
+     * @param batch is for animation purposes
+     */
     public void render (SpriteBatch batch){
         batch.draw(explosion.getKeyFrame(timestate), x , y);
     }

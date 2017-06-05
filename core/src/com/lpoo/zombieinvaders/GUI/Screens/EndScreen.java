@@ -37,12 +37,16 @@ public class EndScreen implements Screen {
     private EndScreenModel endScreenModel;
     ZombieInvaders game ;
 
+    Texture  background ;
+
 
     public EndScreen(ZombieInvaders game, int myscore){
 
         endScreenModel = new EndScreenModel(game, myscore);
 
         this.game = game;
+
+        background = new Texture("background.jpg");
 
     }
 
@@ -91,6 +95,7 @@ public class EndScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
+        game.batch.draw(background,0,0);
 
         game.batch.draw(endScreenModel.getTheEndflag(), ZombieInvaders.WIDTH / 2 - endScreenModel.FLAG_WIDTH
         / 2, ZombieInvaders.HEIGHT - endScreenModel.FLAG_HEIGHT - 15, endScreenModel.FLAG_WIDTH, endScreenModel.FLAG_HEIGHT);

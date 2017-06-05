@@ -27,6 +27,9 @@ public class CharacterModel {
 
     float shootTimer;
 
+    /**
+     * Constructor for the player
+     */
     public CharacterModel(){
 
         y = 15;
@@ -36,18 +39,35 @@ public class CharacterModel {
 
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getxposition(){
         return x;
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getyposition(){
         return y;
     }
 
+
+    /**
+     *
+     * @return time between two shots
+     */
     public float getshootTimer(){
         return shootTimer;
     }
 
+    /**
+     *
+     * @return animation timer
+     */
     public float getRollTimer(){
         return rollTimer;
     }

@@ -23,6 +23,11 @@ public class EndScreenModel {
     public static final int FLAG_HEIGHT = 100;
 
 
+    /**
+     *
+     * @param game
+     * @param myscore
+     */
     public EndScreenModel(ZombieInvaders game, int myscore){
 
         this.game = game;
@@ -47,22 +52,41 @@ public class EndScreenModel {
 
     }
 
+    /**
+     *
+     */
     public void updateOptions(){
 
     }
 
+    /**
+     *
+     * @return the current score
+     */
     public int getMyscore(){
         return myscore;
     }
 
+    /**
+     *
+     * @return the best score until this moment
+     */
     public int getBestScore(){
         return bestScore;
     }
 
+    /**
+     *
+     * @return the texture of GameOver
+     */
     public Texture getTheEndflag(){
         return theEndflag;
     }
 
+    /**
+     *
+     * @return the font to write things on screen
+     */
     public BitmapFont getFontScore(){
         return fontScore;
     }

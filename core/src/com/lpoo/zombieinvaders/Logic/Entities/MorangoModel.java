@@ -21,12 +21,20 @@ public class MorangoModel {
     ShapeCollision rect;
     public boolean remove = false;
 
+    /**
+     *
+     * @param x is where the Morango will be generated
+     */
     public MorangoModel (float x) {
         this.x = x;
         this.y = ZombieInvaders.HEIGHT;
         this.rect = new ShapeCollision(x, y, WIDTH, HEIGHT);
     }
 
+    /**
+     *
+     * @param deltaTime is the value of time that is constantly being updated
+     */
     public void update (float deltaTime) {
         y -= SPEED * deltaTime;
         if (y < -HEIGHT)
@@ -35,14 +43,26 @@ public class MorangoModel {
         rect.move(x, y);
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getXposition(){
         return x;
     }
 
+    /**
+     *
+     * @return position
+     */
     public float getYposition(){
         return y;
     }
 
+    /**
+     *
+     * @return virtual box for collision purposes
+     */
     public ShapeCollision getCollisionRect () {
         return rect;
     }
