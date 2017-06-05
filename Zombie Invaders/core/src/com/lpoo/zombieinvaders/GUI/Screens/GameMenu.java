@@ -52,10 +52,10 @@ public class GameMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
         game.batch.draw(background,0,0);
-        game.batch.draw(title, ZombieInvaders.WIDTH / 2 - FLAG_WIDTH
-                / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - 15, FLAG_WIDTH, FLAG_HEIGHT);
+        game.batch.draw(title, ZombieInvaders.WIDTH / 2 - FLAG_WIDTH / 2, ZombieInvaders.HEIGHT - FLAG_HEIGHT - 15, FLAG_WIDTH, FLAG_HEIGHT);
 
         int x = ZombieInvaders.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2;
+
         if (game.mycam.getInputInGameWorld().x < x + EXIT_BUTTON_WIDTH && game.mycam.getInputInGameWorld().x > x && ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT && ZombieInvaders.HEIGHT - game.mycam.getInputInGameWorld().y > EXIT_BUTTON_Y) {
             game.batch.draw(exitButtonActive, x, EXIT_BUTTON_Y, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
             if (Gdx.input.isTouched()) {

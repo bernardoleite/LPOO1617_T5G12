@@ -61,12 +61,6 @@ public class FirstLevelModel {
     ArrayList<MorangoModel> morangos;
 
     ShapeCollision healthBar;
-/*
-    BitmapFont myscore;
-    BitmapFont mybananas;
-    BitmapFont mylife;
-*/
-    //Texture whiteshape;
 
     int thescore;
     int nrbananas = 20;
@@ -83,10 +77,10 @@ public class FirstLevelModel {
 
         person = new CharacterModel();
 
-
+        if(thebool){
          music = ZombieInvaders.manager.get("arcade.ogg", Music.class);
         music.setLooping(true);
-        music.play();
+        music.play();}
 
         this.model = model;
         this.game = game;
@@ -109,15 +103,7 @@ public class FirstLevelModel {
 
         roll = 2;
         rollTimer = 0;
-      //  rolls = new Animation[5];
 
-        //TextureRegion[][] rollSpriteSheet = TextureRegion.split(new Texture("rick2.png"), person.PERSON_WIDTH_PIXEL, person.PERSON_HEIGHT_PIXEL);
-
-        //rolls[0] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[2]);//All left
-        //rolls[1] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[1]);
-      //  rolls[2] = new Animation(person.PERSON_ANIMATION_SPEED, rollSpriteSheet[0]);//No tilt
-        //rolls[3] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[3]);
-        //rolls[4] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[4]);//Right
 
 
     }
@@ -134,22 +120,11 @@ public class FirstLevelModel {
         if (model.isShooting() && person.shootTimer >= person.SHOOT_WAIT_TIME && nrbananas >= 0) {
             person.shootTimer = 0;
 
-            int offset = 4;
-            if (roll == 1 || roll == 3)//Slightly tilted
-                offset = 8;
-
-            if (roll == 0 || roll == 4)//Fully tilted
-                offset = 16;
-
-
                 nrbananas--;
 
 
-
-
             bullets.add(new BulletModel(person.getxposition()  ));
-            //bullets.add(new BulletModel(person.getxposition() + offset));
-            //bullets.add(new BulletModel(x + PERSON_WIDTH - offset));
+
 
         }
 
@@ -199,7 +174,6 @@ public class FirstLevelModel {
     }
 
 
-
     ArrayList<MorangoModel> morangosToRemove = new ArrayList<MorangoModel>();
 
     /**
@@ -210,12 +184,9 @@ public class FirstLevelModel {
         //Update Morangos
         for (MorangoModel morango: morangos) {
             morango.update(delta);
-             //if(morango.remove)
-              //morangosToRemove.add(morango);
 
         }
     }
-
 
     ArrayList<BananasModel> bananasToRemove = new ArrayList<BananasModel>();
     /**
@@ -226,8 +197,6 @@ public class FirstLevelModel {
         //Update Bananas
         for (BananasModel banana: bananas) {
             banana.update(delta);
-           // if(banana.remove)
-              //  bananasToRemove.add(banana);
 
         }
     }
@@ -281,7 +250,6 @@ public class FirstLevelModel {
         }
         explosions.removeAll(explosionToRemove);
     }
-
     /**
      * This method deals with the movement to the left
      * @param delta is a value of time that is constanty being updated
@@ -298,37 +266,9 @@ public class FirstLevelModel {
 
             if (person.x < 0)
                  person.x = 0;
-
-            //Update roll if button just clicked
-            if (model.isJustLeft() && !model.isRight() && roll > 0) {
-                rollTimer = 0;
-                //roll--;
-            }
-
-            //Update roll
-            if(thebool)
-            {
-                rollTimer -= TESTING_VELOCITY;
-            }
-            else rollTimer -= Gdx.graphics.getDeltaTime() ;
-
-
-            if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll > 0) {
-                rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
-                // roll--;
-            }
-        } else {
-            if (roll < 2) {
-                //Update roll to make it go back to center
-                rollTimer += Gdx.graphics.getDeltaTime();
-                if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll < 4) {
-                    rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
-                    // roll++;
-                }
-            }
         }
-    }
 
+    }
     /**
      * This method deals with the movement to the right
      * @param delta is a value of time that is constanty being updated
@@ -342,35 +282,11 @@ public class FirstLevelModel {
             }
             else person.x += person.SPEED * Gdx.graphics.getDeltaTime() ;
 
-
             if (person.x + person.PERSON_WIDTH > ZombieInvaders.WIDTH)
                 person.x = ZombieInvaders.WIDTH - person.PERSON_WIDTH;
 
-            if (model.isJustRight() && !model.isLeft() && roll > 0) {
-                rollTimer = 0;
-                // roll--;
-            }
-
-            //Update roll
-            if(thebool)
-            {
-                rollTimer += TESTING_VELOCITY;
-            }
-            else rollTimer += Gdx.graphics.getDeltaTime() ;
-            if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll < 4) {
-                rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
-                //roll++;
-            }
-        } else {
-            if (roll > 2) {
-                //Update roll
-                rollTimer -= Gdx.graphics.getDeltaTime();
-                if (Math.abs(rollTimer) > person.ROLL_TIMER_SWITCH_TIME && roll > 0) {
-                    rollTimer -= person.ROLL_TIMER_SWITCH_TIME;
-                    // roll--;
-                }
-            }
         }
+
     }
 
     /**
@@ -474,16 +390,7 @@ public class FirstLevelModel {
         stateTime += delta;
 
 
-
     }
-
-
-
-   /* public Animation<TextureRegion>[] getRolls(){
-        return rolls;
-    }
-*/
-
     /**
      *
      * @return the state time

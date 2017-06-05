@@ -47,6 +47,7 @@ public class ZombieInvaders extends Game {
 	@Override
 	public void render () {
 		batch.setProjectionMatrix(mycam.combined());
+
 		super.render();
 	}
 
