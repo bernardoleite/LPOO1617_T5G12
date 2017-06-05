@@ -11,17 +11,11 @@ public class ShapeCollision {
 
     public ShapeCollision(float x, float y, int width, int height) {
 
-        this.x = x;
-        this.y = y;
         this.width = width;
         this.height = height;
-    }
-
-    public void move(float x, float y) {
         this.x = x;
         this.y = y;
     }
-
 
     //funcao que faz o check da colisão (imaginar colisão entre retangulos)
     public boolean checkCollision (ShapeCollision rect){
@@ -30,6 +24,12 @@ public class ShapeCollision {
                 x + width > rect.x &&
                 y + height > rect.y;
     }
+
+    public void move(float x, float y) {
+        this.x = x; this.y = y;
+    }
+
+
 
 
 }

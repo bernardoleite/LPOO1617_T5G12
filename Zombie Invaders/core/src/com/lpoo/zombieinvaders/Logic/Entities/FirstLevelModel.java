@@ -40,11 +40,6 @@ public class FirstLevelModel {
 
     private Music music;
 
-    //Animation<TextureRegion>[] rolls;
-
-
-    int roll;
-    float rollTimer;
     float stateTime;
     float timerBetweenZombieSpawn;
     float timerBetweenBananasSpawn;
@@ -77,11 +72,6 @@ public class FirstLevelModel {
 
         person = new CharacterModel();
 
-        if(thebool){
-         music = ZombieInvaders.manager.get("arcade.ogg", Music.class);
-        music.setLooping(true);
-        music.play();}
-
         this.model = model;
         this.game = game;
 
@@ -101,9 +91,6 @@ public class FirstLevelModel {
         timerBetweenBananasSpawn = random.nextFloat() * (BANANAS_TIMER_SPAWN_MAX - BANANAS_TIMER_SPAWN_MIN) + BANANAS_TIMER_SPAWN_MIN;
         timerBetweenMorangosSpawn = random.nextFloat() * (MORANGOS_TIMER_SPAWN_MAX - MORANGOS_TIMER_SPAWN_MIN) + MORANGOS_TIMER_SPAWN_MIN;
 
-        roll = 2;
-        rollTimer = 0;
-
 
 
     }
@@ -117,11 +104,10 @@ public class FirstLevelModel {
 
         //Shooting code
         person.shootTimer += delta;
-        if (model.isShooting() && person.shootTimer >= person.SHOOT_WAIT_TIME && nrbananas >= 0) {
+        if (model.isShooting() && person.shootTimer >= person.SHOOT_WAIT_TIME && nrbananas >= 1) {
             person.shootTimer = 0;
 
-                nrbananas--;
-
+            nrbananas--;
 
             bullets.add(new BulletModel(person.getxposition()  ));
 
@@ -360,6 +346,12 @@ public class FirstLevelModel {
      */
     public void render (float delta) {
 
+        if(thebool == false){
+            music = ZombieInvaders.manager.get("arcade.ogg", Music.class);
+            music.setLooping(true);
+            music.play();}
+
+
         shootingCode(delta);
 
         spawnZombies(delta);
@@ -457,13 +449,6 @@ public class FirstLevelModel {
         return health;
     }
 
-    /**
-     *
-     * @return position of the animations array
-     */
-    public int getRoll(){
-        return roll;
-    }
 
     /**
      *
