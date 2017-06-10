@@ -13,7 +13,7 @@ import com.lpoo.zombieinvaders.ZombieInvaders;
 public class EndScreenModel {
 
 
-    int myscore, bestScore;
+    int myscore, bestScore ;
     ZombieInvaders game;
 
     Texture theEndflag;

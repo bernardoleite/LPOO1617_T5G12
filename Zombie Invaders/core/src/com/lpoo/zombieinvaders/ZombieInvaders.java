@@ -21,11 +21,14 @@ public class ZombieInvaders extends Game {
 	public static final int HEIGHT = 720;
 	public static boolean MOBILE = false;
 
+	public boolean STAND = true;
+
 	public SpriteBatch batch;
 
 	public static AssetManager manager;
 
 	public ViewCamera mycam;
+
 
 	@Override
 	public void create () {
@@ -41,7 +44,13 @@ public class ZombieInvaders extends Game {
 		manager.load("arcade.ogg", Music.class);
 		manager.finishLoading();
 
+
+
 		this.setScreen(new GameMenu(this));
+
+
+
+
 	}
 
 	@Override

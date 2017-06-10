@@ -110,6 +110,27 @@ public class TestSuit extends TestCase{
 
     }
 
+    @Test(timeout=1000)
+    public void testClocks(){
+
+        ZombieInvaders game = new ZombieInvaders();
+
+        GameModel mod = new GameModel(game);
+
+        mod.getmodel().thebool = true;
+
+        mod.getmodel().render(1);
+
+        boolean flag = false;
+
+        while(flag == false) {
+            mod.getmodel().render(1);
+            if (mod.getmodel().getClocks().size() > 0)
+                flag = true;
+        }
+
+    }
+
     public void testZombiePositionY(){
 
         ZombieInvaders game = new ZombieInvaders();
@@ -122,15 +143,18 @@ public class TestSuit extends TestCase{
 
         float y1 =  mod.getmodel().getZombies().get(0).getYposition();
 
-        assertEquals(470, y1, y1 - 470);
+        mod.getmodel().getClocks();
+
+        assertEquals(420, y1, y1 - 420);
 
         mod.getmodel().render(1);
 
         float y2 =  mod.getmodel().getZombies().get(0).getYposition();
 
-        assertEquals(220, y2, y2- 220 );
+        assertEquals(120, y2, y2- 120 );
 
     }
+
 
 
     public void testZombiePositionX(){
@@ -151,6 +175,26 @@ public class TestSuit extends TestCase{
 
         float x2 =  mod.getmodel().getZombies().get(0).getXposition();
 
+        assertEquals(x2, x1,x2- x1 );
+
+    }
+
+
+    public void testZombie2Level(){
+
+        ZombieInvaders game = new ZombieInvaders();
+
+        GameModel mod = new GameModel(game);
+
+        mod.getmodel().thebool = true;
+        mod.getmodel().CLOCK_BULLET = 1;
+
+        mod.getmodel().render(1);
+
+        float x1 =  mod.getmodel().getZombies2().get(0).getXposition();
+        assertEquals(x1, x1, x1 - x1);
+        mod.getmodel().render(1);
+        float x2 =  mod.getmodel().getZombies2().get(0).getXposition();
         assertEquals(x2, x1,x2- x1 );
 
     }

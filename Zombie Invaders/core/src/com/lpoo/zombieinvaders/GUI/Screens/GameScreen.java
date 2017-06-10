@@ -10,19 +10,26 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleChannels;
 import com.badlogic.gdx.utils.Align;
 import com.lpoo.zombieinvaders.Logic.Entities.BananasModel;
 import com.lpoo.zombieinvaders.Logic.Entities.BulletModel;
+import com.lpoo.zombieinvaders.Logic.Entities.ClockModel;
 import com.lpoo.zombieinvaders.Logic.Entities.ExplosionModel;
 import com.lpoo.zombieinvaders.Logic.Entities.GameModel;
 import com.lpoo.zombieinvaders.Logic.Entities.MorangoModel;
 import com.lpoo.zombieinvaders.Logic.Entities.ZombieModel;
+import com.lpoo.zombieinvaders.Tools.GifDecoder;
 import com.lpoo.zombieinvaders.Tools.ShapeCollision;
 import com.lpoo.zombieinvaders.ZombieInvaders;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import sun.awt.image.GifImageDecoder;
 
 /**
  * Created by bernardoleite on 27/05/17.
@@ -34,7 +41,7 @@ public class GameScreen implements Screen {
     public static final int PERSON_HEIGHT_PIXEL = 45;
     public static final float PERSON_ANIMATION_SPEED = 0.5f;
 
-    Animation<TextureRegion>[] rolls;
+
     private static Animation<TextureRegion> explosion = null;
 
     private static Texture texturebananas;
@@ -42,10 +49,14 @@ public class GameScreen implements Screen {
     private static Texture texturemorango;
     private static Texture texturezombie;
     private static Texture textureexplosion;
+    private static Texture textureclock;
+    private static Texture textureStand;
+
 
     private GameModel mygame;
     private ZombieInvaders game;
     private Texture background ;
+    private Texture background2 ;
 
     BitmapFont myscore;
     BitmapFont mybananas;
@@ -53,48 +64,43 @@ public class GameScreen implements Screen {
 
     TextureRegion[][]  rollSpriteSheet;
 
+
+    Animation<TextureRegion> rick;
+    Animation<TextureRegion> zomb;
+    Animation<TextureRegion> zomb2;
+
+    float frameCounter=0;
+
+
+
+
     public GameScreen (ZombieInvaders game) {
-/*
-        music = ZombieInvaders.manager.get("arcade.ogg", Music.class);
-        music.setLooping(true);
-        music.play();
-*/
         texturebananas = new Texture("bananas2.png");
         texturebanana= new Texture("banana2.png");
         texturemorango = new Texture("morango.png");
-        texturezombie = new Texture("zombie2.png");
+        textureclock = new Texture("clock.png");
+        textureStand = new Texture("rickstand.png");
 
+        rick = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("ricka.gif").read());
+        zomb = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("zombie.gif").read());
+        zomb2 = GifDecoder.loadGIFAnimation(Animation.PlayMode.LOOP, Gdx.files.internal("zombie3.gif").read());
 
         mygame = new GameModel(game);
         this.game = game;
-        background =  new Texture("road.png");
+        background =  new Texture("road2.png");
 
         myscore = new BitmapFont(Gdx.files.internal("score.fnt"));
         mybananas = new BitmapFont(Gdx.files.internal("score.fnt"));
         mylife = new BitmapFont(Gdx.files.internal("score.fnt"));
 
-        rolls = new Animation[5];
+        rollSpriteSheet = TextureRegion.split(new Texture("ricka.gif"), PERSON_WIDTH_PIXEL, PERSON_HEIGHT_PIXEL);
 
-        rollSpriteSheet = TextureRegion.split(new Texture("rick2.png"), PERSON_WIDTH_PIXEL, PERSON_HEIGHT_PIXEL);
-
-        rolls[2] = new Animation(PERSON_ANIMATION_SPEED, rollSpriteSheet[0]);//No tilt
-    }
-
-
-    @Override
-    public void show() {
 
     }
 
-    @Override
-    public void render(float delta) {
+    public void drawStuff(float delta){
 
-        mygame.getLevel().render(delta);
-
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(background,0,0);
+        frameCounter += Gdx.graphics.getDeltaTime();
 
         GlyphLayout ScoreDisplay = new GlyphLayout(myscore, "" + mygame.getLevel().getThescore(), Color.WHITE, 0, Align.left, false);
         myscore.draw(game.batch, ScoreDisplay, ZombieInvaders.WIDTH / 2 - ScoreDisplay.width / 2 - 150,ZombieInvaders.HEIGHT - ScoreDisplay.height - 10);
@@ -110,8 +116,13 @@ public class GameScreen implements Screen {
         }
 
         for (ZombieModel zombie : mygame.getLevel().getZombies()) {
-            game.batch.draw(texturezombie, zombie.getXposition(), zombie.getYposition());
+            game.batch.draw(zomb.getKeyFrame(frameCounter), zombie.getXposition(), zombie.getYposition());
         }
+
+        if(mygame.getLevel().CLOCK_BULLET == 1) {
+            for (ZombieModel zombie2 : mygame.getLevel().getZombies2()) {
+                game.batch.draw(zomb2.getKeyFrame(frameCounter), zombie2.getXposition(), zombie2.getYposition());
+            }}
 
         for (BananasModel banana : mygame.getLevel().getBananas()) {
             game.batch.draw(texturebananas, banana.getXposition(), banana.getYposition());
@@ -119,6 +130,10 @@ public class GameScreen implements Screen {
 
         for (MorangoModel morango : mygame.getLevel().getMorangos()) {
             game.batch.draw(texturemorango, morango.getXposition(), morango.getYposition());
+        }
+
+        for (ClockModel clock : mygame.getLevel().getClocks()) {
+            game.batch.draw(textureclock, clock.getXposition(), clock.getYposition());
         }
 
         for (ExplosionModel explosion : mygame.getLevel().getExplosions()){
@@ -133,16 +148,31 @@ public class GameScreen implements Screen {
         else
             game.batch.setColor(Color.RED);
 
-
-
-        //multiplicação serve para gerar proporção na barra da vida
-
-
-        //game.batch.draw(mygame.getLevel().getWhiteshape(), 0 , 0, ZombieInvaders.WIDTH * mygame.getLevel().getHealth(), 5);
         game.batch.setColor(Color.WHITE);
 
-        game.batch.draw(rolls[2].getKeyFrame(mygame.getLevel().getStateTime(), true), mygame.getLevel().getx(), mygame.getLevel().gety(), 41, 58);
+        if(game.STAND == true) game.batch.draw(textureStand, mygame.getLevel().getx(), mygame.getLevel().gety());
+        else game.batch.draw(rick.getKeyFrame(frameCounter), mygame.getLevel().getx(), mygame.getLevel().gety());
 
+    }
+
+
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+
+
+        mygame.getLevel().render(delta);
+
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.begin();
+        game.batch.draw(background,0,0);
+        drawStuff(delta);
         game.batch.end();
 
     }

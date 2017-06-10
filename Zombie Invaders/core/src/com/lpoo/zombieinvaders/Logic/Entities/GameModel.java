@@ -22,6 +22,7 @@ public class GameModel {
 private FirstLevelModel firstLevel;
 
 
+
     private ZombieInvaders game;
 
     public boolean moveRight = false;
@@ -44,8 +45,8 @@ private FirstLevelModel firstLevel;
      *
      * @return the current level
      */
-    public FirstLevelModel getLevel(){
-        return firstLevel;
+    public  FirstLevelModel getLevel(){
+         return firstLevel;
     }
 
     /**
@@ -164,7 +165,10 @@ private FirstLevelModel firstLevel;
     }
 
     public FirstLevelModel getmodel(){
+
+
         return firstLevel;
+
     }
 
 

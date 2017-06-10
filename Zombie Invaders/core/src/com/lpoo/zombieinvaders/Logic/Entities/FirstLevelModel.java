@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.lpoo.zombieinvaders.GUI.Screens.EndScreen;
+import com.lpoo.zombieinvaders.Tools.Ability;
 import com.lpoo.zombieinvaders.Tools.ShapeCollision;
 import com.lpoo.zombieinvaders.ZombieInvaders;
 
@@ -32,11 +33,19 @@ public class FirstLevelModel {
     public static final float BANANAS_TIMER_SPAWN_MIN = 0.3f;
     public static final float BANANAS_TIMER_SPAWN_MAX = 10f;
 
+    public static final float CLOCK_TIMER_SPAWN_MIN = 10f;
+    public static final float CLOCK_TIMER_SPAWN_MAX = 15f;
+
     public static final float MORANGOS_TIMER_SPAWN_MIN = 0.1f;
     public static final float MORANGOS_TIMER_SPAWN_MAX = 13f;
 
+    public int CLOCK_BULLET = 0;
+
     public  boolean zombie_bullet = false;
     public  boolean morango_person = false;
+
+    public  int VELOCITY = 300;
+    public Ability ability;
 
     private Music music;
 
@@ -44,6 +53,8 @@ public class FirstLevelModel {
     float timerBetweenZombieSpawn;
     float timerBetweenBananasSpawn;
     float timerBetweenMorangosSpawn;
+    float timerBetweenClocksSpawn;
+    float speedFactor;
 
     Random random;
     ZombieInvaders game;
@@ -51,9 +62,11 @@ public class FirstLevelModel {
 
     ArrayList<BulletModel> bullets;
     ArrayList<ZombieModel> zombies;
+    ArrayList<ZombieModel> zombies2;
     ArrayList<ExplosionModel> explosions;
     ArrayList<BananasModel> bananas;
     ArrayList<MorangoModel> morangos;
+    ArrayList<ClockModel> clocks;
 
     ShapeCollision healthBar;
 
@@ -78,9 +91,13 @@ public class FirstLevelModel {
 
         bullets = new ArrayList<BulletModel>();
         zombies = new ArrayList<ZombieModel>();
+        zombies2 = new ArrayList<ZombieModel>();
         explosions = new ArrayList<ExplosionModel>();
         bananas = new ArrayList<BananasModel>();
         morangos = new ArrayList<MorangoModel>();
+        clocks = new ArrayList<ClockModel>();
+
+        ability = new Ability();
 
         healthBar = new ShapeCollision(0, 0, person.PERSON_WIDTH, person.PERSON_HEIGHT );
 
@@ -90,7 +107,7 @@ public class FirstLevelModel {
         timerBetweenZombieSpawn = random.nextFloat() * (ZOMBIE_TIMER_SPAWN_MAX - ZOMBIE_TIMER_SPAWN_MIN) + ZOMBIE_TIMER_SPAWN_MIN;
         timerBetweenBananasSpawn = random.nextFloat() * (BANANAS_TIMER_SPAWN_MAX - BANANAS_TIMER_SPAWN_MIN) + BANANAS_TIMER_SPAWN_MIN;
         timerBetweenMorangosSpawn = random.nextFloat() * (MORANGOS_TIMER_SPAWN_MAX - MORANGOS_TIMER_SPAWN_MIN) + MORANGOS_TIMER_SPAWN_MIN;
-
+        timerBetweenClocksSpawn = random.nextFloat() * (CLOCK_TIMER_SPAWN_MAX - CLOCK_TIMER_SPAWN_MIN) + CLOCK_TIMER_SPAWN_MIN;
 
 
     }
@@ -101,20 +118,33 @@ public class FirstLevelModel {
      */
     public void shootingCode(float delta){
 
-
         //Shooting code
         person.shootTimer += delta;
         if (model.isShooting() && person.shootTimer >= person.SHOOT_WAIT_TIME && nrbananas >= 1) {
             person.shootTimer = 0;
-
             nrbananas--;
-
             bullets.add(new BulletModel(person.getxposition()  ));
-
 
         }
 
     }
+
+    /** This method has the responsability to spawn randomly the clocks on Game
+     *
+     * @param delta is a value of time that is constanty being updated
+     */
+    public void spawnClocks(float delta){
+
+        //Spawn Clocks
+        timerBetweenClocksSpawn -= delta;
+        if  (timerBetweenClocksSpawn <= 0) {
+            timerBetweenClocksSpawn = random.nextFloat() * (CLOCK_TIMER_SPAWN_MAX - CLOCK_TIMER_SPAWN_MIN) + CLOCK_TIMER_SPAWN_MIN;
+            clocks.add(new ClockModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH)));
+        }
+
+    }
+
+
 
     /** This method has the responsability to spawn randomly the zombies on Game
      *
@@ -126,7 +156,30 @@ public class FirstLevelModel {
         timerBetweenZombieSpawn -= delta;
         if  (timerBetweenZombieSpawn <= 0) {
             timerBetweenZombieSpawn = random.nextFloat() * (ZOMBIE_TIMER_SPAWN_MAX - ZOMBIE_TIMER_SPAWN_MIN) + ZOMBIE_TIMER_SPAWN_MIN;
-            zombies.add(new ZombieModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH)));
+
+            if (!ability.isActive()) {
+                VELOCITY = 300;
+                zombies.add(new ZombieModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH)));
+            }
+            else zombies.add(new ZombieModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH), VELOCITY));
+
+        }
+
+    }
+
+    public void spawnZombies2(float delta){
+
+        //Spawn Zombies2
+        timerBetweenZombieSpawn -= delta;
+        if  (timerBetweenZombieSpawn <= 0) {
+            timerBetweenZombieSpawn = random.nextFloat() * (ZOMBIE_TIMER_SPAWN_MAX - ZOMBIE_TIMER_SPAWN_MIN) + ZOMBIE_TIMER_SPAWN_MIN;
+
+            if (!ability.isActive()) {
+                VELOCITY = 300;
+                zombies2.add(new ZombieModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH)));
+            }
+            else zombies2.add(new ZombieModel(random.nextInt(ZombieInvaders.WIDTH - ZombieModel.WIDTH), VELOCITY));
+
         }
 
     }
@@ -160,10 +213,25 @@ public class FirstLevelModel {
     }
 
 
+    ArrayList<ClockModel> clocksToRemove = new ArrayList<ClockModel>();
+
+    /**
+     * This method has the responsability to update the Clocks on Game
+     * @param delta is a value of time that is constanty being updated
+     */
+    public void updateClocks(float delta){
+        //Update Clocks
+        for (ClockModel clock: clocks) {
+            clock.update(delta);
+
+        }
+    }
+
+
     ArrayList<MorangoModel> morangosToRemove = new ArrayList<MorangoModel>();
 
     /**
-     * This method has the responsability to spawn update the Morangos on Game
+     * This method has the responsability to update the Morangos on Game
      * @param delta is a value of time that is constanty being updated
      */
     public void updateMorangos(float delta){
@@ -206,6 +274,25 @@ public class FirstLevelModel {
     }
 
 
+    ArrayList<ZombieModel> zombiesToRemove2 = new ArrayList<ZombieModel>();
+    /**
+     * This method has the responsability to spawn update Zombies on Game
+     * @param delta is a value of time that is constanty being updated
+     */
+    public void updateZombies2(float delta){
+
+        //Update Zombies 2
+
+        for (ZombieModel zombie2: zombies2) {
+            zombie2.update(delta);
+            if(zombie2.remove)
+                zombiesToRemove2.add(zombie2);
+
+        }
+    }
+
+
+
     ArrayList<BulletModel> bulletsToRemove = new ArrayList<BulletModel>();
     /**
      * This method has the responsability to spawn update Bullets on Game
@@ -243,6 +330,7 @@ public class FirstLevelModel {
     public void treatLeftMovement(float delta){
 
         if (model.isLeft()) {
+            game.STAND = false;
 
             if(thebool)
             {
@@ -254,6 +342,7 @@ public class FirstLevelModel {
                  person.x = 0;
         }
 
+
     }
     /**
      * This method deals with the movement to the right
@@ -262,6 +351,7 @@ public class FirstLevelModel {
     public void treatRightMovement(float delta) {
 
         if (model.isRight() ) {
+            game.STAND = false;
             if(thebool)
             {
                 person.x += TESTING_VELOCITY;
@@ -272,6 +362,7 @@ public class FirstLevelModel {
                 person.x = ZombieInvaders.WIDTH - person.PERSON_WIDTH;
 
         }
+
 
     }
 
@@ -291,8 +382,8 @@ public class FirstLevelModel {
                     thescore+=1;
 
                     if(thescore % 10 == 0) {
-                       if(ZOMBIE_TIMER_SPAWN_MIN >= 0.03) ZOMBIE_TIMER_SPAWN_MIN -= 0.03;
-                       if( ZOMBIE_TIMER_SPAWN_MAX >= 0.03) ZOMBIE_TIMER_SPAWN_MAX -= 0.03;
+                        if(ZOMBIE_TIMER_SPAWN_MIN >= 0.03) ZOMBIE_TIMER_SPAWN_MIN -= 0.03;
+                        if( ZOMBIE_TIMER_SPAWN_MAX >= 0.03) ZOMBIE_TIMER_SPAWN_MAX -= 0.03;
                     }
                 }
             }
@@ -301,7 +392,47 @@ public class FirstLevelModel {
         zombies.removeAll(zombiesToRemove);
         bullets.removeAll(bulletsToRemove);
 
+if(CLOCK_BULLET == 1) {
+    for (BulletModel bullet : bullets) {
+        for (ZombieModel zombie2 : zombies2) {
+            if (bullet.getShapeCollision().checkCollision(zombie2.getCollisionRect())) {
+                zombie_bullet = true;
+                bulletsToRemove.add(bullet);
+                zombiesToRemove2.add(zombie2);
+                explosions.add(new ExplosionModel(zombie2.getXposition(), zombie2.getYposition()));
+                thescore += 1;
+
+                if (thescore % 10 == 0) {
+                    if (ZOMBIE_TIMER_SPAWN_MIN >= 0.03) ZOMBIE_TIMER_SPAWN_MIN -= 0.03;
+                    if (ZOMBIE_TIMER_SPAWN_MAX >= 0.03) ZOMBIE_TIMER_SPAWN_MAX -= 0.03;
+                }
+            }
+        }
+    }
+
+    zombies2.removeAll(zombiesToRemove2);
+    bullets.removeAll(bulletsToRemove);
+}
+
+
+        for (BulletModel bullet: bullets){
+            for (ClockModel clock: clocks){
+                if (bullet.getShapeCollision().checkCollision(clock.getCollisionRect())){
+                    bulletsToRemove.add(bullet);
+                    clocksToRemove.add(clock);
+                    explosions.add(new ExplosionModel(clock.getXposition(), clock.getYposition()));
+                    if(CLOCK_BULLET == 0) CLOCK_BULLET = 1;
+                }
+            }
+        }
+
+        clocks.removeAll(clocksToRemove);
+        bullets.removeAll(bulletsToRemove);
+
+
+
         for( ZombieModel zombie: zombies){
+            zombie.SPEED = VELOCITY;
             if (zombie.getCollisionRect().checkCollision(healthBar)){
                 zombiesToRemove.add(zombie);
                 health -= 10;
@@ -311,6 +442,23 @@ public class FirstLevelModel {
                      ZOMBIE_TIMER_SPAWN_MIN = 0.3f;
                      ZOMBIE_TIMER_SPAWN_MAX = 0.6f;
                     game.setScreen(new EndScreen(game, thescore));
+                }
+            }
+        }
+
+        if(CLOCK_BULLET == 1) {
+            for (ZombieModel zombie2 : zombies2) {
+                zombie2.SPEED = VELOCITY;
+                if (zombie2.getCollisionRect().checkCollision(healthBar)) {
+                    zombiesToRemove.add(zombie2);
+                    health -= 10;
+
+                    //Verificar a vida
+                    if (health <= 0) {
+                        ZOMBIE_TIMER_SPAWN_MIN = 0.3f;
+                        ZOMBIE_TIMER_SPAWN_MAX = 0.6f;
+                        game.setScreen(new EndScreen(game, thescore));
+                    }
                 }
             }
         }
@@ -334,9 +482,21 @@ public class FirstLevelModel {
             }
         }
 
+
+        for( ClockModel clock: clocks){
+            if (clock.getCollisionRect().checkCollision(healthBar)){
+                clocksToRemove.add(clock);
+                ability.activate();
+                VELOCITY = 200 + (int)(Math.random() * 500);
+            }
+        }
+
+
+        clocks.removeAll(clocksToRemove);
         morangos.removeAll(morangosToRemove);
         bananas.removeAll(bananasToRemove);
         zombies.removeAll(zombiesToRemove);
+        zombies2.removeAll(zombiesToRemove);
 
     }
 
@@ -356,19 +516,31 @@ public class FirstLevelModel {
 
         spawnZombies(delta);
 
+        if(CLOCK_BULLET == 1)
+            spawnZombies2(delta);
+
         spawnBananas(delta);
 
         spawnMorangos(delta);
 
+        spawnClocks(delta);
+
         updateZombies(delta);
+
+        if(CLOCK_BULLET == 1)
+            updateZombies2(delta);
 
         updateBananas(delta);
 
         updateMorangos(delta);
 
+        updateClocks(delta);
+
         updateBullets(delta);
 
         updateExplosions(delta);
+
+        game.STAND = true;
 
         treatLeftMovement(delta);
 
@@ -380,7 +552,6 @@ public class FirstLevelModel {
         verifyCollisions(delta);
 
         stateTime += delta;
-
 
     }
     /**
@@ -411,6 +582,14 @@ public class FirstLevelModel {
 
     /**
      *
+     * @return an array of zombies 2 of the main game
+     */
+    public ArrayList<ZombieModel> getZombies2(){
+        return zombies2;
+    }
+
+    /**
+     *
      * @return an array of zombies of the main game
      */
     public ArrayList<ZombieModel> getZombies(){
@@ -423,6 +602,14 @@ public class FirstLevelModel {
      */
     public ArrayList<ExplosionModel> getExplosions(){
         return explosions;
+    }
+
+    /**
+     *
+     * @return an array of clocks of the main game
+     */
+    public ArrayList<ClockModel> getClocks(){
+        return clocks;
     }
 
     /**
