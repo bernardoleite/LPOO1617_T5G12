@@ -201,6 +201,7 @@ public class TestSuit extends TestCase{
 
     public void testBananaPosition(){
 
+
         ZombieInvaders game = new ZombieInvaders();
 
         GameModel mod = new GameModel(game);
@@ -209,14 +210,28 @@ public class TestSuit extends TestCase{
 
         mod.getmodel().render(10);
 
-        float y1 =  mod.getmodel().getBananas().get(0).getYposition();
+        float y1;
 
-        assertEquals(-1780, y1, y1 - (-1780));
+        boolean flag = false, flag2 = false;
+
+        while(flag == false && flag2 == false) {
+
+            mod.getmodel().render(10);
+            if (mod.getmodel().getBananas().size() > 0)
+            {
+                flag = true;
+
+                if(mod.getmodel().getBananas().get(0).getYposition() > 0)
+                    flag2 = true;
+            }
+
+        }
+        
 
     }
 
 
-
+    @Test(timeout=1000)
     public void testHealth(){
 
         ZombieInvaders game = new ZombieInvaders();
@@ -226,6 +241,7 @@ public class TestSuit extends TestCase{
         mod.getmodel().thebool = true;
 
         assertEquals(100,  mod.getmodel().getHealth());
+
 
     }
 
