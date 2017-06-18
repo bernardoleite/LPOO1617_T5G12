@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/bernardoleite/Desktop/dontgiveup/core/build/libs/core-1.0.jar"
+        jumboMode="false"
+        revision="25.0.2"
+        sha1="854aeba92573ce1236b036cac07e28ce68e15e8e">
+        <dex dex="/Users/bernardoleite/Desktop/dontgiveup/android/build/intermediates/pre-dexed/debug/core-1.0_a7d861b866683cff09d8eed1c616ffdcdfce64b5.jar" />
+    </item>
+
+</items>
